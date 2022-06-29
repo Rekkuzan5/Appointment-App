@@ -6,15 +6,41 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace Appointment_App
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        public static void VerifyUser()
+        {
+            string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(connection);
+            //conn.Open();
+
+            try
+            {
+                conn.Open();
+                MessageBox.Show("Connection Open ! ");
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not open connection ! ");
+            }
+        }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
