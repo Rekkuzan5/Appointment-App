@@ -27,12 +27,15 @@ namespace Appointment_App
             string password = passwordLoginTextBox.Text;
 
             MySqlConnection c = DBConnection.Conn;
-            c.Open();
+            //c.Open();
 
             string sqlstring = "SELECT * FROM user;";
             MySqlCommand cmd = new MySqlCommand(sqlstring, c);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            textBox1.AppendText(rdr.ToString());        }
+            rdr.Read();
+            user = rdr["userName"].ToString();
+            textBox1.Text = user;
+        }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
