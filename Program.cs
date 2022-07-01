@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Appointment_App.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace Appointment_App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DBConnection.StartConnection();
             Application.Run(new LoginForm());
+            DBConnection.CloseConnection();
         }
     }
 }

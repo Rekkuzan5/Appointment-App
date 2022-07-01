@@ -10,6 +10,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Windows.Forms;
+using Appointment_App.Database;
 
 namespace Appointment_App
 {
@@ -22,34 +23,17 @@ namespace Appointment_App
 
         public static void VerifyUser()
         {
-            string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-            MySqlConnection conn = null;
 
-            try
-            {
-                conn = new MySqlConnection(connection);
-
-                // Open db connection
-                conn.Open();
-
-                MessageBox.Show("Connected to MySQL...");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            if (conn != null)
-            {
-                conn.Close();
-                //MessageBox.Show("Done.");
-            }
         }
-
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            MySqlConnection c = DBConnection.Conn;
 
+            if(c.State == ConnectionState.Open)
+            {
+                MessageBox.Show("Connection Open!");
+            }
         }
 
     }
