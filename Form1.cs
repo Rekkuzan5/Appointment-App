@@ -23,30 +23,27 @@ namespace Appointment_App
         public static void VerifyUser()
         {
             string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-            MySqlConnection conn = new MySqlConnection(connection);
+            MySqlConnection conn = null;
 
             try
             {
-                Console.WriteLine("Connecting to MySQL...");
+                conn = new MySqlConnection(connection);
+
+                // Open db connection
                 conn.Open();
 
-                string sql = "SELECT Name, HeadOfState FROM Country WHERE Continent='Oceania'";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                }
-                rdr.Close();
+                MessageBox.Show("Connected to MySQL...");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
 
-            conn.Close();
-            Console.WriteLine("Done.");
+            if (conn != null)
+            {
+                conn.Close();
+                //MessageBox.Show("Done.");
+            }
         }
 
 
