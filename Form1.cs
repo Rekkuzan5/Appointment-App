@@ -24,23 +24,36 @@ namespace Appointment_App
         {
             string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
             MySqlConnection conn = new MySqlConnection(connection);
-            //conn.Open();
 
             try
             {
+                Console.WriteLine("Connecting to MySQL...");
                 conn.Open();
-                MessageBox.Show("Connection Open ! ");
-                conn.Close();
+
+                string sql = "SELECT Name, HeadOfState FROM Country WHERE Continent='Oceania'";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                }
+                rdr.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Can not open connection ! ");
+                Console.WriteLine(ex.ToString());
             }
+
+            conn.Close();
+            Console.WriteLine("Done.");
         }
+
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
