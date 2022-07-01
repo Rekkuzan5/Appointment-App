@@ -23,7 +23,6 @@ namespace Appointment_App
 
         public void VerifyUser()
         {
-            string password = passwordLoginTextBox.Text;
 
             MySqlConnection c = DBConnection.Conn;
             //c.Open();
@@ -33,7 +32,8 @@ namespace Appointment_App
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
             string user = rdr["userName"].ToString();
-            textBox1.Text = user;
+            string password = rdr["userName"].ToString();
+            textBox1.Text = $"User: {user} n/ Password: {password}";
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
