@@ -23,7 +23,6 @@ namespace Appointment_App
 
         public void VerifyUser()
         {
-            string user = userNameLoginTextBox.Text;
             string password = passwordLoginTextBox.Text;
 
             MySqlConnection c = DBConnection.Conn;
@@ -33,7 +32,7 @@ namespace Appointment_App
             MySqlCommand cmd = new MySqlCommand(sqlstring, c);
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
-            user = rdr["userName"].ToString();
+            string user = rdr["userName"].ToString();
             textBox1.Text = user;
         }
 
@@ -45,6 +44,8 @@ namespace Appointment_App
             {
                 MessageBox.Show("Connection Open!");
             }
+
+            VerifyUser();
         }
 
     }
