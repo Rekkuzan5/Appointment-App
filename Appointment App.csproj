@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DBConnection.cs" />
+    <Compile Include="Database\Logic.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

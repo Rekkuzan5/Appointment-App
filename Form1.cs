@@ -21,36 +21,44 @@ namespace Appointment_App
             InitializeComponent();
         }
 
-        public bool VerifyUser()
-        {
-            string loginUserName = userNameLoginTextBox.Text;
-            string loginPassword = passwordLoginTextBox.Text;
+        //public bool VerifyUser()
+        //{
+        //    string loginUserName = userNameLoginTextBox.Text;
+        //    string loginPassword = passwordLoginTextBox.Text;
 
-            MySqlConnection c = DBConnection.Conn;
-            //c.Open();
+        //    MySqlConnection c = DBConnection.Conn;
+        //    //c.Open();
 
-            string sqlstring = "SELECT * FROM user;";
-            MySqlCommand cmd = new MySqlCommand(sqlstring, c);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            string user = rdr["userName"].ToString();
-            string password = rdr["userName"].ToString();
-            textBox1.Text = $"User: {user} n/ Password: {password}";
+        //    string sqlstring = "SELECT * FROM user;";
+        //    MySqlCommand cmd = new MySqlCommand(sqlstring, c);
+        //    MySqlDataReader rdr = cmd.ExecuteReader();
+        //    rdr.Read();
+        //    string user = rdr["userName"].ToString();
+        //    string password = rdr["userName"].ToString();
+        //    textBox1.Text = $"User: {user} n/ Password: {password}";
 
-            if (loginUserName == user && loginPassword == password)
-            {
-                //MessageBox.Show("Successful Login!");
-                return true;
-            }
-            else
-            {
-                //MessageBox.Show("Login Unsuccessful");
-                return false;
-            }
-        }
+        //    if (loginUserName == user && loginPassword == password)
+        //    {
+        //        MessageBox.Show("successful login!");
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        //MessageBox.Show("Login Unsuccessful");
+        //        return false;
+        //    }
+        //}
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text))
+            {
+                MessageBox.Show("successful login!");
+            }
+            else
+            {
+                MessageBox.Show("Login Unsuccessful");
+            }
             //MySqlConnection c = DBConnection.Conn;
 
             //if(c.State == ConnectionState.Open)
@@ -58,10 +66,10 @@ namespace Appointment_App
             //    MessageBox.Show("Connection Open!");
             //}
 
-            if(!VerifyUser())
-            {
-                MessageBox.Show("Login Unsuccessful");
-            }
+            //if(!VerifyUser())
+            //{
+            //    MessageBox.Show("Login Unsuccessful");
+            //}
         }
 
     }
