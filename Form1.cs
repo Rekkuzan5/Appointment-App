@@ -21,10 +21,18 @@ namespace Appointment_App
             InitializeComponent();
         }
 
-        public static void VerifyUser()
+        public void VerifyUser()
         {
+            string user = userNameLoginTextBox.Text;
+            string password = passwordLoginTextBox.Text;
 
-        }
+            MySqlConnection c = DBConnection.Conn;
+            c.Open();
+
+            string sqlstring = "SELECT * FROM user;";
+            MySqlCommand cmd = new MySqlCommand(sqlstring, c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            textBox1.AppendText(rdr.ToString());        }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
