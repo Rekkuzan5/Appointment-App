@@ -21,8 +21,10 @@ namespace Appointment_App
             InitializeComponent();
         }
 
-        public void VerifyUser()
+        public bool VerifyUser()
         {
+            string loginUserName = userNameLoginTextBox.Text;
+            string loginPassword = passwordLoginTextBox.Text;
 
             MySqlConnection c = DBConnection.Conn;
             //c.Open();
@@ -34,18 +36,32 @@ namespace Appointment_App
             string user = rdr["userName"].ToString();
             string password = rdr["userName"].ToString();
             textBox1.Text = $"User: {user} n/ Password: {password}";
+
+            if (loginUserName == user && loginPassword == password)
+            {
+                //MessageBox.Show("Successful Login!");
+                return true;
+            }
+            else
+            {
+                //MessageBox.Show("Login Unsuccessful");
+                return false;
+            }
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            MySqlConnection c = DBConnection.Conn;
+            //MySqlConnection c = DBConnection.Conn;
 
-            if(c.State == ConnectionState.Open)
+            //if(c.State == ConnectionState.Open)
+            //{
+            //    MessageBox.Show("Connection Open!");
+            //}
+
+            if(!VerifyUser())
             {
-                MessageBox.Show("Connection Open!");
+                MessageBox.Show("Login Unsuccessful");
             }
-
-            VerifyUser();
         }
 
     }
