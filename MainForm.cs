@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Appointment_App.Database;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,55 @@ namespace Appointment_App
         public MainForm()
         {
             InitializeComponent();
+            getCustomers();
+            customerDataGrid.DataSource = customers;
         }
-    }
+
+        List<Customer> customers = new List<Customer>();
+
+        public void getCustomers()
+        {
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            // Look for customers
+            string query = $"SELECT customer.customerId, customer.customerName, address.address, address.phone, customer.active FROM address INNER JOIN customer ON address.addressId=customer.addressId";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            
+            while (rdr.HasRows)
+            {
+                Customer newCustomer = new Customer();
+
+                customers.Add(newCustomer);
+                
+            }
+        }
+        //static public Array getCalendar(bool weekView)
+        //{
+        //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
+        //    c.Open();
+        //    // Queries the DB for all the appointments related to the logged in user
+        //    string query = $"SELECT customerId, type, start, end, appointmentId, userId FROM appointment WHERE userid = '{Logic.CurrentUserID}'";
+        //    MySqlCommand cmd = new MySqlCommand(query, c);
+        //    MySqlDataReader rdr = cmd.ExecuteReader();
+
+        //    Dictionary<int, Hashtable> appointments = new Dictionary<int, Hashtable>();
+
+        //    // Creates a dictionary of all the appointments
+        //    while (rdr.Read())
+        //    {
+
+        //        Hashtable appointment = new Hashtable();
+        //        appointment.Add("customerId", rdr[0]);
+        //        appointment.Add("type", rdr[1]);
+        //        appointment.Add("start", rdr[2]);
+        //        appointment.Add("end", rdr[3]);
+        //        appointment.Add("userId", rdr[5]);
+
+        //        appointments.Add(Convert.ToInt32(rdr[4]), appointment);
+
+        //    }
+        //    rdr.Close();
+        }
 }
