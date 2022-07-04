@@ -9,11 +9,11 @@ namespace Appointment_App
 {
     class Customer
     {
-        public static int CustomerID { get; set; }
-        public static string CustomerName { get; set; }
-        public static string CustomerAddress { get; set; }
-        public static string CustomerPhone { get; set; }
-        public static int IsActive { get; set; }
+        public int CustomerID { get; set; }
+        public  string CustomerName { get; set; }
+        public  string CustomerAddress { get; set; }
+        public  string CustomerPhone { get; set; }
+        public  int IsActive { get; set; }
 
         public static BindingList<Customer> customers = new BindingList<Customer>();
 

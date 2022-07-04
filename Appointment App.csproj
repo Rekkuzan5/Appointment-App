@@ -80,6 +80,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Appointment_App.Database.DBConnection.datasource" />
+    <None Include="Properties\DataSources\Appointment_App.Database.Logic.datasource" />
+    <None Include="Properties\DataSources\Appointment_App.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\Appointment_App.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\LoginForm.datasource" />
+    <None Include="Properties\DataSources\MainForm.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

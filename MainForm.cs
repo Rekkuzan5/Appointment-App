@@ -33,13 +33,19 @@ namespace Appointment_App
             MySqlDataReader rdr = cmd.ExecuteReader();
 
             
-            if (rdr.HasRows)
-            {
-                Customer newCustomer = new Customer();
 
-                Customer.customers.Add(newCustomer);
-                
-            }
+                while (rdr.Read())
+                {
+
+                    Customer cus = new Customer();
+                    cus.CustomerID = Convert.ToInt32(rdr["customerId"].ToString());
+                    cus.CustomerName = rdr["customerName"].ToString();
+                    cus.CustomerAddress = rdr["address"].ToString();
+                    cus.CustomerPhone = rdr["phone"].ToString();
+                    cus.IsActive = Convert.ToInt32(rdr["isActive"].ToString());
+  
+                }
+
         }
         //static public Array getCalendar(bool weekView)
         //{
