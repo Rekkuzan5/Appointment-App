@@ -17,14 +17,14 @@ namespace Appointment_App
         public MainForm()
         {
             InitializeComponent();
-            getCustomers();
-            customerDataGrid.DataSource = customers;
+            GetCustomers();
         }
 
-        List<Customer> customers = new List<Customer>();
+        //public static List<Customer> customers = new List<Customer>();
 
-        public void getCustomers()
+        public void GetCustomers()
         {
+            customerDataGrid.DataSource = Customer.customers;
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             // Look for customers
@@ -33,11 +33,11 @@ namespace Appointment_App
             MySqlDataReader rdr = cmd.ExecuteReader();
 
             
-            while (rdr.HasRows)
+            if (rdr.HasRows)
             {
                 Customer newCustomer = new Customer();
 
-                customers.Add(newCustomer);
+                Customer.customers.Add(newCustomer);
                 
             }
         }
