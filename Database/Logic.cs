@@ -29,7 +29,7 @@ namespace Appointment_App.Database
                 rdr.Read();
                 CurrentUserID = Convert.ToInt32(rdr[0]);
                 CurrentUserName = Convert.ToString(rdr[1]);
-                MessageBox.Show($"UserID: {CurrentUserID} User: {user} Password: {password}");
+                //MessageBox.Show($"UserID: {CurrentUserID} User: {user} Password: {password}");
                 rdr.Close();
                 conn.Close();
                 return CurrentUserID;
