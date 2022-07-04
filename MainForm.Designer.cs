@@ -42,7 +42,6 @@ namespace Appointment_App
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -150,7 +149,7 @@ namespace Appointment_App
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(642, 477);
+            this.button5.Location = new System.Drawing.Point(38, 766);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(195, 46);
             this.button5.TabIndex = 10;
@@ -177,22 +176,11 @@ namespace Appointment_App
             this.button7.Text = "Delete Appointment";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(39, 766);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(195, 46);
-            this.button8.TabIndex = 13;
-            this.button8.Text = "Exit";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 861);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -231,6 +219,5 @@ namespace Appointment_App
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
     }
 }

@@ -17,8 +17,8 @@ namespace Appointment_App.Database
 
         public static int VerifyUser(string user, string password)
         {
-            string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-            MySqlConnection conn = new MySqlConnection(connection);
+            //string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
             string sqlstring = $"SELECT userID, userName FROM user WHERE userName = '{user}' AND password = '{password}'";
