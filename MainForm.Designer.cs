@@ -206,30 +206,35 @@ namespace Appointment_App
             // 
             // CustomerID
             // 
+            this.CustomerID.DataPropertyName = "customerId";
             this.CustomerID.HeaderText = "ID";
             this.CustomerID.Name = "CustomerID";
             this.CustomerID.ReadOnly = true;
             // 
             // CustomerName
             // 
+            this.CustomerName.DataPropertyName = "customerName";
             this.CustomerName.HeaderText = "Name";
             this.CustomerName.Name = "CustomerName";
             this.CustomerName.ReadOnly = true;
             // 
             // CustomerAddress
             // 
+            this.CustomerAddress.DataPropertyName = "address";
             this.CustomerAddress.HeaderText = "Address";
             this.CustomerAddress.Name = "CustomerAddress";
             this.CustomerAddress.ReadOnly = true;
             // 
             // CustomerPhone
             // 
+            this.CustomerPhone.DataPropertyName = "phone";
             this.CustomerPhone.HeaderText = "Phone";
             this.CustomerPhone.Name = "CustomerPhone";
             this.CustomerPhone.ReadOnly = true;
             // 
             // IsActive
             // 
+            this.IsActive.DataPropertyName = "active";
             this.IsActive.HeaderText = "Active";
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
