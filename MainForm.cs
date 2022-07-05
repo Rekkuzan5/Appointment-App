@@ -14,6 +14,7 @@ namespace Appointment_App
 {
     public partial class MainForm : Form
     {
+        DataTable dt = new DataTable();
         public MainForm()
         {
             InitializeComponent();
@@ -24,27 +25,18 @@ namespace Appointment_App
 
         public void GetCustomers()
         {
-            customerDataGrid.DataSource = Customer.customers;
+
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
             conn.Open();
             // Look for customers
             string query = $"SELECT customer.customerId, customer.customerName, address.address, address.phone, customer.active FROM address INNER JOIN customer ON address.addressId=customer.addressId";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
 
-            
-
-                while (rdr.Read())
-                {
-
-                    Customer cus = new Customer();
-                    cus.CustomerID = Convert.ToInt32(rdr["customerId"].ToString());
-                    cus.CustomerName = rdr["customerName"].ToString();
-                    cus.CustomerAddress = rdr["address"].ToString();
-                    cus.CustomerPhone = rdr["phone"].ToString();
-                    cus.IsActive = Convert.ToInt32(rdr["isActive"].ToString());
-  
-                }
+            adapt.Fill(dt);
+            customerDataGrid.DataSource = dt;
+            conn.Close();
 
         }
         //static public Array getCalendar(bool weekView)
