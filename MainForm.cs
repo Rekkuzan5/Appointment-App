@@ -39,6 +39,13 @@ namespace Appointment_App
             conn.Close();
 
         }
+
+        private void addCustomerButton_Click(object sender, EventArgs e)
+        {
+            CreateCustomer create = new CreateCustomer();
+            create.Show();
+            this.Hide();
+        }
         //static public Array getCalendar(bool weekView)
         //{
         //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
@@ -65,5 +72,5 @@ namespace Appointment_App
 
         //    }
         //    rdr.Close();
-        }
+    }
 }

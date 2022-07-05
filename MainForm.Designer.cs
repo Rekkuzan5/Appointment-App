@@ -31,9 +31,14 @@ namespace Appointment_App
         {
             this.components = new System.ComponentModel.Container();
             this.customerDataGrid = new System.Windows.Forms.DataGridView();
+            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addCustomerButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,11 +49,6 @@ namespace Appointment_App
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFormBindingSource)).BeginInit();
@@ -74,6 +74,41 @@ namespace Appointment_App
             this.customerDataGrid.Size = new System.Drawing.Size(798, 230);
             this.customerDataGrid.TabIndex = 0;
             // 
+            // CustomerID
+            // 
+            this.CustomerID.DataPropertyName = "customerId";
+            this.CustomerID.HeaderText = "ID";
+            this.CustomerID.Name = "CustomerID";
+            this.CustomerID.ReadOnly = true;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.DataPropertyName = "customerName";
+            this.CustomerName.HeaderText = "Name";
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.ReadOnly = true;
+            // 
+            // CustomerAddress
+            // 
+            this.CustomerAddress.DataPropertyName = "address";
+            this.CustomerAddress.HeaderText = "Address";
+            this.CustomerAddress.Name = "CustomerAddress";
+            this.CustomerAddress.ReadOnly = true;
+            // 
+            // CustomerPhone
+            // 
+            this.CustomerPhone.DataPropertyName = "phone";
+            this.CustomerPhone.HeaderText = "Phone";
+            this.CustomerPhone.Name = "CustomerPhone";
+            this.CustomerPhone.ReadOnly = true;
+            // 
+            // IsActive
+            // 
+            this.IsActive.DataPropertyName = "active";
+            this.IsActive.HeaderText = "Active";
+            this.IsActive.Name = "IsActive";
+            this.IsActive.ReadOnly = true;
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Poppins", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,15 +129,16 @@ namespace Appointment_App
             this.button1.Text = "Create Appointment";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // addCustomerButton
             // 
-            this.button2.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(239, 331);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(195, 46);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Add Customer";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addCustomerButton.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCustomerButton.Location = new System.Drawing.Point(239, 331);
+            this.addCustomerButton.Name = "addCustomerButton";
+            this.addCustomerButton.Size = new System.Drawing.Size(195, 46);
+            this.addCustomerButton.TabIndex = 3;
+            this.addCustomerButton.Text = "Add Customer";
+            this.addCustomerButton.UseVisualStyleBackColor = true;
+            this.addCustomerButton.Click += new System.EventHandler(this.addCustomerButton_Click);
             // 
             // button3
             // 
@@ -204,41 +240,6 @@ namespace Appointment_App
             // 
             this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
             // 
-            // CustomerID
-            // 
-            this.CustomerID.DataPropertyName = "customerId";
-            this.CustomerID.HeaderText = "ID";
-            this.CustomerID.Name = "CustomerID";
-            this.CustomerID.ReadOnly = true;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.DataPropertyName = "customerName";
-            this.CustomerName.HeaderText = "Name";
-            this.CustomerName.Name = "CustomerName";
-            this.CustomerName.ReadOnly = true;
-            // 
-            // CustomerAddress
-            // 
-            this.CustomerAddress.DataPropertyName = "address";
-            this.CustomerAddress.HeaderText = "Address";
-            this.CustomerAddress.Name = "CustomerAddress";
-            this.CustomerAddress.ReadOnly = true;
-            // 
-            // CustomerPhone
-            // 
-            this.CustomerPhone.DataPropertyName = "phone";
-            this.CustomerPhone.HeaderText = "Phone";
-            this.CustomerPhone.Name = "CustomerPhone";
-            this.CustomerPhone.ReadOnly = true;
-            // 
-            // IsActive
-            // 
-            this.IsActive.DataPropertyName = "active";
-            this.IsActive.HeaderText = "Active";
-            this.IsActive.Name = "IsActive";
-            this.IsActive.ReadOnly = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,7 +254,7 @@ namespace Appointment_App
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.addCustomerButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.customerDataGrid);
@@ -273,7 +274,7 @@ namespace Appointment_App
         private System.Windows.Forms.DataGridView customerDataGrid;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addCustomerButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label2;
