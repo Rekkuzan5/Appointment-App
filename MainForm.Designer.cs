@@ -44,6 +44,11 @@ namespace Appointment_App
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFormBindingSource)).BeginInit();
@@ -51,7 +56,16 @@ namespace Appointment_App
             // 
             // customerDataGrid
             // 
+            this.customerDataGrid.AllowUserToAddRows = false;
+            this.customerDataGrid.AllowUserToDeleteRows = false;
+            this.customerDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customerDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CustomerID,
+            this.CustomerName,
+            this.CustomerAddress,
+            this.CustomerPhone,
+            this.IsActive});
             this.customerDataGrid.Location = new System.Drawing.Point(39, 95);
             this.customerDataGrid.MultiSelect = false;
             this.customerDataGrid.Name = "customerDataGrid";
@@ -146,6 +160,7 @@ namespace Appointment_App
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(39, 529);
             this.dataGridView2.MultiSelect = false;
@@ -188,6 +203,36 @@ namespace Appointment_App
             // mainFormBindingSource
             // 
             this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
+            // 
+            // CustomerID
+            // 
+            this.CustomerID.HeaderText = "ID";
+            this.CustomerID.Name = "CustomerID";
+            this.CustomerID.ReadOnly = true;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.HeaderText = "Name";
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.ReadOnly = true;
+            // 
+            // CustomerAddress
+            // 
+            this.CustomerAddress.HeaderText = "Address";
+            this.CustomerAddress.Name = "CustomerAddress";
+            this.CustomerAddress.ReadOnly = true;
+            // 
+            // CustomerPhone
+            // 
+            this.CustomerPhone.HeaderText = "Phone";
+            this.CustomerPhone.Name = "CustomerPhone";
+            this.CustomerPhone.ReadOnly = true;
+            // 
+            // IsActive
+            // 
+            this.IsActive.HeaderText = "Active";
+            this.IsActive.Name = "IsActive";
+            this.IsActive.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -234,5 +279,10 @@ namespace Appointment_App
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.BindingSource mainFormBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustomerPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsActive;
     }
 }
