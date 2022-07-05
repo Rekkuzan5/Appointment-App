@@ -53,7 +53,10 @@ namespace Appointment_App
             // 
             this.customerDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customerDataGrid.Location = new System.Drawing.Point(39, 95);
+            this.customerDataGrid.MultiSelect = false;
             this.customerDataGrid.Name = "customerDataGrid";
+            this.customerDataGrid.ReadOnly = true;
+            this.customerDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customerDataGrid.Size = new System.Drawing.Size(798, 230);
             this.customerDataGrid.TabIndex = 0;
             // 
@@ -145,7 +148,10 @@ namespace Appointment_App
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(39, 529);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(798, 230);
             this.dataGridView2.TabIndex = 9;
             // 
