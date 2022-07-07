@@ -22,6 +22,25 @@ namespace Appointment_App
 
         }
 
+        private void CancelCustomerButton_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+            Close();
+        }
 
+        private void CreateCustomerButton_Click(object sender, EventArgs e)
+        {
+            string timestamp;
+            string username;
+
+            //Create country table record
+
+            //Create city table record
+
+            //Create address table record
+
+            //Create customer record
+        }
     }
 }
