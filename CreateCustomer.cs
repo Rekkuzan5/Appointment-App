@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Appointment_App.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,8 +32,8 @@ namespace Appointment_App
 
         private void CreateCustomerButton_Click(object sender, EventArgs e)
         {
-            string timestamp;
-            string username;
+            DateTime timestamp = Logic.GetDateTime();
+            string username = Logic.CurrentUserName;
 
             //Create country table record
 
