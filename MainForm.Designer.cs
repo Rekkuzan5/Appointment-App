@@ -239,6 +239,7 @@ namespace Appointment_App
             this.CustomerID.Name = "CustomerID";
             this.CustomerID.ReadOnly = true;
             this.CustomerID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.CustomerID.Width = 40;
             // 
             // CustomerName
@@ -248,6 +249,8 @@ namespace Appointment_App
             this.CustomerName.HeaderText = "Name";
             this.CustomerName.Name = "CustomerName";
             this.CustomerName.ReadOnly = true;
+            this.CustomerName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CustomerAddress
             // 
@@ -256,6 +259,8 @@ namespace Appointment_App
             this.CustomerAddress.HeaderText = "Address";
             this.CustomerAddress.Name = "CustomerAddress";
             this.CustomerAddress.ReadOnly = true;
+            this.CustomerAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CustomerPhone
             // 
@@ -266,6 +271,7 @@ namespace Appointment_App
             this.CustomerPhone.Name = "CustomerPhone";
             this.CustomerPhone.ReadOnly = true;
             this.CustomerPhone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerPhone.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.CustomerPhone.Width = 150;
             // 
             // IsActive
@@ -277,6 +283,7 @@ namespace Appointment_App
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
             this.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IsActive.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.IsActive.Width = 80;
             // 
             // MainForm
