@@ -15,9 +15,11 @@ namespace Appointment_App
     public partial class MainForm : Form
     {
         DataTable dt = new DataTable();
+
         public MainForm()
         {
             InitializeComponent();
+            customerDataGrid.Columns[0].Width = 50;
             GetCustomers();
         }
 
