@@ -32,9 +32,30 @@ namespace Appointment_App
 
         private void CreateCustomerButton_Click(object sender, EventArgs e)
         {
-            DateTime timestamp = Logic.GetDateTime();
-            string username = Logic.CurrentUserName;
+            //DateTime timestamp = Logic.GetDateTime();
+            //string username = Logic.CurrentUserName;
 
+            if (string.IsNullOrEmpty(customerNameTextBox.Text) ||
+                string.IsNullOrEmpty(customerAddressTextBox.Text) ||
+                string.IsNullOrEmpty(customerPhoneTextBox.Text) ||
+                string.IsNullOrEmpty(customerZipTextBox.Text) ||
+                string.IsNullOrEmpty(customerCityTextBox.Text) ||
+                string.IsNullOrEmpty(customerCountryTextbox.Text)
+                )
+            {
+                MessageBox.Show("Please enter information in all fields.");
+            }
+            else
+            {
+                int active = 1;
+                int customerID = Logic.GetID("customer", "customerId") + 1;
+                string username = Logic.CurrentUserName;
+                int countryID = Logic.CreateCountry(customerCountryTextbox.Text);
+                int cityID = Logic.CreateCity(countryID, customerCityTextBox.Text);
+                int addressID = Logic.CreateAddress(cityID, customerAddressTextBox.Text, customerZipTextBox.Text, customerPhoneTextBox.Text);
+
+                Logic.CreateCustomer(customerID, customerNameTextBox.Text, addressID, active, username);
+            }
             //Create country table record
 
             //Create city table record

@@ -67,6 +67,25 @@ namespace Appointment_App.Database
         }
 
         // Create Customer function will go here.
+        public static void CreateCustomer(int id, string name, int addressId, int active, string username)
+        {
+            string utcTime = "UTC_TIMESTAMP";
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+
+            MySqlTransaction transaction = conn.BeginTransaction();
+
+            string query = $"INSERT into customer (customerId, cutomerName, addressId active, createDate, createdBy, lastUpdateBy)" +
+                $"VALUES ('{id}', {name}, '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            conn.Close();
+        }
+
         public static int CreateCountry(string country)
         {
             int countryId = GetID("country", "countryId") + 1;
