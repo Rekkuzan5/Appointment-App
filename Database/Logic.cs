@@ -78,8 +78,8 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
 
-            string query = $"INSERT into customer (customerId, cutomerName, addressId active, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{id}', {name}, '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
+            string query = $"INSERT into customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdateBy)" +
+                $"VALUES ('{id}', '{name}', '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -138,7 +138,7 @@ namespace Appointment_App.Database
             return countryId;
         }
 
-        public static int CreateAddress(int cityId, string address, string zipCode, string phone)
+        public static int CreateAddress(int cityId, string address, string postalCode, string phone)
         {
             int addressId = GetID("address", "addressId") + 1;
             string username = CurrentUserName;
@@ -150,8 +150,8 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
 
-            string query = $"INSERT into address (addressId, address, cityId, zipCode, phone, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{addressId}', '{address}', '{cityId}', '{zipCode}', '{phone}', '{utcTime}', '{username}', '{username}')";
+            string query = $"INSERT into address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)" +
+                $"VALUES ('{addressId}', '{address}', '{null}', '{cityId}', '{postalCode}', '{phone}', '{utcTime}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;

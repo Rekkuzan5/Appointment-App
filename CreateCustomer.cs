@@ -55,6 +55,8 @@ namespace Appointment_App
                 int addressID = Logic.CreateAddress(cityID, customerAddressTextBox.Text, customerZipTextBox.Text, customerPhoneTextBox.Text);
 
                 Logic.CreateCustomer(customerID, customerNameTextBox.Text, addressID, active, Logic.Now, username);
+
+                this.Close();
             }
             //Create country table record
 

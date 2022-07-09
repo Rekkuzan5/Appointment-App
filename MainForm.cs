@@ -44,7 +44,6 @@ namespace Appointment_App
         {
             CreateCustomer create = new CreateCustomer();
             create.Show();
-            this.Hide();
         }
         //static public Array getCalendar(bool weekView)
         //{
