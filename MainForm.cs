@@ -45,7 +45,15 @@ namespace Appointment_App
         private void addCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer create = new CreateCustomer();
+            //create.Owner = this;
             create.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Owner.Close();
+            
         }
         //static public Array getCalendar(bool weekView)
         //{

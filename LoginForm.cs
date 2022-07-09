@@ -26,8 +26,9 @@ namespace Appointment_App
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
                 MessageBox.Show("successful login!");
-                this.Hide();
                 MainForm mainForm = new MainForm();
+                mainForm.Owner = this;
+                this.Hide();
                 mainForm.Show();
             }
             else

@@ -56,6 +56,9 @@ namespace Appointment_App
 
                 Logic.CreateCustomer(customerID, customerNameTextBox.Text, addressID, active, Logic.Now, username);
 
+                //this.Owner.Show();
+                MainForm mainForm = new MainForm();
+                mainForm.Show();
                 this.Close();
             }
             //Create country table record
