@@ -83,7 +83,7 @@ namespace Appointment_App
             this.customerDataGrid.ReadOnly = true;
             this.customerDataGrid.RowHeadersVisible = false;
             this.customerDataGrid.RowHeadersWidth = 20;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.customerDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customerDataGrid.Size = new System.Drawing.Size(798, 230);
@@ -259,19 +259,25 @@ namespace Appointment_App
             // 
             // CustomerPhone
             // 
+            this.CustomerPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CustomerPhone.DataPropertyName = "phone";
             this.CustomerPhone.FillWeight = 105.9645F;
             this.CustomerPhone.HeaderText = "Phone";
             this.CustomerPhone.Name = "CustomerPhone";
             this.CustomerPhone.ReadOnly = true;
+            this.CustomerPhone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerPhone.Width = 150;
             // 
             // IsActive
             // 
+            this.IsActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.IsActive.DataPropertyName = "active";
             this.IsActive.FillWeight = 105.9645F;
             this.IsActive.HeaderText = "Active";
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
+            this.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IsActive.Width = 80;
             // 
             // MainForm
             // 
