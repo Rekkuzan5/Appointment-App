@@ -14,6 +14,8 @@ namespace Appointment_App.Database
     {
         public static int CurrentUserID { get; set; }
         public static string CurrentUserName { get; set; }
+        public static DateTime Now { get; set; }
+        public static DateTime UtcNow { get; set; }
 
         public static int VerifyUser(string user, string password)
         {
@@ -67,7 +69,7 @@ namespace Appointment_App.Database
         }
 
         // Create Customer function will go here.
-        public static void CreateCustomer(int id, string name, int addressId, int active, string username)
+        public static void CreateCustomer(int id, string name, int addressId, int active, DateTime time, string username)
         {
             string utcTime = "UTC_TIMESTAMP";
 
@@ -77,7 +79,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into customer (customerId, cutomerName, addressId active, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{id}', {name}, '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{id}', {name}, '{addressId}', {active}, '{time}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -91,7 +93,7 @@ namespace Appointment_App.Database
             int countryId = GetID("country", "countryId") + 1;
             string username = CurrentUserName;
             //DateTime UTCTime = GetDateTime();
-            string utcTime = "UTC_TIMESTAMP";
+            DateTime time = UtcNow;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -99,7 +101,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into country (countryId, country, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{countryId}', '{country}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{countryId}', '{country}', '{time}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -115,7 +117,7 @@ namespace Appointment_App.Database
             int cityId = GetID("city", "cityID") + 1;
             string username = CurrentUserName;
             //DateTime UTCTime = GetDateTime();
-            string utcTime = "UTC_TIMESTAMP";
+            DateTime time = UtcNow;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -123,7 +125,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{cityId}', '{city}', '{countryId}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{cityId}', '{city}', '{countryId}', '{time}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn)
             {
@@ -141,7 +143,7 @@ namespace Appointment_App.Database
             int addressId = GetID("address", "addressId") + 1;
             string username = CurrentUserName;
             //DateTime UTCTime = GetDateTime();
-            string utcTime = "UTC_TIMESTAMP";
+            DateTime time = UtcNow;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -149,7 +151,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into address (addressId, address, cityId, zipCode, phone, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{addressId}', '{address}', '{cityId}', '{zipCode}', '{phone}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{addressId}', '{address}', '{cityId}', '{zipCode}', '{phone}', '{time}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
