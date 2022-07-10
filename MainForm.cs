@@ -14,7 +14,6 @@ namespace Appointment_App
 {
     public partial class MainForm : Form
     {
-        DataTable dt = new DataTable();
 
         public MainForm()
         {
@@ -37,6 +36,7 @@ namespace Appointment_App
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
 
+            DataTable dt = new DataTable();
             adapt.Fill(dt);
             customerDataGrid.DataSource = dt;
             conn.Close();
@@ -65,7 +65,7 @@ namespace Appointment_App
                 int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
                 Logic.DeleteCustomer(customerId);
                 MessageBox.Show("Customer successfully deleted!");
-                
+                GetCustomers();
             }
             else
                 MessageBox.Show("Customer could not be deleted.");

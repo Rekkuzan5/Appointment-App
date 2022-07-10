@@ -98,16 +98,19 @@ namespace Appointment_App.Database
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
-                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.addressId = city.countryId JOIN country " +
-                $"ON city.cityId = country.countryId WHERE customerId = '{Id}'";
+                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
+                $"ON city.countryId = country.countryId WHERE customer.customerId = '{Id}'";
             MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
             MySqlDataReader rdr = cmd1.ExecuteReader();
-            while (rdr.Read())
+            if (rdr.HasRows)
             {
-                customerId = (int)rdr["customerId"];
-                addressId = (int)rdr["addressId"];
-                cityId = (int)rdr["cityId"];
-                countryId = (int)rdr["countryId"];
+                while (rdr.Read())
+                {
+                    customerId = (int)rdr["customerId"];
+                    addressId = (int)rdr["addressId"];
+                    cityId = (int)rdr["cityId"];
+                    countryId = (int)rdr["countryId"];
+                }
             }
             rdr.Close();
 
