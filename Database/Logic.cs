@@ -88,28 +88,34 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        public static void DeleteCustomer(int customerId)
+        public static void DeleteCustomer(int Id)
         {
+            int customerId = 0;
             int addressId = 0;
             int cityId = 0;
-            int countryId = 0; ;
+            int countryId = 0;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            string getInfo = "SELECT address.addressId, city.cityId, country.countryId FROM address JOIN " +
-                "city ON address.addressId = city.cityId JOIN country ON city.cityId = country.countryId";
+            string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
+                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.addressId = city.countryId JOIN country " +
+                $"ON city.cityId = country.countryId WHERE customerId = '{Id}'";
             MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
             MySqlDataReader rdr = cmd1.ExecuteReader();
             while (rdr.Read())
             {
+                customerId = (int)rdr["customerId"];
                 addressId = (int)rdr["addressId"];
                 cityId = (int)rdr["cityId"];
                 countryId = (int)rdr["countryId"];
             }
+            rdr.Close();
 
             string query1 = $"DELETE from customer WHERE customerId = '{customerId}'";
             MySqlCommand cmd = new MySqlCommand(query1, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
+            cmd.CommandText = query1;
+            cmd.Connection = conn;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
@@ -117,23 +123,27 @@ namespace Appointment_App.Database
             string query2 = $"DELETE from address WHERE addressId = '{addressId}'";
             cmd.CommandText = query2;
             cmd.Connection = conn;
+            //cmd.Transaction = transaction;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
-            string query3 = $"DELETE from customer WHERE customerId = '{cityId}'";
+            transaction = conn.BeginTransaction();
+            string query3 = $"DELETE from city WHERE cityId = '{cityId}'";
             cmd.CommandText = query3;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
-            string query4 = $"DELETE from customer WHERE customerId = '{countryId}'";
+            transaction = conn.BeginTransaction();
+            string query4 = $"DELETE from country WHERE countryId = '{countryId}'";
             cmd.CommandText = query4;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
+            conn.Close();
 
         }
         public static int CreateCountry(string country)
