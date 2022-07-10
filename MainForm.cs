@@ -18,7 +18,6 @@ namespace Appointment_App
         public MainForm()
         {
             InitializeComponent();
-            customerDataGrid.Columns[0].Width = 50;
             GetCustomers();
         }
 
@@ -38,7 +37,6 @@ namespace Appointment_App
 
             DataTable dt = new DataTable();
             adapt.Fill(dt);
-            customerDataGrid.DataSource = dt;
             conn.Close();
 
         }
@@ -70,6 +68,11 @@ namespace Appointment_App
             else
                 MessageBox.Show("Customer could not be deleted.");
 
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            GetCustomers();
         }
 
         //static public Array getCalendar(bool weekView)
