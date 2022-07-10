@@ -252,11 +252,11 @@ namespace Appointment_App
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(642, 331);
+            this.button5.Location = new System.Drawing.Point(711, 331);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(195, 46);
+            this.button5.Size = new System.Drawing.Size(126, 46);
             this.button5.TabIndex = 10;
-            this.button5.Text = "View Reports";
+            this.button5.Text = "Reports";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
