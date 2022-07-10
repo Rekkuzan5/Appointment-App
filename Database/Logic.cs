@@ -88,6 +88,54 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
+        public static void DeleteCustomer(int customerId)
+        {
+            int addressId = 0;
+            int cityId = 0;
+            int countryId = 0; ;
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            string getInfo = "SELECT address.addressId, city.cityId, country.countryId FROM address JOIN " +
+                "city ON address.addressId = city.cityId JOIN country ON city.cityId = country.countryId";
+            MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
+            MySqlDataReader rdr = cmd1.ExecuteReader();
+            while (rdr.Read())
+            {
+                addressId = (int)rdr["addressId"];
+                cityId = (int)rdr["cityId"];
+                countryId = (int)rdr["countryId"];
+            }
+
+            string query1 = $"DELETE from customer WHERE customerId = '{customerId}'";
+            MySqlCommand cmd = new MySqlCommand(query1, conn);
+            MySqlTransaction transaction = conn.BeginTransaction();
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            transaction = conn.BeginTransaction();
+            string query2 = $"DELETE from address WHERE addressId = '{addressId}'";
+            cmd.CommandText = query2;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            string query3 = $"DELETE from customer WHERE customerId = '{cityId}'";
+            cmd.CommandText = query3;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            string query4 = $"DELETE from customer WHERE customerId = '{countryId}'";
+            cmd.CommandText = query4;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+        }
         public static int CreateCountry(string country)
         {
             int countryId = GetID("country", "countryId") + 1;

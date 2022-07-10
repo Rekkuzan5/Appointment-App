@@ -58,7 +58,17 @@ namespace Appointment_App
 
         private void DeleteCustomerButton_Click(object sender, EventArgs e)
         {
-            /*DialogResult affirmation =*/ MessageBox.Show("Are you sure you want to delete this customer?", "This cannot be reversed!", MessageBoxButtons.YesNo);
+            DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this customer?", "This cannot be reversed!", MessageBoxButtons.YesNo);
+            if (affirmation == DialogResult.Yes)
+            {
+            // Delete
+                int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
+                Logic.DeleteCustomer(customerId);
+                MessageBox.Show("Customer successfully deleted!");
+                
+            }
+            else
+                MessageBox.Show("Customer could not be deleted.");
 
         }
 
