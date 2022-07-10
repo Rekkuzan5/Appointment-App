@@ -27,7 +27,6 @@ namespace Appointment_App
             {
                 MessageBox.Show("successful login!");
                 MainForm mainForm = new MainForm();
-                mainForm.Owner = this;
                 this.Hide();
                 mainForm.Show();
             }

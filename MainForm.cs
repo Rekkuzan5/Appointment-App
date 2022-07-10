@@ -23,6 +23,7 @@ namespace Appointment_App
             GetCustomers();
         }
 
+
         //public static List<Customer> customers = new List<Customer>();
 
         public void GetCustomers()
@@ -45,16 +46,16 @@ namespace Appointment_App
         private void addCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer create = new CreateCustomer();
-            //create.Owner = this;
             create.Show();
-            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Owner.Close();
+            //this.Close();
+            Application.Exit();
             
         }
+
         //static public Array getCalendar(bool weekView)
         //{
         //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
