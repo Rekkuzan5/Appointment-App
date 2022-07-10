@@ -56,6 +56,12 @@ namespace Appointment_App
             
         }
 
+        private void DeleteCustomerButton_Click(object sender, EventArgs e)
+        {
+            /*DialogResult affirmation =*/ MessageBox.Show("Are you sure you want to delete this customer?", "This cannot be reversed!", MessageBoxButtons.YesNo);
+
+        }
+
         //static public Array getCalendar(bool weekView)
         //{
         //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
