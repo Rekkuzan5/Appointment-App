@@ -69,7 +69,7 @@ namespace Appointment_App.Database
         }
 
         // Create Customer function will go here.
-        public static void CreateCustomer(int id, string name, int addressId, int active, DateTime time, string username)
+        public static void CreateCustomer(string name, int addressId, int active, DateTime time, string username)
         {
             string utcTime = FormatUTCDateTime(time);
 
@@ -78,8 +78,8 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
 
-            string query = $"INSERT into customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{id}', '{name}', '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
+            string query = $"INSERT into customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy)" +
+                $"VALUES ('{name}', '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -88,64 +88,74 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        public static void DeleteCustomer(int Id)
+        public static void DeleteCustomer(int custId)
         {
-            int customerId = 0;
+            //int customerId = custId;
             int addressId = 0;
             int cityId = 0;
             int countryId = 0;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
-                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
-                $"ON city.countryId = country.countryId WHERE customer.customerId = '{Id}'";
-            MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
-            MySqlDataReader rdr = cmd1.ExecuteReader();
-            if (rdr.HasRows)
-            {
-                while (rdr.Read())
-                {
-                    customerId = (int)rdr["customerId"];
-                    addressId = (int)rdr["addressId"];
-                    cityId = (int)rdr["cityId"];
-                    countryId = (int)rdr["countryId"];
-                }
-            }
-            rdr.Close();
+            //string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
+            //    $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
+            //    $"ON city.countryId = country.countryId WHERE customer.customerId = '{Id}'";
+            //MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
+            //MySqlDataReader rdr = cmd1.ExecuteReader();
+            //if (rdr.HasRows)
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        customerId = (int)rdr["customerId"];
+            //        addressId = (int)rdr["addressId"];
+            //        cityId = (int)rdr["cityId"];
+            //        countryId = (int)rdr["countryId"];
+            //    }
+            //}
+            //rdr.Close();
 
-            string query1 = $"DELETE from customer WHERE customerId = '{customerId}'";
-            MySqlCommand cmd = new MySqlCommand(query1, conn);
+            string test = $"DELETE FROM appointment WHERE customerId = '{custId}'";
+            string query1 = $"DELETE FROM customer WHERE customerId = '{custId}'";
+            MySqlCommand cmd = new MySqlCommand(test, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
-            cmd.CommandText = query1;
+            cmd.CommandText = test;
             cmd.Connection = conn;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
             transaction = conn.BeginTransaction();
-            string query2 = $"DELETE from address WHERE addressId = '{addressId}'";
-            cmd.CommandText = query2;
+            cmd.CommandText = query1;
             cmd.Connection = conn;
             //cmd.Transaction = transaction;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            string query3 = $"DELETE from city WHERE cityId = '{cityId}'";
-            cmd.CommandText = query3;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            string query4 = $"DELETE from country WHERE countryId = '{countryId}'";
-            cmd.CommandText = query4;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+            //transaction = conn.BeginTransaction();
+            //string query2 = $"DELETE from address WHERE addressId = '{addressId}'";
+            //cmd.CommandText = query2;
+            //cmd.Connection = conn;
+            ////cmd.Transaction = transaction;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+            //transaction = conn.BeginTransaction();
+            //string query3 = $"DELETE from city WHERE cityId = '{cityId}'";
+            //cmd.CommandText = query3;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+            //transaction = conn.BeginTransaction();
+            //string query4 = $"DELETE from country WHERE countryId = '{countryId}'";
+            //cmd.CommandText = query4;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
             conn.Close();
 
         }

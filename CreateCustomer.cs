@@ -47,13 +47,13 @@ namespace Appointment_App
             else
             {
                 int active = 1;
-                int customerID = Logic.GetID("customer", "customerId") + 1;
+                //int customerID = Logic.GetID("customer", "customerId") + 1;
                 string username = Logic.CurrentUserName;
                 int countryID = Logic.CreateCountry(customerCountryTextbox.Text);
                 int cityID = Logic.CreateCity(countryID, customerCityTextBox.Text);
                 int addressID = Logic.CreateAddress(cityID, customerAddressTextBox.Text, customerZipTextBox.Text, customerPhoneTextBox.Text);
 
-                Logic.CreateCustomer(customerID, customerNameTextBox.Text, addressID, active, Logic.Now, username);
+                Logic.CreateCustomer(customerNameTextBox.Text, addressID, active, Logic.Now, username);
 
                 this.Close();
 
