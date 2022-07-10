@@ -37,6 +37,7 @@ namespace Appointment_App
 
             DataTable dt = new DataTable();
             adapt.Fill(dt);
+            customerDataGrid.DataSource = dt;
             conn.Close();
 
         }
