@@ -108,9 +108,9 @@ namespace Appointment_App.Database
                 rdr.Read();
                 {
                     //customerId = (int)rdr["customerId"];
-                    addressId = (int)rdr["addressId"];
-                    cityId = (int)rdr["cityId"];
-                    countryId = (int)rdr["countryId"];
+                    addressId = rdr.GetInt32(1);
+                    cityId = rdr.GetInt32(2);
+                    countryId = rdr.GetInt32(3);
                 }
             }
             rdr.Close();
