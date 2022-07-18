@@ -25,6 +25,12 @@ namespace Appointment_App
         private void UpdateCustomer_Load(object sender, EventArgs e)
         {
             string name = null;
+            string address = null;
+            string phone = null;
+            int postalCode = 0;
+            string city = null;
+            string country = null;
+
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
             conn.Open();
@@ -38,12 +44,21 @@ namespace Appointment_App
             {
                 rdr.Read();
                 {
-                    name = rdr.GetString(0);
-
+                    name = rdr.GetString(1);
+                    address = rdr.GetString(2);
+                    phone = rdr.GetString(3);
+                    postalCode = rdr.GetInt32(4);
+                    city = rdr.GetString(5);
+                    country = rdr.GetString(6);
                 }
             }
             rdr.Close();
-            label8.Text = $"name is {name}";
+            customerNameTextBox.Text = name;
+            customerAddressTextBox.Text = address;
+            customerPhoneTextBox.Text = phone;
+            customerZipTextBox.Text = postalCode.ToString();
+            customerCityTextBox.Text = city;
+            customerCountryTextbox.Text = country;
         }
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
