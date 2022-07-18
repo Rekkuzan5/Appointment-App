@@ -17,7 +17,7 @@ namespace Appointment_App
             InitializeComponent();
         }
 
-        private void ModifyCustomer_Load(object sender, EventArgs e)
+        private void UpdateCustomer_Load(object sender, EventArgs e)
         {
 
         }

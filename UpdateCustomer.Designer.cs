@@ -208,7 +208,7 @@ namespace Appointment_App
             this.Controls.Add(this.label1);
             this.Name = "ModifyCustomer";
             this.Text = "ModifyCustomer";
-            this.Load += new System.EventHandler(this.ModifyCustomer_Load);
+            this.Load += new System.EventHandler(this.UpdateCustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
