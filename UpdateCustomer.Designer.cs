@@ -186,7 +186,7 @@ namespace Appointment_App
             this.label6.Text = "Update Customer";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ModifyCustomer
+            // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -206,7 +206,8 @@ namespace Appointment_App
             this.Controls.Add(this.customerCountryTextbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ModifyCustomer";
+            this.Name = "UpdateCustomer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifyCustomer";
             this.Load += new System.EventHandler(this.UpdateCustomer_Load);
             this.ResumeLayout(false);

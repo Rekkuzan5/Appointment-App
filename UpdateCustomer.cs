@@ -12,7 +12,7 @@ namespace Appointment_App
 {
     public partial class UpdateCustomer : Form
     {
-        public UpdateCustomer()
+        public UpdateCustomer(int customerId)
         {
             InitializeComponent();
         }

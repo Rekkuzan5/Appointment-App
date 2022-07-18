@@ -97,25 +97,30 @@ namespace Appointment_App.Database
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            //string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
-            //    $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
-            //    $"ON city.countryId = country.countryId WHERE customer.customerId = '{Id}'";
-            //MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
-            //MySqlDataReader rdr = cmd1.ExecuteReader();
-            //if (rdr.HasRows)
-            //{
-            //    while (rdr.Read())
-            //    {
-            //        customerId = (int)rdr["customerId"];
-            //        addressId = (int)rdr["addressId"];
-            //        cityId = (int)rdr["cityId"];
-            //        countryId = (int)rdr["countryId"];
-            //    }
-            //}
-            //rdr.Close();
+
+            string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
+                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
+                $"ON city.countryId = country.countryId WHERE customer.customerId = '{custId}'";
+            MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
+            MySqlDataReader rdr = cmd1.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                rdr.Read();
+                {
+                    //customerId = (int)rdr["customerId"];
+                    addressId = (int)rdr["addressId"];
+                    cityId = (int)rdr["cityId"];
+                    countryId = (int)rdr["countryId"];
+                }
+            }
+            rdr.Close();
 
             string test = $"DELETE FROM appointment WHERE customerId = '{custId}'";
             string query1 = $"DELETE FROM customer WHERE customerId = '{custId}'";
+            string query2 = $"DELETE FROM address WHERE addressId = '{addressId}'";
+            string query3 = $"DELETE FROM city WHERE cityId = '{cityId}'";
+            string query4 = $"DELETE FROM country WHERE countryId = '{countryId}'";
+
             MySqlCommand cmd = new MySqlCommand(test, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
             cmd.CommandText = test;
@@ -132,30 +137,27 @@ namespace Appointment_App.Database
             transaction.Commit();
 
 
-            //transaction = conn.BeginTransaction();
-            //string query2 = $"DELETE from address WHERE addressId = '{addressId}'";
-            //cmd.CommandText = query2;
-            //cmd.Connection = conn;
-            ////cmd.Transaction = transaction;
+            transaction = conn.BeginTransaction();
+            cmd.CommandText = query2;
+            cmd.Connection = conn;
             //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
 
-            //transaction = conn.BeginTransaction();
-            //string query3 = $"DELETE from city WHERE cityId = '{cityId}'";
-            //cmd.CommandText = query3;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
+            transaction = conn.BeginTransaction();         
+            cmd.CommandText = query3;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
 
-            //transaction = conn.BeginTransaction();
-            //string query4 = $"DELETE from country WHERE countryId = '{countryId}'";
-            //cmd.CommandText = query4;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
+            transaction = conn.BeginTransaction();           
+            cmd.CommandText = query4;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
             conn.Close();
 
         }

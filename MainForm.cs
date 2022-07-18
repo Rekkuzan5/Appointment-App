@@ -82,7 +82,7 @@ namespace Appointment_App
         {
             // pull from db to fill a customer object that can be modified and update the customer fields in the db
             int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
-            UpdateCustomer update = new UpdateCustomer();
+            UpdateCustomer update = new UpdateCustomer(customerId);
             update.Show();
 
         }
