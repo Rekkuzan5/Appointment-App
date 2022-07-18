@@ -66,12 +66,25 @@ namespace Appointment_App
                 GetCustomers();
                 MessageBox.Show("Customer successfully deleted!");
             }
+            else
+            {
+                MessageBox.Show("Operation Cancelled.");
+            }
 
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
             GetCustomers();
+        }
+
+        private void UpdateCustomerButton_Click(object sender, EventArgs e)
+        {
+            // pull from db to fill a customer object that can be modified and update the customer fields in the db
+            int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
+            UpdateCustomer update = new UpdateCustomer();
+            update.Show();
+
         }
 
         //static public Array getCalendar(bool weekView)
