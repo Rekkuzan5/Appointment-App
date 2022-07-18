@@ -130,9 +130,9 @@ namespace Appointment_App
             this.label4.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(202, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 26);
+            this.label4.Size = new System.Drawing.Size(103, 26);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Zip Code";
+            this.label4.Text = "Postal Code";
             // 
             // label5
             // 
