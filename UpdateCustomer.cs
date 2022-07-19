@@ -30,11 +30,12 @@ namespace Appointment_App
             int postalCode = 0;
             string city = null;
             string country = null;
+            bool isActive = false;
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
             conn.Open();
-            string query = $"SELECT customer.customerId, customer.customerName, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
+            string query = $"SELECT customer.customerId, customer.customerName, customer.active, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
                 $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
                 $"ON city.countryId = country.countryId WHERE customer.customerId = '{CustomerId}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -45,14 +46,16 @@ namespace Appointment_App
                 rdr.Read();
                 {
                     name = rdr.GetString(1);
-                    address = rdr.GetString(2);
-                    phone = rdr.GetString(3);
-                    postalCode = rdr.GetInt32(4);
-                    city = rdr.GetString(5);
-                    country = rdr.GetString(6);
+                    address = rdr.GetString(3);
+                    phone = rdr.GetString(4);
+                    postalCode = rdr.GetInt32(5);
+                    city = rdr.GetString(6);
+                    country = rdr.GetString(7);
+                    isActive = rdr.GetBoolean(2);
                 }
             }
             rdr.Close();
+            ActiveCustomerCheck.Checked = isActive;
             customerNameTextBox.Text = name;
             customerAddressTextBox.Text = address;
             customerPhoneTextBox.Text = phone;

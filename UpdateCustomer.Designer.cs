@@ -44,6 +44,7 @@ namespace Appointment_App
             this.UpdateCustomerButton = new System.Windows.Forms.Button();
             this.cancelCustomerButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.ActiveCustomerCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // customerNameTextBox
@@ -179,18 +180,30 @@ namespace Appointment_App
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Poppins", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(32, 31);
+            this.label6.Location = new System.Drawing.Point(32, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(325, 45);
             this.label6.TabIndex = 15;
             this.label6.Text = "Update Customer";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // ActiveCustomerCheck
+            // 
+            this.ActiveCustomerCheck.AutoSize = true;
+            this.ActiveCustomerCheck.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActiveCustomerCheck.Location = new System.Drawing.Point(31, 86);
+            this.ActiveCustomerCheck.Name = "ActiveCustomerCheck";
+            this.ActiveCustomerCheck.Size = new System.Drawing.Size(69, 27);
+            this.ActiveCustomerCheck.TabIndex = 16;
+            this.ActiveCustomerCheck.Text = "Active";
+            this.ActiveCustomerCheck.UseVisualStyleBackColor = true;
+            // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 401);
+            this.Controls.Add(this.ActiveCustomerCheck);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cancelCustomerButton);
             this.Controls.Add(this.customerNameTextBox);
@@ -232,5 +245,6 @@ namespace Appointment_App
         private System.Windows.Forms.Button UpdateCustomerButton;
         private System.Windows.Forms.Button cancelCustomerButton;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox ActiveCustomerCheck;
     }
 }
