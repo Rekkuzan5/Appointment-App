@@ -88,6 +88,27 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
+        // Update the customer
+        public static void UpdateCustomer()
+        {
+            string username = CurrentUserName;
+            string utcTime = FormatUTCDateTime(Now);
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+
+            MySqlTransaction transaction = conn.BeginTransaction();
+            // this needs work next -- var query = $"UPDATE customer SET customerName = ";
+            var query = $"UPDATE customer" +
+               $" SET customerName = 'ry"]}', lastUpdateBy = '{user}'" +
+               $" WHERE countryId = '{dictionary["countryId"]}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+        }
+
         public static void DeleteCustomer(int custId)
         {
             //int customerId = custId;
