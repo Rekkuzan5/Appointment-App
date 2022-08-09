@@ -11,6 +11,7 @@ namespace Appointment_App
     {
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
+        public static string CustomerAddressId { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerPhone { get; set; }
         public int CustomerPostalCode { get; set; }
@@ -20,10 +21,11 @@ namespace Appointment_App
 
         public static BindingList<Customer> customers = new BindingList<Customer>();
 
-        public Customer(int id, string name, string address, string phone, int postalCode, string city, string country, bool isActive)
+        public Customer(int id, string name, string addressId, string address, string phone, int postalCode, string city, string country, bool isActive)
         {
             CustomerID = id;
             CustomerName = name;
+            CustomerAddressId = addressId;
             CustomerAddress = address;
             CustomerPhone = phone;
             CustomerPostalCode = postalCode;

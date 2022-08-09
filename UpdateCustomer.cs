@@ -16,6 +16,7 @@ namespace Appointment_App
     {
         public static int CustomerId { get; set; }
         public static string CustomerName { get; set; }
+        public static string CustomerAddressId { get; set; }
         public static string CustomerAddress { get; set; }
         public static string CustomerPhone { get; set; }
         public static int CustomerPostalCode { get; set; }
@@ -33,7 +34,7 @@ namespace Appointment_App
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            string query = $"SELECT customer.customerId, customer.customerName, customer.active, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
+            string query = $"SELECT customer.customerId, customer.customerName, customer.active, address.addressId, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
                 $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
                 $"ON city.countryId = country.countryId WHERE customer.customerId = '{CustomerId}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -44,11 +45,12 @@ namespace Appointment_App
                 rdr.Read();
                 {
                     CustomerName = rdr.GetString(1);
-                    CustomerAddress = rdr.GetString(3);
-                    CustomerPhone = rdr.GetString(4);
-                    CustomerPostalCode = rdr.GetInt32(5);
-                    CustomerCity = rdr.GetString(6);
-                    CustomerCountry = rdr.GetString(7);
+                    CustomerAddressId = rdr.GetString(3);
+                    CustomerAddress = rdr.GetString(4);
+                    CustomerPhone = rdr.GetString(5);
+                    CustomerPostalCode = rdr.GetInt32(6);
+                    CustomerCity = rdr.GetString(7);
+                    CustomerCountry = rdr.GetString(8);
                     IsActive = rdr.GetBoolean(2);
                 }
             }
@@ -72,7 +74,7 @@ namespace Appointment_App
             CustomerCity = customerCityTextBox.Text;
             CustomerCountry = customerCountryTextbox.Text;
 
-            Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
+            Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddressId, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
             DateTime updateTime = Logic.GetDateTime();
             Logic.UpdateCustomer(updatedCustomer, updateTime);
             this.Close();

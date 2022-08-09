@@ -113,7 +113,7 @@ namespace Appointment_App.Database
             transaction = conn.BeginTransaction();
             var query2 = $"UPDATE address" +
                $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-               $" WHERE address = '{updatedCustomer.CustomerAddress}'";
+               $" WHERE addressId = '{updatedCustomer.CustomerAddressId}'";
             cmd.CommandText = query2;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
