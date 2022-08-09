@@ -89,9 +89,9 @@ namespace Appointment_App.Database
         }
 
         // Update the customer
-        public static void UpdateCustomer(Customer updatedCustomer)
+        public static void UpdateCustomer(Customer updatedCustomer, DateTime time)
         {
-            string utcTime = FormatUTCDateTime(Now);
+            string utcTime = FormatUTCDateTime(time);
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
