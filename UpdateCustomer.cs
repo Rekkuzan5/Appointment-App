@@ -15,13 +15,13 @@ namespace Appointment_App
     public partial class UpdateCustomer : Form
     {
         public static int CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerAddress { get; set; }
-        public string CustomerPhone { get; set; }
-        public int CustomerPostalCode { get; set; }
-        public string CustomerCity { get; set; }
-        public string CustomerCountry { get; set; }
-        public bool IsActive { get; set; }
+        public static string CustomerName { get; set; }
+        public static string CustomerAddress { get; set; }
+        public static string CustomerPhone { get; set; }
+        public static int CustomerPostalCode { get; set; }
+        public static string CustomerCity { get; set; }
+        public static string CustomerCountry { get; set; }
+        public static bool IsActive { get; set; }
 
         public UpdateCustomer(int customerId)
         {
