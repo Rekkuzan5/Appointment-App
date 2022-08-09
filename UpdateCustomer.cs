@@ -67,6 +67,7 @@ namespace Appointment_App
             Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
             DateTime updateTime = Logic.GetDateTime();
             Logic.UpdateCustomer(updatedCustomer, updateTime);
+            this.Close();
         }
 
         private void CancelCustomerButton_Click(object sender, EventArgs e)

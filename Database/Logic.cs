@@ -136,6 +136,8 @@ namespace Appointment_App.Database
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
+
+            conn.Close();
         }
 
         public static void DeleteCustomer(int custId)
