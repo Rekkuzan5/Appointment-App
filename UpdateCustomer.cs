@@ -64,6 +64,14 @@ namespace Appointment_App
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
+            IsActive = ActiveCustomerCheck.Checked;
+            CustomerName = customerNameTextBox.Text;
+            CustomerAddress = customerAddressTextBox.Text;
+            CustomerPhone = customerPhoneTextBox.Text;
+            CustomerPostalCode = Convert.ToInt32(customerZipTextBox.Text);
+            CustomerCity = customerCityTextBox.Text;
+            CustomerCountry = customerCountryTextbox.Text;
+
             Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
             DateTime updateTime = Logic.GetDateTime();
             Logic.UpdateCustomer(updatedCustomer, updateTime);
