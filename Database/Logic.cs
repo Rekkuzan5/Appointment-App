@@ -89,7 +89,7 @@ namespace Appointment_App.Database
         }
 
         // Update the customer
-        public static void UpdateCustomer()
+        public static void UpdateCustomer(Object customer)
         {
             string username = CurrentUserName;
             string utcTime = FormatUTCDateTime(Now);
@@ -100,12 +100,12 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
             // this needs work next -- var query = $"UPDATE customer SET customerName = ";
             var query = $"UPDATE customer" +
-               $" SET customerName = 'ry"]}', lastUpdateBy = '{user}'" +
-               $" WHERE countryId = '{dictionary["countryId"]}'";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+            //   $" SET customerName = 'ry"]}', lastUpdateBy = '{user}'" +
+            //   $" WHERE countryId = '{dictionary["countryId"]}'";
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
 
         }
 

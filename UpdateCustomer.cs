@@ -15,26 +15,13 @@ namespace Appointment_App
     public partial class UpdateCustomer : Form
     {
         public static int CustomerId { get; set; }
-        //public string CustomerName { get; set; }
-        //public string CustomerAddress { get; set; }
-        //public int CustomerPhone { get; set; }
-        //public int CustomerPostalCode { get; set; }
-        //public string CustomerCity { get; set; }
-        //public string CustomerCountry { get; set; }
-        //public int IsActive { get; set; }
-
-        //public UpdateCustomer(int id, string name, string address, int phone, int postalCode, string city, string country, int active)
-        //{
-        //    CustomerId = id;
-        //    CustomerName = name;
-        //    CustomerAddress = address;
-        //    CustomerPhone = phone;
-        //    CustomerPostalCode = postalCode;
-        //    CustomerCity = city;
-        //    CustomerCountry = country;
-        //    IsActive = active;
-        //}
-
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhone { get; set; }
+        public int CustomerPostalCode { get; set; }
+        public string CustomerCity { get; set; }
+        public string CustomerCountry { get; set; }
+        public bool IsActive { get; set; }
 
         public UpdateCustomer(int customerId)
         {
@@ -44,15 +31,15 @@ namespace Appointment_App
 
         private void UpdateCustomer_Load(object sender, EventArgs e)
         {
-            string name = null;
-            string address = null;
-            string phone = null;
-            int postalCode = 0;
-            string city = null;
-            string country = null;
-            bool isActive = false;
+            //string name = null;
+            //string address = null;
+            //string phone = null;
+            //int postalCode = 0;
+            //string city = null;
+            //string country = null;
+            //bool isActive = false;
 
-            Customer customer = new Customer(CustomerId, name, address, phone, postalCode, city, country, isActive);
+            //Customer customer = new Customer(CustomerId, name, address, phone, postalCode, city, country, isActive);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
             conn.Open();
@@ -66,13 +53,13 @@ namespace Appointment_App
             {
                 rdr.Read();
                 {
-                    customer.CustomerName = rdr.GetString(1);
-                    customer.CustomerAddress = rdr.GetString(3);
-                    customer.CustomerPhone = rdr.GetString(4);
-                    customer.CustomerPostalCode = rdr.GetInt32(5);
-                    customer.CustomerCity = rdr.GetString(6);
-                    customer.CustomerCountry = rdr.GetString(7);
-                    customer.IsActive = rdr.GetBoolean(2);
+                    CustomerName = rdr.GetString(1);
+                    CustomerAddress = rdr.GetString(3);
+                    CustomerPhone = rdr.GetString(4);
+                    CustomerPostalCode = rdr.GetInt32(5);
+                    CustomerCity = rdr.GetString(6);
+                    CustomerCountry = rdr.GetString(7);
+                    IsActive = rdr.GetBoolean(2);
                 }
             }
             rdr.Close();
@@ -84,18 +71,18 @@ namespace Appointment_App
             //customerCityTextBox.Text = city;
             //customerCountryTextbox.Text = country;
 
-            ActiveCustomerCheck.Checked = customer.IsActive;
-            customerNameTextBox.Text = customer.CustomerName;
-            customerAddressTextBox.Text = customer.CustomerAddress;
-            customerPhoneTextBox.Text = customer.CustomerPhone;
-            customerZipTextBox.Text = customer.CustomerPostalCode.ToString();
-            customerCityTextBox.Text = customer.CustomerCity;
-            customerCountryTextbox.Text = customer.CustomerCountry;
+            ActiveCustomerCheck.Checked = IsActive;
+            customerNameTextBox.Text = CustomerName;
+            customerAddressTextBox.Text = CustomerAddress;
+            customerPhoneTextBox.Text = CustomerPhone;
+            customerZipTextBox.Text = CustomerPostalCode.ToString();
+            customerCityTextBox.Text = CustomerCity;
+            customerCountryTextbox.Text = CustomerCountry;
         }
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void CancelCustomerButton_Click(object sender, EventArgs e)
