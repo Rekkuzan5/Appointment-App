@@ -41,9 +41,14 @@ namespace Appointment_App.Database
             return 0;
         }
 
+        public static DateTime GetDateTime()
+        {
+            return DateTime.Now.ToUniversalTime();
+        }
         public static string FormatUTCDateTime(DateTime Now)
         {
-            return Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm");
+            string formatSQLTime = Now.ToString("YYYY-MM-DD hh:mm");
+            return formatSQLTime;
         }
 
         // Gets the id from any table.  New customers will not need this since the table auto increments userID for us.
@@ -89,9 +94,9 @@ namespace Appointment_App.Database
         }
 
         // Update the customer
-        public static void UpdateCustomer(Customer updatedCustomer, DateTime time)
+        public static void UpdateCustomer(Customer updatedCustomer, DateTime updateTime)
         {
-            string utcTime = FormatUTCDateTime(time);
+            string utcTime = FormatUTCDateTime(updateTime);
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
