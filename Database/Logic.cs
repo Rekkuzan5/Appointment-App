@@ -98,7 +98,7 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
             var query = $"UPDATE customer" +
-                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{updatedCustomer.IsActive}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
                 $" WHERE customerId = '{updatedCustomer.CustomerID}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
