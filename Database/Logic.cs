@@ -89,24 +89,45 @@ namespace Appointment_App.Database
         }
 
         // Update the customer
-        public static void UpdateCustomer(Object customer)
+        public static void UpdateCustomer(Customer updatedCustomer)
         {
-            string username = CurrentUserName;
             string utcTime = FormatUTCDateTime(Now);
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
             MySqlTransaction transaction = conn.BeginTransaction();
-            // this needs work next -- var query = $"UPDATE customer SET customerName = ";
             var query = $"UPDATE customer" +
-            //   $" SET customerName = 'ry"]}', lastUpdateBy = '{user}'" +
-            //   $" WHERE countryId = '{dictionary["countryId"]}'";
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
+                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{updatedCustomer.IsActive}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+                $" WHERE customerId = '{updatedCustomer.CustomerID}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
 
+            query = $"UPDATE address" +
+               $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" WHERE address = '{updatedCustomer.CustomerAddress}'";
+            cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            query = $"UPDATE city" +
+               $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" WHERE city = '{updatedCustomer.CustomerCity}'";
+            cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            query = $"UPDATE country" +
+               $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" WHERE country = '{updatedCustomer.CustomerCountry}'";
+            cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
         }
 
         public static void DeleteCustomer(int custId)

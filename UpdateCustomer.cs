@@ -31,17 +31,7 @@ namespace Appointment_App
 
         private void UpdateCustomer_Load(object sender, EventArgs e)
         {
-            //string name = null;
-            //string address = null;
-            //string phone = null;
-            //int postalCode = 0;
-            //string city = null;
-            //string country = null;
-            //bool isActive = false;
-
-            //Customer customer = new Customer(CustomerId, name, address, phone, postalCode, city, country, isActive);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-
             conn.Open();
             string query = $"SELECT customer.customerId, customer.customerName, customer.active, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
                 $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
@@ -63,14 +53,6 @@ namespace Appointment_App
                 }
             }
             rdr.Close();
-            //ActiveCustomerCheck.Checked = isActive;
-            //customerNameTextBox.Text = name;
-            //customerAddressTextBox.Text = address;
-            //customerPhoneTextBox.Text = phone;
-            //customerZipTextBox.Text = postalCode.ToString();
-            //customerCityTextBox.Text = city;
-            //customerCountryTextbox.Text = country;
-
             ActiveCustomerCheck.Checked = IsActive;
             customerNameTextBox.Text = CustomerName;
             customerAddressTextBox.Text = CustomerAddress;
@@ -82,7 +64,8 @@ namespace Appointment_App
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
-            
+            Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
+            Logic.UpdateCustomer(updatedCustomer);
         }
 
         private void CancelCustomerButton_Click(object sender, EventArgs e)
