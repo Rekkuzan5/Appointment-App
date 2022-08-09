@@ -11,7 +11,7 @@ namespace Appointment_App
     {
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
-        public static string CustomerAddressId { get; set; }
+        public string CustomerAddressId { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerPhone { get; set; }
         public int CustomerPostalCode { get; set; }

@@ -93,7 +93,7 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        // Update the customer
+        // Update the customer //!!!!!!! Need to do the same as updating address in the function below...maybe try to clean it up or more streamlined somehow??? !!!!!!! //
         public static void UpdateCustomer(Customer updatedCustomer, DateTime updateTime)
         {
             string utcTime = FormatUTCDateTime(updateTime);
