@@ -110,6 +110,7 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
+            transaction = conn.BeginTransaction();
             query = $"UPDATE address" +
                $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE address = '{updatedCustomer.CustomerAddress}'";
@@ -118,6 +119,7 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
+            transaction = conn.BeginTransaction();
             query = $"UPDATE city" +
                $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE city = '{updatedCustomer.CustomerCity}'";
@@ -126,6 +128,7 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
+            transaction = conn.BeginTransaction();
             query = $"UPDATE country" +
                $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE country = '{updatedCustomer.CustomerCountry}'";
