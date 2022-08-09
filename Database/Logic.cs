@@ -103,7 +103,7 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
             var query = $"UPDATE customer" +
-                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                 $" WHERE customerId = '{updatedCustomer.CustomerID}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -111,7 +111,7 @@ namespace Appointment_App.Database
             transaction.Commit();
 
             query = $"UPDATE address" +
-               $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE address = '{updatedCustomer.CustomerAddress}'";
             cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -119,7 +119,7 @@ namespace Appointment_App.Database
             transaction.Commit();
 
             query = $"UPDATE city" +
-               $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE city = '{updatedCustomer.CustomerCity}'";
             cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -127,7 +127,7 @@ namespace Appointment_App.Database
             transaction.Commit();
 
             query = $"UPDATE country" +
-               $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = '{utcTime}'" +
+               $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE country = '{updatedCustomer.CustomerCountry}'";
             cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
