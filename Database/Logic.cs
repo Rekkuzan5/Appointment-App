@@ -111,28 +111,31 @@ namespace Appointment_App.Database
             transaction.Commit();
 
             transaction = conn.BeginTransaction();
-            query = $"UPDATE address" +
+            var query2 = $"UPDATE address" +
                $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE address = '{updatedCustomer.CustomerAddress}'";
-            cmd = new MySqlCommand(query, conn);
+            cmd.CommandText = query2;
+            cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
             transaction = conn.BeginTransaction();
-            query = $"UPDATE city" +
+            var query3 = $"UPDATE city" +
                $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE city = '{updatedCustomer.CustomerCity}'";
-            cmd = new MySqlCommand(query, conn);
+            cmd.CommandText = query3;
+            cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
             transaction = conn.BeginTransaction();
-            query = $"UPDATE country" +
+            var query4 = $"UPDATE country" +
                $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
                $" WHERE country = '{updatedCustomer.CustomerCountry}'";
-            cmd = new MySqlCommand(query, conn);
+            cmd.CommandText = query4;
+            cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
