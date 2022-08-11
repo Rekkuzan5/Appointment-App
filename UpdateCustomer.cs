@@ -15,14 +15,6 @@ namespace Appointment_App
     public partial class UpdateCustomer : Form
     {
         public static int CustomerId { get; set; }
-        //public static string CustomerName { get; set; }
-        //public static string CustomerAddressId { get; set; }
-        //public static string CustomerAddress { get; set; }
-        //public static string CustomerPhone { get; set; }
-        //public static int CustomerPostalCode { get; set; }
-        //public static string CustomerCity { get; set; }
-        //public static string CustomerCountry { get; set; }
-        //public static bool IsActive { get; set; }
 
         public UpdateCustomer(int customerId)
         {
@@ -32,48 +24,13 @@ namespace Appointment_App
 
         public static List<KeyValuePair<string, object>> CustList;
 
-
         private void UpdateCustomer_Load(object sender, EventArgs e)
         {
-            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            //conn.Open();
-            //string query = $"SELECT customer.customerId, customer.customerName, customer.active, address.addressId, address.address, address.phone, address.postalCode, city.city, country.country FROM customer " +
-            //    $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
-            //    $"ON city.countryId = country.countryId WHERE customer.customerId = '{CustomerId}'";
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rdr = cmd.ExecuteReader();
-
-            //if (rdr.HasRows)
-            //{
-            //    rdr.Read();
-            //    {
-            //        CustomerName = rdr.GetString(1);
-            //        CustomerAddressId = rdr.GetString(3);
-            //        CustomerAddress = rdr.GetString(4);
-            //        CustomerPhone = rdr.GetString(5);
-            //        CustomerPostalCode = rdr.GetInt32(6);
-            //        CustomerCity = rdr.GetString(7);
-            //        CustomerCountry = rdr.GetString(8);
-            //        IsActive = rdr.GetBoolean(2);
-            //    }
-            //}
-            //rdr.Close();
-
-
-            //ActiveCustomerCheck.Checked = IsActive;
-            //customerNameTextBox.Text = CustomerName;
-            //customerAddressTextBox.Text = CustomerAddress;
-            //customerPhoneTextBox.Text = CustomerPhone;
-            //customerZipTextBox.Text = CustomerPostalCode.ToString();
-            //customerCityTextBox.Text = CustomerCity;
-            //customerCountryTextbox.Text = CustomerCountry;
-
             CustList = Logic.SearchCustomer(CustomerId);
-            fillFields(CustList);
-
+            FillFields(CustList);
         }
 
-        private void fillFields(List<KeyValuePair<string, object>> custList)
+        private void FillFields(List<KeyValuePair<string, object>> custList)
         {
             // Lambda used to set text values from kvp
             customerNameTextBox.Text = custList.First(kvp => kvp.Key == "customerName").Value.ToString();
@@ -90,11 +47,6 @@ namespace Appointment_App
             {
                 ActiveCustomerCheck.Checked = false;
             }
-        }
-
-        private void CancelCustomerButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
@@ -129,8 +81,12 @@ namespace Appointment_App
                     MessageBox.Show("Customer Record Updated");
                     this.Close();
                 }
-
             }
+        }
+
+        private void CancelCustomerButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Appointment_App
             GetCustomers();
         }
 
+        public static List<KeyValuePair<string, object>> CustList;
 
         //public static List<Customer> customers = new List<Customer>();
 
@@ -55,15 +56,19 @@ namespace Appointment_App
             
         }
 
+        // Will need more work //
         private void DeleteCustomerButton_Click(object sender, EventArgs e)
         {
             int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
             DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Customer Record", MessageBoxButtons.YesNo);
             if (affirmation == DialogResult.Yes)
             {
-            // Delete
-                Logic.DeleteCustomer(customerId);
-                GetCustomers();
+                // Delete
+                var list = CustList;
+                IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
+                //First we need to check if appointments exist
+                    Logic.DeleteCustomer(dictionary);
+                    GetCustomers();
                 MessageBox.Show("Customer successfully deleted!");
             }
             else

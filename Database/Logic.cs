@@ -176,56 +176,6 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        //// Update the customer //!!!!!!! Need to do the same as updating address in the function below...maybe try to clean it up or more streamlined somehow??? !!!!!!! //
-        //public static void UpdateCustomer(Customer updatedCustomer, DateTime updateTime)
-        //{
-        //    string utcTime = FormatUTCDateTime(updateTime);
-
-        //    MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-        //    conn.Open();
-
-        //    MySqlTransaction transaction = conn.BeginTransaction();
-        //    var query = $"UPDATE customer" +
-        //        $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //        $" WHERE customerId = '{updatedCustomer.CustomerID}'";
-        //    MySqlCommand cmd = new MySqlCommand(query, conn);
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    transaction = conn.BeginTransaction();
-        //    var query2 = $"UPDATE address" +
-        //       $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE addressId = '{updatedCustomer.CustomerAddressId}'";
-        //    cmd.CommandText = query2;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    transaction = conn.BeginTransaction();
-        //    var query3 = $"UPDATE city" +
-        //       $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE city = '{updatedCustomer.CustomerCity}'";
-        //    cmd.CommandText = query3;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    transaction = conn.BeginTransaction();
-        //    var query4 = $"UPDATE country" +
-        //       $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE country = '{updatedCustomer.CustomerCountry}'";
-        //    cmd.CommandText = query4;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    conn.Close();
-        //}
-
         public static void UpdateCustomer(IDictionary<string, object> dictionary)
         {
             string user = CurrentUserName;
@@ -277,79 +227,123 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        public static void DeleteCustomer(int custId)
+        public static void DeleteCustomer(IDictionary<string, object> dictionary)
         {
-            //int customerId = custId;
-            int addressId = 0;
-            int cityId = 0;
-            int countryId = 0;
-
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-
-            string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
-                $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
-                $"ON city.countryId = country.countryId WHERE customer.customerId = '{custId}'";
-            MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
-            MySqlDataReader rdr = cmd1.ExecuteReader();
-            if (rdr.HasRows)
-            {
-                rdr.Read();
-                {
-                    //customerId = (int)rdr["customerId"];
-                    addressId = rdr.GetInt32(1);
-                    cityId = rdr.GetInt32(2);
-                    countryId = rdr.GetInt32(3);
-                }
-            }
-            rdr.Close();
-
-            string test = $"DELETE FROM appointment WHERE customerId = '{custId}'";
-            string query1 = $"DELETE FROM customer WHERE customerId = '{custId}'";
-            string query2 = $"DELETE FROM address WHERE addressId = '{addressId}'";
-            string query3 = $"DELETE FROM city WHERE cityId = '{cityId}'";
-            string query4 = $"DELETE FROM country WHERE countryId = '{countryId}'";
-
-            MySqlCommand cmd = new MySqlCommand(test, conn);
+            var query4 = $"DELETE FROM customer" +
+               $" WHERE customerId = '{dictionary["customerId"]}'";
+            MySqlCommand cmd = new MySqlCommand(query4, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
-            cmd.CommandText = test;
-            cmd.Connection = conn;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            cmd.CommandText = query1;
+            cmd.CommandText = query4;
             cmd.Connection = conn;
-            //cmd.Transaction = transaction;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
 
+            // Start a address transaction.
             transaction = conn.BeginTransaction();
-            cmd.CommandText = query2;
-            cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
-
-            transaction = conn.BeginTransaction();         
+            var query3 = $"DELETE FROM address" +
+                $" WHERE addressId = '{dictionary["addressId"]}'";
             cmd.CommandText = query3;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
-            transaction = conn.BeginTransaction();           
-            cmd.CommandText = query4;
+            // Start a city transaction.
+            transaction = conn.BeginTransaction();
+            var query2 = $"DELETE FROM city" +
+                $" WHERE cityId = '{dictionary["cityId"]}'";
+            cmd.CommandText = query2;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            // Start a country transaction.
+            transaction = conn.BeginTransaction();
+            var query = $"DELETE FROM country" +
+                $" WHERE countryId = '{dictionary["countryId"]}'";
+            cmd.CommandText = query;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
             conn.Close();
 
+
+            //int addressId = 0;
+            //int cityId = 0;
+            //int countryId = 0;
+
+            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            //conn.Open();
+
+            //string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
+            //    $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
+            //    $"ON city.countryId = country.countryId WHERE customer.customerId = '{custId}'";
+            //MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
+            //MySqlDataReader rdr = cmd1.ExecuteReader();
+            //if (rdr.HasRows)
+            //{
+            //    rdr.Read();
+            //    {
+            //        addressId = rdr.GetInt32(1);
+            //        cityId = rdr.GetInt32(2);
+            //        countryId = rdr.GetInt32(3);
+            //    }
+            //}
+            //rdr.Close();
+
+            //string test = $"DELETE FROM appointment WHERE customerId = '{custId}'";
+            //string query1 = $"DELETE FROM customer WHERE customerId = '{custId}'";
+            //string query2 = $"DELETE FROM address WHERE addressId = '{addressId}'";
+            //string query3 = $"DELETE FROM city WHERE cityId = '{cityId}'";
+            //string query4 = $"DELETE FROM country WHERE countryId = '{countryId}'";
+
+            //MySqlCommand cmd = new MySqlCommand(test, conn);
+            //MySqlTransaction transaction = conn.BeginTransaction();
+            //cmd.CommandText = test;
+            //cmd.Connection = conn;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+            //transaction = conn.BeginTransaction();
+            //cmd.CommandText = query1;
+            //cmd.Connection = conn;
+            ////cmd.Transaction = transaction;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+
+            //transaction = conn.BeginTransaction();
+            //cmd.CommandText = query2;
+            //cmd.Connection = conn;
+            ////cmd.Transaction = transaction;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+            //transaction = conn.BeginTransaction();         
+            //cmd.CommandText = query3;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+
+            //transaction = conn.BeginTransaction();           
+            //cmd.CommandText = query4;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+            //conn.Close();
         }
+
         public static int CreateCountry(string country)
         {
             int countryId = GetID("country", "countryId") + 1;
