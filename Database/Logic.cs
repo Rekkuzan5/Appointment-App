@@ -226,6 +226,57 @@ namespace Appointment_App.Database
         //    conn.Close();
         //}
 
+        public static void UpdateCustomer(IDictionary<string, object> dictionary)
+        {
+            string user = CurrentUserName;
+            //DateTime utc = getDateTime();
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            MySqlTransaction transaction = conn.BeginTransaction();
+            var query = $"UPDATE country" +
+                $" SET country = '{dictionary["country"]}', lastUpdateBy = '{user}'" +
+                $" WHERE countryId = '{dictionary["countryId"]}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            // Start a city transaction.
+            transaction = conn.BeginTransaction();
+            var query2 = $"UPDATE city" +
+                $" SET city = '{dictionary["city"]}', lastUpdateBy = '{user}'" +
+                $" WHERE cityId = '{dictionary["cityId"]}'";
+            cmd.CommandText = query2;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            // Start a address transaction.
+            transaction = conn.BeginTransaction();
+            var query3 = $"UPDATE address" +
+                $" SET address = '{dictionary["address"]}', lastUpdateBy = '{user}', postalCode = '{dictionary["postalCode"]}', phone = '{dictionary["phone"]}'" +
+                $" WHERE addressId = '{dictionary["addressId"]}'";
+            cmd.CommandText = query3;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
+            // Start a customer transaction.
+            transaction = conn.BeginTransaction();
+            var query4 = $"UPDATE customer" +
+                $" SET customerName = '{dictionary["customerName"]}', lastUpdateBy = '{user}', active = '{dictionary["active"]}'" +
+                $" WHERE customerId = '{dictionary["customerId"]}'";
+            cmd.CommandText = query4;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            conn.Close();
+        }
+
         public static void DeleteCustomer(int custId)
         {
             //int customerId = custId;

@@ -91,116 +91,46 @@ namespace Appointment_App
                 ActiveCustomerCheck.Checked = false;
             }
         }
-        //private void UpdateCustomerButton_Click(object sender, EventArgs e)
-        //{
-        //    IsActive = ActiveCustomerCheck.Checked;
-        //    CustomerName = customerNameTextBox.Text;
-        //    CustomerAddress = customerAddressTextBox.Text;
-        //    CustomerPhone = customerPhoneTextBox.Text;
-        //    CustomerPostalCode = Convert.ToInt32(customerZipTextBox.Text);
-        //    CustomerCity = customerCityTextBox.Text;
-        //    CustomerCountry = customerCountryTextbox.Text;
-
-        //    Customer updatedCustomer = new Customer(CustomerId, CustomerName, CustomerAddressId, CustomerAddress, CustomerPhone, CustomerPostalCode, CustomerCity, CustomerCountry, IsActive);
-        //    DateTime updateTime = Logic.GetDateTime();
-        //    Logic.UpdateCustomer(updatedCustomer, updateTime);
-        //    this.Close();
-        //}
 
         private void CancelCustomerButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Update the customer //!!!!!!! Need to do the same as updating address in the function below...maybe try to clean it up or more streamlined somehow??? !!!!!!! //
-        //public static void UpdateCustomerData(Customer updatedCustomer, DateTime updateTime)
-        //{
-        //    //string utcTime = FormatUTCDateTime(updateTime);
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            DialogResult youSure = MessageBox.Show("Are you sure you want to update this customer?", "", MessageBoxButtons.YesNo);
+            if (youSure == DialogResult.Yes)
+            {
+                try
+                {
+                    //Grab List & convert
+                    var list = CustList;
+                    IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
+                    //replace values for the keys in the form         
+                    dictionary["customerName"] = customerNameTextBox.Text;
+                    dictionary["phone"] = customerPhoneTextBox.Text;
+                    dictionary["address"] = customerAddressTextBox.Text;
+                    dictionary["city"] = customerCityTextBox.Text;
+                    dictionary["postalCode"] = customerZipTextBox.Text;
+                    dictionary["country"] = customerCountryTextbox.Text;
+                    dictionary["active"] = ActiveCustomerCheck.Checked ? 1 : 0;
 
-        //    MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-        //    conn.Open();
+                    //Pass the updated IDictionary to dbhelper to update the database
+                    Logic.UpdateCustomer(dictionary);
 
-        //    MySqlTransaction transaction = conn.BeginTransaction();
-        //    var query = $"UPDATE customer" +
-        //        $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //        $" WHERE customerId = '{updatedCustomer.CustomerID}'";
-        //    MySqlCommand cmd = new MySqlCommand(query, conn);
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    MessageBox.Show("Customer Record Updated");
+                    this.Close();
+                }
 
-        //    transaction = conn.BeginTransaction();
-        //    var query2 = $"UPDATE address" +
-        //       $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE addressId = '{updatedCustomer.CustomerAddressId}'";
-        //    cmd.CommandText = query2;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    transaction = conn.BeginTransaction();
-        //    var query3 = $"UPDATE city" +
-        //       $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE city = '{updatedCustomer.CustomerCity}'";
-        //    cmd.CommandText = query3;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    transaction = conn.BeginTransaction();
-        //    var query4 = $"UPDATE country" +
-        //       $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-        //       $" WHERE country = '{updatedCustomer.CustomerCountry}'";
-        //    cmd.CommandText = query4;
-        //    cmd.Connection = conn;
-        //    cmd.Transaction = transaction;
-        //    cmd.ExecuteNonQuery();
-        //    transaction.Commit();
-
-        //    conn.Close();
-        //}
-        //public bool updateCustomer(Dictionary<string, string> updatedForm)
-        //{
-        //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
-        //    c.Open();
-
-        //    // Updates Customer Table
-        //    string recUpdate = $"UPDATE customer" +
-        //        $" SET customerName = '{updatedForm["customerName"]}', active = '{updatedForm["active"]}', lastUpdate = '{DataHelper.createTimestamp()}', lastUpdateBy = '{Logic.CurrentUserName}'" +
-        //        $" WHERE customerName = '{cForm["customerName"]}'";
-        //    MySqlCommand cmd = new MySqlCommand(recUpdate, c);
-        //    int customerUpdated = cmd.ExecuteNonQuery();
-
-        //    // Updates Address Table
-        //    recUpdate = $"UPDATE address" +
-        //        $" SET address = '{updatedForm["address"]}', postalCode = '{updatedForm["zip"]}', phone = '{updatedForm["phone"]}', lastUpdate = '{DataHelper.createTimestamp()}', lastUpdateBy = '{DataHelper.getCurrentUserName()}'" +
-        //        $" WHERE address = '{cForm["address"]}'";
-        //    cmd = new MySqlCommand(recUpdate, c);
-        //    int addressUpdated = cmd.ExecuteNonQuery();
-
-        //    // Updates City Table
-        //    recUpdate = $"UPDATE city" +
-        //        $" SET city = '{updatedForm["city"]}', lastUpdate = '{DataHelper.createTimestamp()}', lastUpdateBy = '{DataHelper.getCurrentUserName()}'" +
-        //        $" WHERE city = '{cForm["city"]}'";
-        //    cmd = new MySqlCommand(recUpdate, c);
-        //    int cityUpdated = cmd.ExecuteNonQuery();
-
-        //    // Updates Country Table
-        //    recUpdate = $"UPDATE country" +
-        //        $" SET country = '{updatedForm["country"]}', lastUpdate = '{DataHelper.createTimestamp()}', lastUpdateBy = '{DataHelper.getCurrentUserName()}'" +
-        //        $" WHERE country = '{cForm["country"]}'";
-        //    cmd = new MySqlCommand(recUpdate, c);
-        //    int countryUpdated = cmd.ExecuteNonQuery();
-
-        //    c.Close();
-
-        //    if (customerUpdated != 0 && addressUpdated != 0 && cityUpdated != 0 && countryUpdated != 0)
-        //        return true;
-        //    else
-        //        return false;
-        //}
-
+            }
+        }
     }
 }
