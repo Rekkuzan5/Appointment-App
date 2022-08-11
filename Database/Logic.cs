@@ -167,7 +167,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into customer (customerName, addressId, active, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{name}', '{addressId}', {active}, '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{name}', '{addressId}', {active}, CURRENT_TIMESTAMP, '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -357,7 +357,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into country (countryId, country, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{countryId}', '{country}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{countryId}', '{country}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
@@ -381,7 +381,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{cityId}', '{city}', '{countryId}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{cityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn)
             {
@@ -407,7 +407,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction();
 
             string query = $"INSERT into address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{addressId}', '{address}', '{null}', '{cityId}', '{postalCode}', '{phone}', '{utcTime}', '{username}', '{username}')";
+                $"VALUES ('{addressId}', '{address}', '{null}', '{cityId}', '{postalCode}', '{phone}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
