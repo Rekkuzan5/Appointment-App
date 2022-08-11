@@ -73,6 +73,89 @@ namespace Appointment_App.Database
             return 0;
         }
 
+        // Get customer data for updating -- new code for testing using dictionary data structure
+        public static List<KeyValuePair<string, object>> SearchCustomer(int customerID)
+        {
+            var customerList = new List<KeyValuePair<string, object>>();
+            //Get customer Table info
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            var query = $"SELECT * FROM customer WHERE customerId = {customerID}";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            try
+            {
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    customerList.Add(new KeyValuePair<string, object>("customerId", rdr[0]));
+                    customerList.Add(new KeyValuePair<string, object>("customerName", rdr[1]));
+                    customerList.Add(new KeyValuePair<string, object>("addressId", rdr[2]));
+                    customerList.Add(new KeyValuePair<string, object>("active", rdr[3]));
+                    rdr.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No Customer found with the ID: " + customerID, "Please try again");
+                    return null;
+                }
+
+                //Get Address info now that we have addressID
+                var addressID = customerList.First(kvp => kvp.Key == "addressId").Value;
+
+                var query2 = $"SELECT * FROM address WHERE addressId = {addressID}";
+                cmd.CommandText = query2;
+                cmd.Connection = conn;
+                MySqlDataReader rdr2 = cmd.ExecuteReader();
+                if (rdr2.HasRows)
+                {
+                    rdr2.Read();
+                    customerList.Add(new KeyValuePair<string, object>("address", rdr2[1]));
+                    customerList.Add(new KeyValuePair<string, object>("cityId", rdr2[3]));
+                    customerList.Add(new KeyValuePair<string, object>("postalCode", rdr2[4]));
+                    customerList.Add(new KeyValuePair<string, object>("phone", rdr2[5]));
+                    rdr2.Close();
+                }
+
+                //Get city info now that we have cityID
+                var cityID = customerList.First(kvp => kvp.Key == "cityId").Value;
+
+                var query3 = $"SELECT * FROM city WHERE cityId = {cityID}";
+                cmd.CommandText = query3;
+                cmd.Connection = conn;
+                MySqlDataReader rdr3 = cmd.ExecuteReader();
+                if (rdr3.HasRows)
+                {
+                    rdr3.Read();
+                    customerList.Add(new KeyValuePair<string, object>("city", rdr3[1]));
+                    customerList.Add(new KeyValuePair<string, object>("countryId", rdr3[2]));
+                    rdr3.Close();
+                }
+
+                //Get country info now that we have countryId
+                var countryID = customerList.First(kvp => kvp.Key == "countryId").Value;
+
+                var query4 = $"SELECT * FROM country WHERE countryId = {countryID}";
+                cmd.CommandText = query4;
+                cmd.Connection = conn;
+                MySqlDataReader rdr4 = cmd.ExecuteReader();
+                if (rdr4.HasRows)
+                {
+                    rdr4.Read();
+                    customerList.Add(new KeyValuePair<string, object>("country", rdr4[1]));
+                    rdr4.Close();
+                }
+
+                return customerList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
         // Create Customer function will go here.
         public static void CreateCustomer(string name, int addressId, int active, DateTime time, string username)
         {
@@ -93,55 +176,55 @@ namespace Appointment_App.Database
             conn.Close();
         }
 
-        // Update the customer //!!!!!!! Need to do the same as updating address in the function below...maybe try to clean it up or more streamlined somehow??? !!!!!!! //
-        public static void UpdateCustomer(Customer updatedCustomer, DateTime updateTime)
-        {
-            string utcTime = FormatUTCDateTime(updateTime);
+        //// Update the customer //!!!!!!! Need to do the same as updating address in the function below...maybe try to clean it up or more streamlined somehow??? !!!!!!! //
+        //public static void UpdateCustomer(Customer updatedCustomer, DateTime updateTime)
+        //{
+        //    string utcTime = FormatUTCDateTime(updateTime);
 
-            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            conn.Open();
+        //    MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+        //    conn.Open();
 
-            MySqlTransaction transaction = conn.BeginTransaction();
-            var query = $"UPDATE customer" +
-                $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-                $" WHERE customerId = '{updatedCustomer.CustomerID}'";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+        //    MySqlTransaction transaction = conn.BeginTransaction();
+        //    var query = $"UPDATE customer" +
+        //        $" SET customerName = '{updatedCustomer.CustomerName}', active = '{Convert.ToInt32(updatedCustomer.IsActive)}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
+        //        $" WHERE customerId = '{updatedCustomer.CustomerID}'";
+        //    MySqlCommand cmd = new MySqlCommand(query, conn);
+        //    cmd.Transaction = transaction;
+        //    cmd.ExecuteNonQuery();
+        //    transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            var query2 = $"UPDATE address" +
-               $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-               $" WHERE addressId = '{updatedCustomer.CustomerAddressId}'";
-            cmd.CommandText = query2;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+        //    transaction = conn.BeginTransaction();
+        //    var query2 = $"UPDATE address" +
+        //       $" SET address = '{updatedCustomer.CustomerAddress}', postalCode = '{updatedCustomer.CustomerPostalCode}', phone = '{updatedCustomer.CustomerPhone}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
+        //       $" WHERE addressId = '{updatedCustomer.CustomerAddressId}'";
+        //    cmd.CommandText = query2;
+        //    cmd.Connection = conn;
+        //    cmd.Transaction = transaction;
+        //    cmd.ExecuteNonQuery();
+        //    transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            var query3 = $"UPDATE city" +
-               $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-               $" WHERE city = '{updatedCustomer.CustomerCity}'";
-            cmd.CommandText = query3;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+        //    transaction = conn.BeginTransaction();
+        //    var query3 = $"UPDATE city" +
+        //       $" SET city = '{updatedCustomer.CustomerCity}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
+        //       $" WHERE city = '{updatedCustomer.CustomerCity}'";
+        //    cmd.CommandText = query3;
+        //    cmd.Connection = conn;
+        //    cmd.Transaction = transaction;
+        //    cmd.ExecuteNonQuery();
+        //    transaction.Commit();
 
-            transaction = conn.BeginTransaction();
-            var query4 = $"UPDATE country" +
-               $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
-               $" WHERE country = '{updatedCustomer.CustomerCountry}'";
-            cmd.CommandText = query4;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+        //    transaction = conn.BeginTransaction();
+        //    var query4 = $"UPDATE country" +
+        //       $" SET country = '{updatedCustomer.CustomerCountry}', lastUpdateBy = '{CurrentUserName}', lastUpdate = CURRENT_TIMESTAMP" +
+        //       $" WHERE country = '{updatedCustomer.CustomerCountry}'";
+        //    cmd.CommandText = query4;
+        //    cmd.Connection = conn;
+        //    cmd.Transaction = transaction;
+        //    cmd.ExecuteNonQuery();
+        //    transaction.Commit();
 
-            conn.Close();
-        }
+        //    conn.Close();
+        //}
 
         public static void DeleteCustomer(int custId)
         {
