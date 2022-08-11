@@ -69,6 +69,7 @@ namespace Appointment_App
             //customerCountryTextbox.Text = CustomerCountry;
 
             CustList = Logic.SearchCustomer(CustomerId);
+            fillFields(CustList);
 
         }
 
