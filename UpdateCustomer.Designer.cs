@@ -164,7 +164,7 @@ namespace Appointment_App
             this.UpdateCustomerButton.TabIndex = 14;
             this.UpdateCustomerButton.Text = "Update";
             this.UpdateCustomerButton.UseVisualStyleBackColor = true;
-            ////this.UpdateCustomerButton.Click += new System.EventHandler(this.UpdateCustomerButton_Click);  // Uncomment this out when needing the button later!!!!!!!!!!!!! //
+            this.UpdateCustomerButton.Click += new System.EventHandler(this.UpdateCustomerButton_Click);
             // 
             // cancelCustomerButton
             // 

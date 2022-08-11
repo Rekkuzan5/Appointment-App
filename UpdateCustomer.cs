@@ -49,7 +49,7 @@ namespace Appointment_App
             }
         }
 
-        private void UpdateButton_Click(object sender, EventArgs e)
+        private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
             DialogResult youSure = MessageBox.Show("Are you sure you want to update this customer?", "", MessageBoxButtons.YesNo);
             if (youSure == DialogResult.Yes)
