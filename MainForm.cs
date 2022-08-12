@@ -56,7 +56,7 @@ namespace Appointment_App
             
         }
 
-        // Will need more work //
+        // Will need more work //  need to work on next //
         private void DeleteCustomerButton_Click(object sender, EventArgs e)
         {
             int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
@@ -64,6 +64,7 @@ namespace Appointment_App
             if (affirmation == DialogResult.Yes)
             {
                 // Delete
+                CustList = Logic.SearchCustomer(customerId);
                 var list = CustList;
                 IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
                 //First we need to check if appointments exist
