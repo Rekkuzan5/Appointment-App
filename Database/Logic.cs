@@ -406,7 +406,7 @@ namespace Appointment_App.Database
 
             MySqlTransaction transaction = conn.BeginTransaction();
 
-            string query = $"INSERT into address (addressId, address, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)" +
+            string query = $"INSERT into address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy)" +
                 $"VALUES ('{addressId}', '{address}', '{null}', '{cityId}', '{postalCode}', '{phone}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
