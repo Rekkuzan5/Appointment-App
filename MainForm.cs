@@ -19,6 +19,7 @@ namespace Appointment_App
         {
             InitializeComponent();
             GetCustomers();
+            GetAppointments();
         }
 
         public static List<KeyValuePair<string, object>> CustList;
@@ -119,5 +120,23 @@ namespace Appointment_App
 
         //    }
         //    rdr.Close();
+
+        public void GetAppointments()
+        {
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
+            conn.Open();
+            // Look for appointments
+            string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+
+            DataTable dt = new DataTable();
+            adapt.Fill(dt);
+            appointmentDataGrid.DataSource = dt;
+            conn.Close();
+
+        }
     }
 }
