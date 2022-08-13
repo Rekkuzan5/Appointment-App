@@ -128,7 +128,7 @@ namespace Appointment_App
 
             conn.Open();
             // Look for appointments
-            string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
+            string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end, appointment.title FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
 
