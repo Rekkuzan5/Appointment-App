@@ -31,7 +31,6 @@ namespace Appointment_App
         {
             this.titleLabel = new System.Windows.Forms.Label();
             this.customerComboBox = new System.Windows.Forms.ComboBox();
-            this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.descriptionTextBox = new System.Windows.Forms.TextBox();
             this.custLabel = new System.Windows.Forms.Label();
             this.typeLabel = new System.Windows.Forms.Label();
@@ -42,6 +41,8 @@ namespace Appointment_App
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.CreateAppointmentButton = new System.Windows.Forms.Button();
+            this.typeTextBox = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -62,15 +63,6 @@ namespace Appointment_App
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(260, 34);
             this.customerComboBox.TabIndex = 1;
-            // 
-            // typeComboBox
-            // 
-            this.typeComboBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(21, 197);
-            this.typeComboBox.Name = "typeComboBox";
-            this.typeComboBox.Size = new System.Drawing.Size(260, 34);
-            this.typeComboBox.TabIndex = 2;
             // 
             // descriptionTextBox
             // 
@@ -171,11 +163,29 @@ namespace Appointment_App
             this.CreateAppointmentButton.Text = "Create";
             this.CreateAppointmentButton.UseVisualStyleBackColor = true;
             // 
+            // typeTextBox
+            // 
+            this.typeTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeTextBox.Location = new System.Drawing.Point(21, 198);
+            this.typeTextBox.MinimumSize = new System.Drawing.Size(260, 34);
+            this.typeTextBox.Name = "typeTextBox";
+            this.typeTextBox.Size = new System.Drawing.Size(260, 34);
+            this.typeTextBox.TabIndex = 9;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(71, 337);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 10;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 401);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.typeTextBox);
             this.Controls.Add(this.CreateAppointmentButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.comboBox2);
@@ -186,7 +196,6 @@ namespace Appointment_App
             this.Controls.Add(this.startLabel);
             this.Controls.Add(this.custLabel);
             this.Controls.Add(this.descriptionTextBox);
-            this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.customerComboBox);
             this.Controls.Add(this.titleLabel);
             this.Name = "AddAppointment";
@@ -201,7 +210,6 @@ namespace Appointment_App
 
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.ComboBox customerComboBox;
-        private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.Label custLabel;
         private System.Windows.Forms.Label typeLabel;
@@ -212,5 +220,7 @@ namespace Appointment_App
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button CreateAppointmentButton;
+        private System.Windows.Forms.TextBox typeTextBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

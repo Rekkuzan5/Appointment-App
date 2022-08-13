@@ -17,9 +17,10 @@ namespace Appointment_App
         public AddAppointment()
         {
             InitializeComponent();
+            FillData();
         }
 
-        public void fillData()
+        public void FillData()
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
