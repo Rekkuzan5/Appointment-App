@@ -26,14 +26,13 @@ namespace Appointment_App
             conn.Open();
             // Look for customers
             string query = $"SELECT customer.customerId, customer.customerName FROM customer";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
 
             DataSet ds = new DataSet();
-            adapt.Fill(ds);
-            customerComboBox.DisplayMember = "CustomerName";
+            adapt.Fill(ds, "Customers");
+            customerComboBox.DisplayMember = "customerName";
             customerComboBox.ValueMember = "customerId";
-            customerComboBox.DataSource = ds;
+            customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
         }
 
