@@ -138,5 +138,12 @@ namespace Appointment_App
             conn.Close();
 
         }
+
+        private void CreateAppointmentButton_Click(object sender, EventArgs e)
+        {
+            AddAppointment appointment = new AddAppointment();
+            appointment.Show();
+
+        }
     }
 }
