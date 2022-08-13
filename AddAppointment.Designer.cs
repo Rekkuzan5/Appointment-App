@@ -159,6 +159,7 @@ namespace Appointment_App
             this.CancelButton.TabIndex = 8;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // CreateAppointmentButton
             // 
@@ -189,6 +190,7 @@ namespace Appointment_App
             this.Controls.Add(this.customerComboBox);
             this.Controls.Add(this.titleLabel);
             this.Name = "AddAppointment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddAppointment";
             this.ResumeLayout(false);
             this.PerformLayout();
