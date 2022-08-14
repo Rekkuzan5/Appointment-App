@@ -43,18 +43,13 @@ namespace Appointment_App
             apptTimes.Add(45);
             apptTimes.Add(11);
             apptTimes.Add(89);
-
-            foreach (int appt in apptTimes)
-            {
-                timeComboBox.Items.Add(appt);
-            }
         }
 
         public void getTimes()
         {
             var pickedDate = dateTimePicker1.Value.ToShortDateString();
 
-            if (pickedDate == )
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
