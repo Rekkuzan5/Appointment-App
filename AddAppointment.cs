@@ -50,6 +50,13 @@ namespace Appointment_App
             }
         }
 
+        public void getTimes()
+        {
+            var pickedDate = dateTimePicker1.Value.ToShortDateString();
+
+            if (pickedDate == )
+        }
+
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
