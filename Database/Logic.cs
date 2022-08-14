@@ -419,6 +419,7 @@ namespace Appointment_App.Database
 
         }
 
+        // Work on these functions. //
         public static DateTime getDateTime()
         {
             return DateTime.Now.ToUniversalTime();
@@ -437,14 +438,17 @@ namespace Appointment_App.Database
             int appointID = GetID("appointment", "appointmentId") + 1;
             //int userID = 1;
 
+            int currentUserId = CurrentUserID;
+            string currentUserName = CurrentUserName;
+
             DateTime utc = getDateTime();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             MySqlTransaction transaction = conn.BeginTransaction(); ;
             // Start a local transaction.
-            var query = "INSERT into appointment (appointmentId, customerId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdateBy) " +
-                        $"VALUES ('{appointID}', '{custID}', '{title}', '{description}', '{location}', '{contact}', '{type}', '{custID}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}','{CurrentUserName}','{CurrentUserID}')";
+            var query = "INSERT into appointment (appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+                        $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{title}', '{description}', '{location}', '{contact}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();

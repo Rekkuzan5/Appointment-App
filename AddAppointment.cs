@@ -14,7 +14,7 @@ namespace Appointment_App
 {
     public partial class AddAppointment : Form
     {
-        public int CustId { get; set; };
+        public int CustId { get; set; }
 
         public AddAppointment()
         {
@@ -30,8 +30,16 @@ namespace Appointment_App
 
             conn.Open();
             // Look for customers
-            string query = $"SELECT customer.customerId, customer.customerName FROM customer";
+            string query = $"SELECT customerId, customerName FROM customer";
             MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataReader rd = cmd.ExecuteReader();
+
+            //    while (rd.Read())
+            //    {
+            //    customerComboBox.Items.Add(rd[1]);
+            //    }
+
 
             DataSet ds = new DataSet();
             adapt.Fill(ds, "Customers");
@@ -40,15 +48,7 @@ namespace Appointment_App
             customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
 
-            apptTimes.Add(32);
-            apptTimes.Add(21);
-            apptTimes.Add(45);
-            apptTimes.Add(11);
-            apptTimes.Add(89);
-
-            var custId = ds.Tables[0].Rows[0]["customerId"];
-
-            CustId = (int)custId;
+            //CustId = Convert.ToInt32(customerComboBox.SelectedValue);
         }
 
         public void getTimes()
@@ -65,7 +65,7 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            Logic.createAppointment(CustId, titleTextBox.Text, descriptionTextBox.Text, LocComboBox.Text, contactTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
+            Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, descriptionTextBox.Text, LocComboBox.Text, contactTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
             this.Close();
         }
     }
