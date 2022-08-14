@@ -20,6 +20,8 @@ namespace Appointment_App
             FillData();
         }
 
+        public static List<int> apptTimes = new List<int>();
+
         public void FillData()
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
@@ -35,6 +37,12 @@ namespace Appointment_App
             customerComboBox.ValueMember = "customerId";
             customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
+
+            apptTimes.Add(32);
+            apptTimes.Add(21);
+            apptTimes.Add(45);
+            apptTimes.Add(11);
+            apptTimes.Add(89);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

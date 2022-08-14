@@ -128,6 +128,7 @@ namespace Appointment_App
             this.comboBox1.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(160, 263);
+            this.comboBox1.MinimumSize = new System.Drawing.Size(121, 0);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 34);
             this.comboBox1.TabIndex = 7;
