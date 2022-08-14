@@ -91,7 +91,7 @@ namespace Appointment_App
             // 
             this.typeLabel.AutoSize = true;
             this.typeLabel.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeLabel.Location = new System.Drawing.Point(153, 168);
+            this.typeLabel.Location = new System.Drawing.Point(153, 234);
             this.typeLabel.Name = "typeLabel";
             this.typeLabel.Size = new System.Drawing.Size(89, 26);
             this.typeLabel.TabIndex = 5;
@@ -157,7 +157,7 @@ namespace Appointment_App
             "General",
             "Advanced",
             "Exit"});
-            this.typeComboBox.Location = new System.Drawing.Point(158, 197);
+            this.typeComboBox.Location = new System.Drawing.Point(158, 263);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(123, 34);
             this.typeComboBox.TabIndex = 1;
@@ -196,7 +196,7 @@ namespace Appointment_App
             this.textBox1.Location = new System.Drawing.Point(21, 197);
             this.textBox1.MinimumSize = new System.Drawing.Size(123, 34);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 34);
+            this.textBox1.Size = new System.Drawing.Size(260, 34);
             this.textBox1.TabIndex = 9;
             // 
             // titleLabel
