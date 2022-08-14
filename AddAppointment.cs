@@ -43,6 +43,8 @@ namespace Appointment_App
             apptTimes.Add(45);
             apptTimes.Add(11);
             apptTimes.Add(89);
+
+            typeComboBox.DataSource = apptTimes;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
