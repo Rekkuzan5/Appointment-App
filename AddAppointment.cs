@@ -56,5 +56,10 @@ namespace Appointment_App
         {
             this.Close();
         }
+
+        private void descLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
