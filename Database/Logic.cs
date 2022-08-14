@@ -418,5 +418,39 @@ namespace Appointment_App.Database
             return addressId;
 
         }
+
+        public static DateTime getDateTime()
+        {
+            return DateTime.Now.ToUniversalTime();
+
+        }
+
+        public static string dateSQLFormat(DateTime dateValue)
+        {
+            string formatForMySql = dateValue.ToString("yyyy-MM-dd HH:mm");
+
+            return formatForMySql;
+        }
+
+        public static void createAppointment(int custID, string title, string description, string location, string contact, string type, DateTime start, DateTime endTime)
+        {
+            int appointID = GetID("appointment", "appointmentId") + 1;
+            //int userID = 1;
+
+            DateTime utc = getDateTime();
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            MySqlTransaction transaction = conn.BeginTransaction(); ;
+            // Start a local transaction.
+            var query = "INSERT into appointment (appointmentId, customerId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdateBy) " +
+                        $"VALUES ('{appointID}', '{custID}', '{title}', '{description}', '{location}', '{contact}', '{type}', '{custID}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}','{CurrentUserName}','{CurrentUserID}')";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            conn.Close();
+
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace Appointment_App
 {
     public partial class AddAppointment : Form
     {
+        public int CustId { get; set; };
+
         public AddAppointment()
         {
             InitializeComponent();
@@ -43,6 +45,10 @@ namespace Appointment_App
             apptTimes.Add(45);
             apptTimes.Add(11);
             apptTimes.Add(89);
+
+            var custId = ds.Tables[0].Rows[0]["customerId"];
+
+            CustId = (int)custId;
         }
 
         public void getTimes()
@@ -57,9 +63,10 @@ namespace Appointment_App
             this.Close();
         }
 
-        private void descLabel_Click(object sender, EventArgs e)
+        private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-
+            Logic.createAppointment(CustId, titleTextBox.Text, descriptionTextBox.Text, LocComboBox.Text, contactTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
+            this.Close();
         }
     }
 }

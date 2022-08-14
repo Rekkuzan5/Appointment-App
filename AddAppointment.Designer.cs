@@ -40,16 +40,16 @@ namespace Appointment_App
             this.CancelButton = new System.Windows.Forms.Button();
             this.CreateAppointmentButton = new System.Windows.Forms.Button();
             this.typeComboBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateLabel = new System.Windows.Forms.Label();
             this.contactTextBox = new System.Windows.Forms.TextBox();
             this.contactLabel = new System.Windows.Forms.Label();
             this.locationLabel = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.LocComboBox = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // formLabel
@@ -109,7 +109,6 @@ namespace Appointment_App
             this.descLabel.Size = new System.Drawing.Size(140, 26);
             this.descLabel.TabIndex = 6;
             this.descLabel.Text = "Appt. Description";
-            this.descLabel.Click += new System.EventHandler(this.descLabel_Click);
             // 
             // endLabel
             // 
@@ -151,6 +150,7 @@ namespace Appointment_App
             this.CreateAppointmentButton.TabIndex = 8;
             this.CreateAppointmentButton.Text = "Create";
             this.CreateAppointmentButton.UseVisualStyleBackColor = true;
+            this.CreateAppointmentButton.Click += new System.EventHandler(this.CreateAppointmentButton_Click);
             // 
             // typeComboBox
             // 
@@ -166,42 +166,14 @@ namespace Appointment_App
             this.typeComboBox.Size = new System.Drawing.Size(123, 34);
             this.typeComboBox.TabIndex = 1;
             // 
-            // comboBox1
+            // titleTextBox
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Initial",
-            "General",
-            "Advanced",
-            "Exit"});
-            this.comboBox1.Location = new System.Drawing.Point(19, 329);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 34);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Initial",
-            "General",
-            "Advanced",
-            "Exit"});
-            this.comboBox2.Location = new System.Drawing.Point(158, 329);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(123, 34);
-            this.comboBox2.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(21, 197);
-            this.textBox1.MinimumSize = new System.Drawing.Size(123, 34);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 34);
-            this.textBox1.TabIndex = 9;
+            this.titleTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTextBox.Location = new System.Drawing.Point(21, 197);
+            this.titleTextBox.MinimumSize = new System.Drawing.Size(123, 34);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(260, 30);
+            this.titleTextBox.TabIndex = 9;
             // 
             // titleLabel
             // 
@@ -239,7 +211,7 @@ namespace Appointment_App
             this.contactTextBox.Location = new System.Drawing.Point(310, 131);
             this.contactTextBox.MinimumSize = new System.Drawing.Size(123, 34);
             this.contactTextBox.Name = "contactTextBox";
-            this.contactTextBox.Size = new System.Drawing.Size(260, 34);
+            this.contactTextBox.Size = new System.Drawing.Size(260, 30);
             this.contactTextBox.TabIndex = 9;
             // 
             // contactLabel
@@ -262,11 +234,11 @@ namespace Appointment_App
             this.locationLabel.TabIndex = 10;
             this.locationLabel.Text = "Location";
             // 
-            // comboBox3
+            // LocComboBox
             // 
-            this.comboBox3.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.LocComboBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LocComboBox.FormattingEnabled = true;
+            this.LocComboBox.Items.AddRange(new object[] {
             "Room 1",
             "Room 2",
             "Room 3",
@@ -277,23 +249,45 @@ namespace Appointment_App
             "Room 8",
             "Room 9",
             "Room 10"});
-            this.comboBox3.Location = new System.Drawing.Point(309, 197);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(260, 34);
-            this.comboBox3.TabIndex = 1;
+            this.LocComboBox.Location = new System.Drawing.Point(309, 197);
+            this.LocComboBox.Name = "LocComboBox";
+            this.LocComboBox.Size = new System.Drawing.Size(260, 34);
+            this.LocComboBox.TabIndex = 1;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "hh:mm tt";
+            this.dateTimePicker2.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(19, 329);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(125, 30);
+            this.dateTimePicker2.TabIndex = 13;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CustomFormat = "hh:mm tt";
+            this.dateTimePicker3.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(158, 329);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(125, 30);
+            this.dateTimePicker3.TabIndex = 13;
             // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 433);
+            this.Controls.Add(this.dateTimePicker3);
+            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.locationLabel);
             this.Controls.Add(this.contactLabel);
             this.Controls.Add(this.contactTextBox);
             this.Controls.Add(this.titleLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.CreateAppointmentButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.descLabel);
@@ -302,10 +296,8 @@ namespace Appointment_App
             this.Controls.Add(this.endLabel);
             this.Controls.Add(this.custLabel);
             this.Controls.Add(this.descriptionTextBox);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.typeComboBox);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.LocComboBox);
             this.Controls.Add(this.customerComboBox);
             this.Controls.Add(this.formLabel);
             this.Name = "AddAppointment";
@@ -329,15 +321,15 @@ namespace Appointment_App
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button CreateAppointmentButton;
         private System.Windows.Forms.ComboBox typeComboBox;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.TextBox contactTextBox;
         private System.Windows.Forms.Label contactLabel;
         private System.Windows.Forms.Label locationLabel;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox LocComboBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }
