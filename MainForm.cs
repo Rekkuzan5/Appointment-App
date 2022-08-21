@@ -14,7 +14,7 @@ namespace Appointment_App
 {
     public partial class MainForm : Form
     {
-
+        public static DateTime CurrentDate { get; set; }
         public MainForm()
         {
             InitializeComponent();
@@ -123,6 +123,8 @@ namespace Appointment_App
 
         public void GetAppointments()
         {
+            CurrentDate = Logic.Now;
+            calendar.AddBoldedDate(CurrentDate);
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
@@ -132,6 +134,7 @@ namespace Appointment_App
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
 
+            handleday();
             DataTable dt = new DataTable();
             adapt.Fill(dt);
             appointmentDataGrid.DataSource = dt;
@@ -139,7 +142,41 @@ namespace Appointment_App
 
         }
 
-        private void CreateAppointmentButton_Click(object sender, EventArgs e)
+        private void handleday()
+        {
+            calendar.AddBoldedDate(CurrentDate);
+            calendar.UpdateBoldedDates();
+            string query = $"Select customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment WHERE start = '{CurrentDate}'";
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            DataTable dt = new DataTable();
+            adapt.Fill(dt);
+            appointmentDataGrid.DataSource = dt;
+            conn.Close();
+
+            //try
+            //{
+            //    if (rdr.HasRows)
+            //    {
+            //        rdr.Read();
+            //        appointmentDataGrid.ColumnHeader(new KeyValuePair<string, object>("customerId", rdr[0]));
+            //        customerList.Add(new KeyValuePair<string, object>("customerName", rdr[1]));
+            //        customerList.Add(new KeyValuePair<string, object>("addressId", rdr[2]));
+            //        customerList.Add(new KeyValuePair<string, object>("active", rdr[3]));
+            //        rdr.Close();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("No Customer found with the ID: " + customerID, "Please try again");
+            //        return null;
+            //    }
+            //}
+        }
+
+            private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             AddAppointment appointment = new AddAppointment();
             appointment.Show();
