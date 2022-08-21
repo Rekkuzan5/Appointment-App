@@ -58,7 +58,7 @@ namespace Appointment_App
 
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void AppointmentCancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
