@@ -14,6 +14,7 @@ namespace Appointment_App
 {
     public partial class AddAppointment : Form
     {
+        //private string _selectedDate;
         public int CustId { get; set; }
 
         public AddAppointment()
@@ -47,12 +48,11 @@ namespace Appointment_App
             customerComboBox.ValueMember = "customerId";
             customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
-
-            //CustId = Convert.ToInt32(customerComboBox.SelectedValue);
         }
 
         public void getTimes()
         {
+            //var initialDate = selectedDate;
             var pickedDate = dateTimePicker1.Value.ToShortDateString();
 
 

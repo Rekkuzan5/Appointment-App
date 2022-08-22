@@ -47,7 +47,7 @@ namespace Appointment_App.Database
         }
         public static string FormatUTCDateTime(DateTime Now)
         {
-            string formatSQLTime = Now.ToString("YYYY-MM-DD hh:mm");
+            string formatSQLTime = Now.ToString("yyyy-MM-dd hh:mm");
             return formatSQLTime;
         }
 

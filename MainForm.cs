@@ -14,7 +14,10 @@ namespace Appointment_App
 {
     public partial class MainForm : Form
     {
-        public static DateTime CurrentDate { get; set; }
+        DataTable at = new DataTable();
+        DateTime currentDate;
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -54,7 +57,7 @@ namespace Appointment_App
         {
             //this.Close();
             Application.Exit();
-            
+
         }
 
         // Will need more work //  need to work on next //
@@ -69,8 +72,8 @@ namespace Appointment_App
                 var list = CustList;
                 IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
                 //First we need to check if appointments exist
-                    Logic.DeleteCustomer(dictionary);
-                    GetCustomers();
+                Logic.DeleteCustomer(dictionary);
+                GetCustomers();
                 MessageBox.Show("Customer successfully deleted!");
             }
             else
@@ -123,63 +126,52 @@ namespace Appointment_App
 
         public void GetAppointments()
         {
-            CurrentDate = Logic.Now;
-            calendar.AddBoldedDate(CurrentDate);
-
-            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-
-            conn.Open();
+            currentDate = DateTime.Now.ToUniversalTime();
+            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            calendar.AddBoldedDate(currentDate);
+            //conn.Open();
             // Look for appointments
-            string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-
-            handleday();
-            DataTable dt = new DataTable();
-            adapt.Fill(dt);
-            appointmentDataGrid.DataSource = dt;
-            conn.Close();
+            //string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            //DataTable at = new DataTable();
+            //adapt.Fill(at);
+            handleDay();
+            appointmentDataGrid.DataSource = at;
+            //conn.Close();
 
         }
 
-        private void handleday()
+        private void handleDay()
         {
-            calendar.AddBoldedDate(CurrentDate);
-            calendar.UpdateBoldedDates();
-            string query = $"Select customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment WHERE start = '{CurrentDate}'";
-
+            var currentDateNow = Logic.FormatUTCDateTime(currentDate);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            label3.Text = currentDate.ToString("yyyy-MM-dd");
+
+            calendar.RemoveAllBoldedDates();
+            calendar.AddBoldedDate(currentDate);
+            calendar.UpdateBoldedDates();
+            at.Clear();
+            string query = $"SELECT customer.customerName, appointment.type, SUBSTR(appointment.start FROM 11) AS Start, SUBSTR(appointment.end FROM 11) AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-
             MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            DataTable dt = new DataTable();
-            adapt.Fill(dt);
-            appointmentDataGrid.DataSource = dt;
+            adapt.Fill(at);
+            appointmentDataGrid.DataSource = at;
             conn.Close();
-
-            //try
-            //{
-            //    if (rdr.HasRows)
-            //    {
-            //        rdr.Read();
-            //        appointmentDataGrid.ColumnHeader(new KeyValuePair<string, object>("customerId", rdr[0]));
-            //        customerList.Add(new KeyValuePair<string, object>("customerName", rdr[1]));
-            //        customerList.Add(new KeyValuePair<string, object>("addressId", rdr[2]));
-            //        customerList.Add(new KeyValuePair<string, object>("active", rdr[3]));
-            //        rdr.Close();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("No Customer found with the ID: " + customerID, "Please try again");
-            //        return null;
-            //    }
-            //}
         }
 
-            private void CreateAppointmentButton_Click(object sender, EventArgs e)
+        private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             AddAppointment appointment = new AddAppointment();
             appointment.Show();
+        }
+
+        private void calendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            //label3.Text = calendar.SelectionStart.ToString("yyyy-MM-dd");
+
+            currentDate = e.Start;
+            handleDay();
 
         }
     }
