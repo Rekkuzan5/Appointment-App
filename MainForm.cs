@@ -128,7 +128,7 @@ namespace Appointment_App
         {
             currentDate = DateTime.Now.ToUniversalTime();
             //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            calendar.AddBoldedDate(currentDate);
+            //calendar.AddBoldedDate(currentDate);
             //conn.Open();
             // Look for appointments
             //string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
@@ -137,7 +137,7 @@ namespace Appointment_App
             //DataTable at = new DataTable();
             //adapt.Fill(at);
             handleDay();
-            appointmentDataGrid.DataSource = at;
+            //appointmentDataGrid.DataSource = at;
             //conn.Close();
 
         }
@@ -151,11 +151,21 @@ namespace Appointment_App
             calendar.RemoveAllBoldedDates();
             calendar.AddBoldedDate(currentDate);
             calendar.UpdateBoldedDates();
-            at.Clear();
-            string query = $"SELECT customer.customerName, appointment.type, SUBSTR(appointment.start FROM 11) AS Start, SUBSTR(appointment.end FROM 11) AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
+            //at.Clear();
+            conn.Open();
+            string query = $"SELECT customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            adapt.Fill(at);
+            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            //adapt.Fill(at);
+
+            DataTable at = new DataTable();
+            at.Load(cmd.ExecuteReader());
+            foreach (DataRow row in at.Rows) {
+                DateTime utcStart = Convert.ToDateTime(row["Start"]);
+                DateTime utcEnd = Convert.ToDateTime(row["End"]);
+                row["Start"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
+                row["End"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
+            }
             appointmentDataGrid.DataSource = at;
             conn.Close();
         }

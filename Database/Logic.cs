@@ -433,6 +433,7 @@ namespace Appointment_App.Database
             return formatForMySql;
         }
 
+        // Need to fix this where the date is actually in the start combo/calendar box //
         public static void createAppointment(int custID, string title, string description, string location, string contact, string type, DateTime start, DateTime endTime)
         {
             int appointID = GetID("appointment", "appointmentId") + 1;

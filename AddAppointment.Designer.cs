@@ -70,6 +70,7 @@ namespace Appointment_App
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(260, 26);
             this.customerComboBox.TabIndex = 1;
+            this.customerComboBox.Text = "Select a Customer...";
             // 
             // descriptionTextBox
             // 
@@ -160,6 +161,8 @@ namespace Appointment_App
             "Initial",
             "General",
             "Advanced",
+            "Other",
+            "Maintenance",
             "Exit"});
             this.typeComboBox.Location = new System.Drawing.Point(158, 263);
             this.typeComboBox.Name = "typeComboBox";

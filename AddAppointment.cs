@@ -37,7 +37,7 @@ namespace Appointment_App
             //MySqlDataReader rd = cmd.ExecuteReader();
 
             //    while (rd.Read())
-            //    {
+            //    {t
             //    customerComboBox.Items.Add(rd[1]);
             //    }
 
