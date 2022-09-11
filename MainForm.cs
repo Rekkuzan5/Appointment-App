@@ -160,7 +160,8 @@ namespace Appointment_App
 
             DataTable at = new DataTable();
             at.Load(cmd.ExecuteReader());
-            foreach (DataRow row in at.Rows) {
+            foreach (DataRow row in at.Rows)
+            {
                 DateTime utcStart = Convert.ToDateTime(row["Start"]);
                 DateTime utcEnd = Convert.ToDateTime(row["End"]);
                 row["Start"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
@@ -183,6 +184,25 @@ namespace Appointment_App
             currentDate = e.Start;
             handleDay();
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int appointmentId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
+            DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this appointment?", "Delete Appointment Record", MessageBoxButtons.YesNo);
+            if (affirmation == DialogResult.Yes)
+            {
+                // Delete
+
+                //First we need to check if appointments exist
+                Logic.DeleteAppointment(appointmentId);
+                GetAppointments();
+                MessageBox.Show("Appointment successfully deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Operation Cancelled.");
+            }
         }
     }
 }

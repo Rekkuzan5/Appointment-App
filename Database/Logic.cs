@@ -457,5 +457,20 @@ namespace Appointment_App.Database
             conn.Close();
 
         }
+
+        public static void DeleteAppointment(int appointmentID)
+        {
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            var query = $"DELETE * FROM appointment WHERE appointment.id = '{appointmentID}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlTransaction transaction = conn.BeginTransaction();
+            cmd.CommandText = query;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            conn.Close();
+        }
     }
 }
