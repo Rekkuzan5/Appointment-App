@@ -350,6 +350,7 @@ namespace Appointment_App
             // 
             // apptID
             // 
+            this.apptID.DataPropertyName = "appointmentId";
             this.apptID.HeaderText = "ID";
             this.apptID.Name = "apptID";
             this.apptID.ReadOnly = true;

@@ -462,7 +462,7 @@ namespace Appointment_App.Database
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            var query = $"DELETE * FROM appointment WHERE appointment.id = '{appointmentID}'";
+            var query = $"DELETE FROM appointment WHERE appointment.appointmentId = '{appointmentID}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
             cmd.CommandText = query;

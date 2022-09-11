@@ -153,7 +153,7 @@ namespace Appointment_App
             calendar.UpdateBoldedDates();
             //at.Clear();
             conn.Open();
-            string query = $"SELECT customer.customerName, appointment.appointmentId, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
+            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
             //adapt.Fill(at);
