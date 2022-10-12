@@ -229,19 +229,29 @@ namespace Appointment_App.Database
 
         public static void DeleteCustomer(IDictionary<string, object> dictionary)
         {
+            //Fix this for proper deleting of customers.
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            var query4 = $"DELETE FROM customer" +
-               $" WHERE customerId = '{dictionary["customerId"]}'";
-            MySqlCommand cmd = new MySqlCommand(query4, conn);
+            var query5 = $"DELETE FROM appointment" +
+               $" WHERE appointmentId = '{dictionary["appointmentId"]}'";
+            MySqlCommand cmd = new MySqlCommand(query5, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
 
-            cmd.CommandText = query4;
+            cmd.CommandText = query5;
             cmd.Connection = conn;
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
+            // Start a customer transaction.
+            transaction = conn.BeginTransaction();
+            var query4 = $"DELETE FROM customer" +
+                $" WHERE customerId = '{dictionary["customerId"]}'";
+            cmd.CommandText = query4;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
 
             // Start a address transaction.
             transaction = conn.BeginTransaction();

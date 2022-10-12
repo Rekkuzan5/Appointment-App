@@ -63,24 +63,30 @@ namespace Appointment_App
         // Will need more work //  need to work on next //
         private void DeleteCustomerButton_Click(object sender, EventArgs e)
         {
-            int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
-            DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Customer Record", MessageBoxButtons.YesNo);
-            if (affirmation == DialogResult.Yes)
+            if (customerDataGrid.Rows.Count > 0)
             {
-                // Delete
-                CustList = Logic.SearchCustomer(customerId);
-                var list = CustList;
-                IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
-                //First we need to check if appointments exist
-                Logic.DeleteCustomer(dictionary);
-                GetCustomers();
-                MessageBox.Show("Customer successfully deleted!");
+                int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
+                DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this customer?", "Delete Customer Record", MessageBoxButtons.YesNo);
+                if (affirmation == DialogResult.Yes)
+                {
+                    // Delete
+                    CustList = Logic.SearchCustomer(customerId);
+                    var list = CustList;
+                    IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
+                    //First we need to check if appointments exist
+                    Logic.DeleteCustomer(dictionary);
+                    GetCustomers();
+                    MessageBox.Show("Customer successfully deleted!");
+                }
+                else
+                {
+                    MessageBox.Show("Operation Cancelled.");
+                }
             }
             else
             {
-                MessageBox.Show("Operation Cancelled.");
+                MessageBox.Show("There are no customers to delete!");
             }
-
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
@@ -188,20 +194,27 @@ namespace Appointment_App
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int appointmentId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
-            DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this appointment?", "Delete Appointment Record", MessageBoxButtons.YesNo);
-            if (affirmation == DialogResult.Yes)
+            if (appointmentDataGrid.Rows.Count > 0)
             {
-                // Delete
+                int appointmentId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
+                DialogResult affirmation = MessageBox.Show("Are you sure you want to delete this appointment?", "Delete Appointment Record", MessageBoxButtons.YesNo);
+                if (affirmation == DialogResult.Yes)
+                {
+                    // Delete
 
-                //First we need to check if appointments exist
-                Logic.DeleteAppointment(appointmentId);
-                GetAppointments();
-                MessageBox.Show("Appointment successfully deleted!");
+                    //First we need to check if appointments exist
+                    Logic.DeleteAppointment(appointmentId);
+                    GetAppointments();
+                    MessageBox.Show("Appointment successfully deleted!");
+                }
+                else
+                {
+                    MessageBox.Show("Operation Cancelled.");
+                }
             }
             else
             {
-                MessageBox.Show("Operation Cancelled.");
+                MessageBox.Show("There are no appointments to delete!");
             }
         }
     }
