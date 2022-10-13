@@ -17,6 +17,7 @@ namespace Appointment_App
         public CreateCustomer()
         {
             InitializeComponent();
+            FillCityData();
         }
 
         private void CreateCustomer_Load(object sender, EventArgs e)
@@ -30,13 +31,14 @@ namespace Appointment_App
             this.Close();
         }
 
-        public void FillData()
+        // *** need to polish this section but it is working partially *** //
+        public void FillCityData()
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
             conn.Open();
             // Look for customers
-            string query = $"SELECT customerId, customerName FROM customer";
+            string query = $"SELECT cityId, city FROM city";
             MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
             //MySqlCommand cmd = new MySqlCommand(query, conn);
             //MySqlDataReader rd = cmd.ExecuteReader();
@@ -48,10 +50,28 @@ namespace Appointment_App
 
 
             DataSet ds = new DataSet();
-            adapt.Fill(ds, "Customers");
-            cityComboTextBox.DisplayMember = "customerCity";
+            adapt.Fill(ds, "City");
+            cityComboTextBox.DisplayMember = "city";
             cityComboTextBox.ValueMember = "cityId";
             cityComboTextBox.DataSource = ds.Tables["City"];
+
+            // Look for customers
+            string query2 = $"SELECT countryId, country FROM country";
+            MySqlDataAdapter adapt2 = new MySqlDataAdapter(query2, conn);
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataReader rd = cmd.ExecuteReader();
+
+            //    while (rd.Read())
+            //    {t
+            //    customerComboBox.Items.Add(rd[1]);
+            //    }
+
+
+            DataSet ds2 = new DataSet();
+            adapt2.Fill(ds2, "Country");
+            customerCountryCombobox.DisplayMember = "country";
+            customerCountryCombobox.ValueMember = "countryId";
+            customerCountryCombobox.DataSource = ds2.Tables["Country"];
             conn.Close();
         }
 
