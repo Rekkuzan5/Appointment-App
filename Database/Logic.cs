@@ -233,7 +233,7 @@ namespace Appointment_App.Database
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             var query5 = $"DELETE FROM appointment" +
-               $" WHERE appointmentId = '{dictionary["appointmentId"]}'";
+               $" WHERE customerId = '{dictionary["customerId"]}'";
             MySqlCommand cmd = new MySqlCommand(query5, conn);
             MySqlTransaction transaction = conn.BeginTransaction();
 
@@ -263,27 +263,30 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
 
-            // Start a city transaction.
-            transaction = conn.BeginTransaction();
-            var query2 = $"DELETE FROM city" +
-                $" WHERE cityId = '{dictionary["cityId"]}'";
-            cmd.CommandText = query2;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
+            // *** Deleted since the cities and countries don't need to be deleted.  They could be added to but never deleted by a customer/user ***
 
-            // Start a country transaction.
-            transaction = conn.BeginTransaction();
-            var query = $"DELETE FROM country" +
-                $" WHERE countryId = '{dictionary["countryId"]}'";
-            cmd.CommandText = query;
-            cmd.Connection = conn;
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
-            conn.Close();
+            //// Start a city transaction.
+            //transaction = conn.BeginTransaction();
+            //var query2 = $"DELETE FROM city" +
+            //    $" WHERE cityId = '{dictionary["cityId"]}'";
+            //cmd.CommandText = query2;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
 
+            //// Start a country transaction.
+            //transaction = conn.BeginTransaction();
+            //var query = $"DELETE FROM country" +
+            //    $" WHERE countryId = '{dictionary["countryId"]}'";
+            //cmd.CommandText = query;
+            //cmd.Connection = conn;
+            //cmd.Transaction = transaction;
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+            //conn.Close();
+
+            // *** End of comment ***
 
             //int addressId = 0;
             //int cityId = 0;
