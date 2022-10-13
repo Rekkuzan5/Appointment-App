@@ -33,8 +33,6 @@ namespace Appointment_App
             this.customerAddressTextBox = new System.Windows.Forms.TextBox();
             this.customerPhoneTextBox = new System.Windows.Forms.TextBox();
             this.customerZipTextBox = new System.Windows.Forms.TextBox();
-            this.customerCityTextBox = new System.Windows.Forms.TextBox();
-            this.customerCountryTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +42,8 @@ namespace Appointment_App
             this.createCustomerButton = new System.Windows.Forms.Button();
             this.cancelCustomerButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.customerCountryCombobox = new System.Windows.Forms.ComboBox();
+            this.customerComboTextBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // customerNameTextBox
@@ -77,22 +77,6 @@ namespace Appointment_App
             this.customerZipTextBox.Name = "customerZipTextBox";
             this.customerZipTextBox.Size = new System.Drawing.Size(150, 30);
             this.customerZipTextBox.TabIndex = 3;
-            // 
-            // customerCityTextBox
-            // 
-            this.customerCityTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerCityTextBox.Location = new System.Drawing.Point(207, 212);
-            this.customerCityTextBox.Name = "customerCityTextBox";
-            this.customerCityTextBox.Size = new System.Drawing.Size(150, 30);
-            this.customerCityTextBox.TabIndex = 4;
-            // 
-            // customerCountryTextbox
-            // 
-            this.customerCountryTextbox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerCountryTextbox.Location = new System.Drawing.Point(207, 278);
-            this.customerCountryTextbox.Name = "customerCountryTextbox";
-            this.customerCountryTextbox.Size = new System.Drawing.Size(150, 30);
-            this.customerCountryTextbox.TabIndex = 5;
             // 
             // label1
             // 
@@ -186,11 +170,29 @@ namespace Appointment_App
             this.label6.Text = "Create New Customer";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // customerCountryCombobox
+            // 
+            this.customerCountryCombobox.FormattingEnabled = true;
+            this.customerCountryCombobox.Location = new System.Drawing.Point(207, 278);
+            this.customerCountryCombobox.Name = "customerCountryCombobox";
+            this.customerCountryCombobox.Size = new System.Drawing.Size(150, 21);
+            this.customerCountryCombobox.TabIndex = 17;
+            // 
+            // customerComboTextBox
+            // 
+            this.customerComboTextBox.FormattingEnabled = true;
+            this.customerComboTextBox.Location = new System.Drawing.Point(207, 212);
+            this.customerComboTextBox.Name = "customerComboTextBox";
+            this.customerComboTextBox.Size = new System.Drawing.Size(150, 21);
+            this.customerComboTextBox.TabIndex = 16;
+            // 
             // CreateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 401);
+            this.Controls.Add(this.customerCountryCombobox);
+            this.Controls.Add(this.customerComboTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cancelCustomerButton);
             this.Controls.Add(this.createCustomerButton);
@@ -200,8 +202,6 @@ namespace Appointment_App
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.customerCountryTextbox);
-            this.Controls.Add(this.customerCityTextBox);
             this.Controls.Add(this.customerZipTextBox);
             this.Controls.Add(this.customerPhoneTextBox);
             this.Controls.Add(this.customerAddressTextBox);
@@ -222,8 +222,6 @@ namespace Appointment_App
         private System.Windows.Forms.TextBox customerAddressTextBox;
         private System.Windows.Forms.TextBox customerPhoneTextBox;
         private System.Windows.Forms.TextBox customerZipTextBox;
-        private System.Windows.Forms.TextBox customerCityTextBox;
-        private System.Windows.Forms.TextBox customerCountryTextbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -233,5 +231,7 @@ namespace Appointment_App
         private System.Windows.Forms.Button createCustomerButton;
         private System.Windows.Forms.Button cancelCustomerButton;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox customerCountryCombobox;
+        private System.Windows.Forms.ComboBox customerComboTextBox;
     }
 }

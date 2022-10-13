@@ -38,8 +38,8 @@ namespace Appointment_App
                 string.IsNullOrEmpty(customerAddressTextBox.Text) ||
                 string.IsNullOrEmpty(customerPhoneTextBox.Text) ||
                 string.IsNullOrEmpty(customerZipTextBox.Text) ||
-                string.IsNullOrEmpty(customerCityTextBox.Text) ||
-                string.IsNullOrEmpty(customerCountryTextbox.Text)
+                string.IsNullOrEmpty(listBox1.Text) ||
+                string.IsNullOrEmpty(customerCountryCombobox.Text)
                 )
             {
                 MessageBox.Show("Please enter information in all fields.");
@@ -49,8 +49,8 @@ namespace Appointment_App
                 int active = 1;
                 //int customerID = Logic.GetID("customer", "customerId") + 1;
                 string username = Logic.CurrentUserName;
-                int countryID = Logic.CreateCountry(customerCountryTextbox.Text);
-                int cityID = Logic.CreateCity(countryID, customerCityTextBox.Text);
+                int countryID = Logic.CreateCountry(customerCountryCombobox.Text);
+                int cityID = Logic.CreateCity(countryID, listBox1.Text);
                 int addressID = Logic.CreateAddress(cityID, customerAddressTextBox.Text, customerZipTextBox.Text, customerPhoneTextBox.Text);
 
                 Logic.CreateCustomer(customerNameTextBox.Text, addressID, active, Logic.Now, username);
