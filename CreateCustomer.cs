@@ -1,4 +1,5 @@
 ﻿using Appointment_App.Database;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,31 @@ namespace Appointment_App
         {
 
             this.Close();
+        }
+
+        public void FillData()
+        {
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
+            conn.Open();
+            // Look for customers
+            string query = $"SELECT customerId, customerName FROM customer";
+            MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataReader rd = cmd.ExecuteReader();
+
+            //    while (rd.Read())
+            //    {t
+            //    customerComboBox.Items.Add(rd[1]);
+            //    }
+
+
+            DataSet ds = new DataSet();
+            adapt.Fill(ds, "Customers");
+            cityComboTextBox.DisplayMember = "customerCity";
+            cityComboTextBox.ValueMember = "cityId";
+            cityComboTextBox.DataSource = ds.Tables["City"];
+            conn.Close();
         }
 
         private void CreateCustomerButton_Click(object sender, EventArgs e)
