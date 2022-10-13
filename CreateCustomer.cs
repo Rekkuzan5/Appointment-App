@@ -38,7 +38,7 @@ namespace Appointment_App
                 string.IsNullOrEmpty(customerAddressTextBox.Text) ||
                 string.IsNullOrEmpty(customerPhoneTextBox.Text) ||
                 string.IsNullOrEmpty(customerZipTextBox.Text) ||
-                string.IsNullOrEmpty(listBox1.Text) ||
+                string.IsNullOrEmpty(cityComboTextBox.Text) ||
                 string.IsNullOrEmpty(customerCountryCombobox.Text)
                 )
             {
@@ -50,7 +50,7 @@ namespace Appointment_App
                 //int customerID = Logic.GetID("customer", "customerId") + 1;
                 string username = Logic.CurrentUserName;
                 int countryID = Logic.CreateCountry(customerCountryCombobox.Text);
-                int cityID = Logic.CreateCity(countryID, listBox1.Text);
+                int cityID = Logic.CreateCity(countryID, cityComboTextBox.Text);
                 int addressID = Logic.CreateAddress(cityID, customerAddressTextBox.Text, customerZipTextBox.Text, customerPhoneTextBox.Text);
 
                 Logic.CreateCustomer(customerNameTextBox.Text, addressID, active, Logic.Now, username);
