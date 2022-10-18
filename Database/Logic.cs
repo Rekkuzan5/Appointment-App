@@ -52,6 +52,7 @@ namespace Appointment_App.Database
         }
 
         // Gets the id from any table.  New customers will not need this since the table auto increments userID for us.
+        // *** this may need to be changed or a new method for just getting the id that isn't the max type ***
         public static int GetID(string table, string id)
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
@@ -357,30 +358,59 @@ namespace Appointment_App.Database
             //conn.Close();
         }
 
+        // *** Needs to be a button for creating a new country because a country doesn't need to be input into the system unless new ***
         public static int CreateCountry(string country)
         {
-            int countryId = GetID("country", "countryId") + 1;
             string username = CurrentUserName;
-            //DateTime UTCTime = GetDateTime();
             string utcTime = FormatUTCDateTime(Now);
+            var customerList = new List<KeyValuePair<string, int>>();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
-            MySqlTransaction transaction = conn.BeginTransaction();
+            string countryNameQuery = $"SELECT countryId, country FROM country WHERE country = '{country}'";
+            MySqlCommand cmd1 = new MySqlCommand(countryNameQuery, conn);
+            MySqlDataReader rdr = cmd1.ExecuteReader();
 
-            string query = $"INSERT into country (countryId, country, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{countryId}', '{country}', CURRENT_TIMESTAMP, '{username}', '{username}')";
+            if (rdr.HasRows)
+            {
+                rdr.Read();
+                customerList.Add(new KeyValuePair<string, int>("countryId", (int)rdr[0]));
+                rdr.Close();
+            }
+            else
+            {
+                rdr.Close();
+                int newCountryId = GetID("country", "countryId") + 1;
 
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Transaction = transaction;
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
-            conn.Close();
+                MySqlTransaction transaction = conn.BeginTransaction();
+                string query = $"INSERT into country (countryId, country, createDate, createdBy, lastUpdateBy)" +
+                    $"VALUES ('{newCountryId}', '{country}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
-            return countryId;
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+                MessageBox.Show("Country has been added to Database");
+                return newCountryId;
+            }
+
+            var containedCountry = customerList.First(kvp => kvp.Key == "countryId").Value;
+            if (containedCountry != 0)
+            {
+                MessageBox.Show("This country is present");
+                int oldCountryId = (int)customerList.First(kvp => kvp.Key == "countryId").Value;
+                return oldCountryId;
+            }
+            else
+            {
+                MessageBox.Show("Error: Country cannot be added.");
+                return 0;
+            }
         }
 
+        // *** Needs to be a button for creating a new city because a city doesn't need to be input into the system unless new ***
         public static int CreateCity(int countryId, string city)
         {
             int cityId = GetID("city", "cityID") + 1;
@@ -404,7 +434,7 @@ namespace Appointment_App.Database
             transaction.Commit();
             conn.Close();
 
-            return countryId;
+            return cityId;
         }
 
         public static int CreateAddress(int cityId, string address, string postalCode, string phone)
