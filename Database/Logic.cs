@@ -36,7 +36,6 @@ namespace Appointment_App.Database
                 conn.Close();
                 return CurrentUserID;
             }
-            MessageBox.Show($"User: {CurrentUserName} Password: {password}");
             conn.Close();
             return 0;
         }

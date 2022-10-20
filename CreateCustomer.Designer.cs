@@ -172,18 +172,20 @@ namespace Appointment_App
             // 
             // customerCountryCombobox
             // 
+            this.customerCountryCombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerCountryCombobox.FormattingEnabled = true;
             this.customerCountryCombobox.Location = new System.Drawing.Point(207, 278);
             this.customerCountryCombobox.Name = "customerCountryCombobox";
-            this.customerCountryCombobox.Size = new System.Drawing.Size(150, 21);
+            this.customerCountryCombobox.Size = new System.Drawing.Size(150, 24);
             this.customerCountryCombobox.TabIndex = 17;
             // 
             // cityComboTextBox
             // 
+            this.cityComboTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cityComboTextBox.FormattingEnabled = true;
             this.cityComboTextBox.Location = new System.Drawing.Point(207, 212);
             this.cityComboTextBox.Name = "cityComboTextBox";
-            this.cityComboTextBox.Size = new System.Drawing.Size(150, 21);
+            this.cityComboTextBox.Size = new System.Drawing.Size(150, 24);
             this.cityComboTextBox.TabIndex = 16;
             // 
             // CreateCustomer

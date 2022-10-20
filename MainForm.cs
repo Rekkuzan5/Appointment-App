@@ -152,7 +152,6 @@ namespace Appointment_App
         {
             var currentDateNow = Logic.FormatUTCDateTime(currentDate);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            label3.Text = currentDate.ToString("yyyy-MM-dd");
 
             calendar.RemoveAllBoldedDates();
             calendar.AddBoldedDate(currentDate);

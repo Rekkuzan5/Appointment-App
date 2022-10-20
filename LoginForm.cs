@@ -25,14 +25,14 @@ namespace Appointment_App
         {
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
-                MessageBox.Show("successful login!");
+                MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
                 MainForm mainForm = new MainForm();
                 this.Hide();
                 mainForm.Show();
             }
             else
             {
-                MessageBox.Show("Login Unsuccessful");
+                MessageBox.Show("Login Failed\n\nUsername and Password did not match.");
             }
         }
     }
