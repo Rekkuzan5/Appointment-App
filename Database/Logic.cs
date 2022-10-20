@@ -263,102 +263,8 @@ namespace Appointment_App.Database
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
             transaction.Commit();
-
-            // *** Deleted since the cities and countries don't need to be deleted.  They could be added to but never deleted by a customer/user ***
-
-            //// Start a city transaction.
-            //transaction = conn.BeginTransaction();
-            //var query2 = $"DELETE FROM city" +
-            //    $" WHERE cityId = '{dictionary["cityId"]}'";
-            //cmd.CommandText = query2;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-
-            //// Start a country transaction.
-            //transaction = conn.BeginTransaction();
-            //var query = $"DELETE FROM country" +
-            //    $" WHERE countryId = '{dictionary["countryId"]}'";
-            //cmd.CommandText = query;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-            //conn.Close();
-
-            // *** End of comment ***
-
-            //int addressId = 0;
-            //int cityId = 0;
-            //int countryId = 0;
-
-            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            //conn.Open();
-
-            //string getInfo = $"SELECT customer.customerId, address.addressId, city.cityId, country.countryId FROM customer " +
-            //    $"JOIN address ON customer.addressId = address.addressId JOIN city ON address.cityId = city.cityId JOIN country " +
-            //    $"ON city.countryId = country.countryId WHERE customer.customerId = '{custId}'";
-            //MySqlCommand cmd1 = new MySqlCommand(getInfo, conn);
-            //MySqlDataReader rdr = cmd1.ExecuteReader();
-            //if (rdr.HasRows)
-            //{
-            //    rdr.Read();
-            //    {
-            //        addressId = rdr.GetInt32(1);
-            //        cityId = rdr.GetInt32(2);
-            //        countryId = rdr.GetInt32(3);
-            //    }
-            //}
-            //rdr.Close();
-
-            //string test = $"DELETE FROM appointment WHERE customerId = '{custId}'";
-            //string query1 = $"DELETE FROM customer WHERE customerId = '{custId}'";
-            //string query2 = $"DELETE FROM address WHERE addressId = '{addressId}'";
-            //string query3 = $"DELETE FROM city WHERE cityId = '{cityId}'";
-            //string query4 = $"DELETE FROM country WHERE countryId = '{countryId}'";
-
-            //MySqlCommand cmd = new MySqlCommand(test, conn);
-            //MySqlTransaction transaction = conn.BeginTransaction();
-            //cmd.CommandText = test;
-            //cmd.Connection = conn;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-
-            //transaction = conn.BeginTransaction();
-            //cmd.CommandText = query1;
-            //cmd.Connection = conn;
-            ////cmd.Transaction = transaction;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-
-
-            //transaction = conn.BeginTransaction();
-            //cmd.CommandText = query2;
-            //cmd.Connection = conn;
-            ////cmd.Transaction = transaction;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-
-            //transaction = conn.BeginTransaction();         
-            //cmd.CommandText = query3;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-
-            //transaction = conn.BeginTransaction();           
-            //cmd.CommandText = query4;
-            //cmd.Connection = conn;
-            //cmd.Transaction = transaction;
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-            //conn.Close();
         }
 
-        // *** Needs to be a button for creating a new country because a country doesn't need to be input into the system unless new ***
         public static int CreateCountry(string country)
         {
             string username = CurrentUserName;
@@ -443,8 +349,8 @@ namespace Appointment_App.Database
                     $"VALUES ('{newCityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
 
                 MySqlCommand cmd2 = new MySqlCommand(query, conn);
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
+                cmd2.Transaction = transaction;
+                cmd2.ExecuteNonQuery();
                 transaction.Commit();
                 conn.Close();
                 MessageBox.Show("City has been added to Database");
@@ -463,25 +369,6 @@ namespace Appointment_App.Database
                 MessageBox.Show("Error: City cannot be added.");
                 return 0;
             }
-
-
-            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            //conn.Open();
-
-            //MySqlTransaction transaction = conn.BeginTransaction();
-
-            //string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
-            //    $"VALUES ('{cityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
-
-            //MySqlCommand cmd = new MySqlCommand(query, conn)
-            //{
-            //    Transaction = transaction
-            //};
-            //cmd.ExecuteNonQuery();
-            //transaction.Commit();
-            //conn.Close();
-
-            //return cityId;
         }
 
         public static int CreateAddress(int cityId, string address, string postalCode, string phone)
