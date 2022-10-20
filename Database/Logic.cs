@@ -363,7 +363,7 @@ namespace Appointment_App.Database
         {
             string username = CurrentUserName;
             string utcTime = FormatUTCDateTime(Now);
-            var customerList = new List<KeyValuePair<string, int>>();
+            var countryList = new List<KeyValuePair<string, int>>();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -375,7 +375,7 @@ namespace Appointment_App.Database
             if (rdr.HasRows)
             {
                 rdr.Read();
-                customerList.Add(new KeyValuePair<string, int>("countryId", (int)rdr[0]));
+                countryList.Add(new KeyValuePair<string, int>("countryId", (int)rdr[0]));
                 rdr.Close();
             }
             else
@@ -396,11 +396,11 @@ namespace Appointment_App.Database
                 return newCountryId;
             }
 
-            var containedCountry = customerList.First(kvp => kvp.Key == "countryId").Value;
+            var containedCountry = countryList.First(kvp => kvp.Key == "countryId").Value;
             if (containedCountry != 0)
             {
                 MessageBox.Show("This country is present");
-                int oldCountryId = (int)customerList.First(kvp => kvp.Key == "countryId").Value;
+                int oldCountryId = (int)countryList.First(kvp => kvp.Key == "countryId").Value;
                 return oldCountryId;
             }
             else
@@ -418,23 +418,70 @@ namespace Appointment_App.Database
             //DateTime UTCTime = GetDateTime();
             string utcTime = FormatUTCDateTime(Now);
 
+            var cityList = new List<KeyValuePair<string, int>>();
+
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
-            MySqlTransaction transaction = conn.BeginTransaction();
+            string cityQuery = $"SELECT cityId, city FROM city WHERE city = '{city}'";
+            MySqlCommand cmd = new MySqlCommand(cityQuery, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
 
-            string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
-                $"VALUES ('{cityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
-
-            MySqlCommand cmd = new MySqlCommand(query, conn)
+            if (rdr.HasRows)
             {
-                Transaction = transaction
-            };
-            cmd.ExecuteNonQuery();
-            transaction.Commit();
-            conn.Close();
+                rdr.Read();
+                cityList.Add(new KeyValuePair<string, int>("cityId", (int)rdr[0]));
+                rdr.Close();
+            }
+            else
+            {
+                rdr.Close();
+                int newCityId = GetID("city", "cityId") + 1;
 
-            return cityId;
+                MySqlTransaction transaction = conn.BeginTransaction();
+                string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
+                    $"VALUES ('{newCityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
+
+                MySqlCommand cmd2 = new MySqlCommand(query, conn);
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                conn.Close();
+                MessageBox.Show("City has been added to Database");
+                return newCityId;
+            }
+
+            var containedCity = cityList.First(kvp => kvp.Key == "cityId").Value;
+            if (containedCity != 0)
+            {
+                MessageBox.Show("This city is present");
+                int existingCityId = (int)cityList.First(kvp => kvp.Key == "cityId").Value;
+                return existingCityId;
+            }
+            else
+            {
+                MessageBox.Show("Error: City cannot be added.");
+                return 0;
+            }
+
+
+            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            //conn.Open();
+
+            //MySqlTransaction transaction = conn.BeginTransaction();
+
+            //string query = $"INSERT into city (cityId, city, countryId, createDate, createdBy, lastUpdateBy)" +
+            //    $"VALUES ('{cityId}', '{city}', '{countryId}', CURRENT_TIMESTAMP, '{username}', '{username}')";
+
+            //MySqlCommand cmd = new MySqlCommand(query, conn)
+            //{
+            //    Transaction = transaction
+            //};
+            //cmd.ExecuteNonQuery();
+            //transaction.Commit();
+            //conn.Close();
+
+            //return cityId;
         }
 
         public static int CreateAddress(int cityId, string address, string postalCode, string phone)
