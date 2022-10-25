@@ -30,9 +30,9 @@ namespace Appointment_App
         {
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, "logins.txt"), true))
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(path), true))
                 {
-                    outputFile.WriteLine($"{Logic.CurrentUserName} logged in at {Logic.Now}");
+                    outputFile.WriteLine($"{Logic.CurrentUserName} logged in --- {Logic.GetDateTime()}");
                 }
 
                 MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
