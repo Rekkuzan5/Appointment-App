@@ -17,7 +17,7 @@ namespace Appointment_App
 {
     public partial class LoginForm : Form
     {
-        private StreamWriter logFile;
+        //private StreamWriter logFile;
         string path = "logins.txt";
 
 
@@ -26,19 +26,13 @@ namespace Appointment_App
             InitializeComponent();
         }
 
-        private static void AddText(FileStream fs, string value)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(value);
-            fs.Write(info, 0, info.Length);
-        }
-
         private void LoginButton_Click(object sender, EventArgs e)
         {
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
-                using (FileStream fs = File.Create(path))
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(path, "logins.txt"), true))
                 {
-                    AddText(fs, $"{Logic.CurrentUserName} logged in at {Logic.Now}");
+                    outputFile.WriteLine($"{Logic.CurrentUserName} logged in at {Logic.Now}");
                 }
 
                 MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
