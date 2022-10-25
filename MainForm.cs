@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,9 +56,16 @@ namespace Appointment_App
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //this.Close();
-            Application.Exit();
-
+            DialogResult logout = MessageBox.Show("Logout and exit application?", "Exit Application", MessageBoxButtons.YesNo);
+            if (logout == DialogResult.Yes)
+            {
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(Logic.Path), true))
+                {
+                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged out: {Logic.GetDateTime()}\n***");
+                }
+                //this.Close();
+                Application.Exit();
+            }
         }
 
         // Will need more work //  need to work on next //

@@ -12,12 +12,14 @@ namespace Appointment_App.Database
 {
     class Logic
     {
+        private static string path = "logins.txt";
         public static int CurrentUserID { get; set; }
         public static string CurrentUserName { get; set; }
         public static DateTime Now { get; set; }
         public static DateTime UtcNow { get; }
+        public static string Path { get => path;}
 
-        public static int VerifyUser(string user, string password)
+            public static int VerifyUser(string user, string password)
         {
             //string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);

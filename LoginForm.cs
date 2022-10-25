@@ -18,7 +18,7 @@ namespace Appointment_App
     public partial class LoginForm : Form
     {
         //private StreamWriter logFile;
-        string path = "logins.txt";
+        //string path = "logins.txt";
 
 
     public LoginForm()
@@ -30,9 +30,9 @@ namespace Appointment_App
         {
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(path), true))
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(Logic.Path), true))
                 {
-                    outputFile.WriteLine($"{Logic.CurrentUserName} logged in --- {Logic.GetDateTime()}");
+                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {Logic.GetDateTime()}\n***");
                 }
 
                 MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
