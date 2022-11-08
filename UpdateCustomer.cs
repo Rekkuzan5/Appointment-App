@@ -20,6 +20,7 @@ namespace Appointment_App
         {
             InitializeComponent();
             CustomerId = customerId;
+            FillCityData();
         }
 
         public static List<KeyValuePair<string, object>> CustList;
