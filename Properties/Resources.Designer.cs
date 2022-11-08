@@ -59,5 +59,32 @@ namespace Appointment_App.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        internal static string loginLabel {
+            get {
+                return ResourceManager.GetString("loginLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string passwordLabel {
+            get {
+                return ResourceManager.GetString("passwordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username:.
+        /// </summary>
+        internal static string usernameLabel {
+            get {
+                return ResourceManager.GetString("usernameLabel", resourceCulture);
+            }
+        }
     }
 }

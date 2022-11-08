@@ -33,8 +33,6 @@ namespace Appointment_App
             this.customerAddressTextBox = new System.Windows.Forms.TextBox();
             this.customerPhoneTextBox = new System.Windows.Forms.TextBox();
             this.customerZipTextBox = new System.Windows.Forms.TextBox();
-            this.customerCityTextBox = new System.Windows.Forms.TextBox();
-            this.customerCountryTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,55 +43,41 @@ namespace Appointment_App
             this.cancelCustomerButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.ActiveCustomerCheck = new System.Windows.Forms.CheckBox();
+            this.cityComboBox = new System.Windows.Forms.ComboBox();
+            this.countryComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // customerNameTextBox
             // 
-            this.customerNameTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerNameTextBox.Location = new System.Drawing.Point(32, 149);
             this.customerNameTextBox.Name = "customerNameTextBox";
-            this.customerNameTextBox.Size = new System.Drawing.Size(150, 30);
+            this.customerNameTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerNameTextBox.TabIndex = 0;
             // 
             // customerAddressTextBox
             // 
-            this.customerAddressTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerAddressTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerAddressTextBox.Location = new System.Drawing.Point(32, 211);
             this.customerAddressTextBox.Name = "customerAddressTextBox";
-            this.customerAddressTextBox.Size = new System.Drawing.Size(150, 30);
+            this.customerAddressTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerAddressTextBox.TabIndex = 1;
             // 
             // customerPhoneTextBox
             // 
-            this.customerPhoneTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerPhoneTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerPhoneTextBox.Location = new System.Drawing.Point(32, 277);
             this.customerPhoneTextBox.Name = "customerPhoneTextBox";
-            this.customerPhoneTextBox.Size = new System.Drawing.Size(150, 30);
+            this.customerPhoneTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerPhoneTextBox.TabIndex = 2;
             // 
             // customerZipTextBox
             // 
-            this.customerZipTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerZipTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerZipTextBox.Location = new System.Drawing.Point(207, 149);
             this.customerZipTextBox.Name = "customerZipTextBox";
-            this.customerZipTextBox.Size = new System.Drawing.Size(150, 30);
+            this.customerZipTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerZipTextBox.TabIndex = 3;
-            // 
-            // customerCityTextBox
-            // 
-            this.customerCityTextBox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerCityTextBox.Location = new System.Drawing.Point(207, 211);
-            this.customerCityTextBox.Name = "customerCityTextBox";
-            this.customerCityTextBox.Size = new System.Drawing.Size(150, 30);
-            this.customerCityTextBox.TabIndex = 4;
-            // 
-            // customerCountryTextbox
-            // 
-            this.customerCountryTextbox.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerCountryTextbox.Location = new System.Drawing.Point(207, 277);
-            this.customerCountryTextbox.Name = "customerCountryTextbox";
-            this.customerCountryTextbox.Size = new System.Drawing.Size(150, 30);
-            this.customerCountryTextbox.TabIndex = 5;
             // 
             // label1
             // 
@@ -190,19 +174,41 @@ namespace Appointment_App
             // ActiveCustomerCheck
             // 
             this.ActiveCustomerCheck.AutoSize = true;
-            this.ActiveCustomerCheck.Font = new System.Drawing.Font("Poppins", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActiveCustomerCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ActiveCustomerCheck.Location = new System.Drawing.Point(31, 86);
             this.ActiveCustomerCheck.Name = "ActiveCustomerCheck";
-            this.ActiveCustomerCheck.Size = new System.Drawing.Size(69, 27);
+            this.ActiveCustomerCheck.Size = new System.Drawing.Size(66, 22);
             this.ActiveCustomerCheck.TabIndex = 16;
             this.ActiveCustomerCheck.Text = "Active";
             this.ActiveCustomerCheck.UseVisualStyleBackColor = true;
+            // 
+            // cityComboBox
+            // 
+            this.cityComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cityComboBox.FormattingEnabled = true;
+            this.cityComboBox.Location = new System.Drawing.Point(207, 211);
+            this.cityComboBox.Name = "cityComboBox";
+            this.cityComboBox.Size = new System.Drawing.Size(150, 24);
+            this.cityComboBox.Sorted = true;
+            this.cityComboBox.TabIndex = 17;
+            // 
+            // countryComboBox
+            // 
+            this.countryComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countryComboBox.FormattingEnabled = true;
+            this.countryComboBox.Location = new System.Drawing.Point(207, 277);
+            this.countryComboBox.Name = "countryComboBox";
+            this.countryComboBox.Size = new System.Drawing.Size(150, 24);
+            this.countryComboBox.Sorted = true;
+            this.countryComboBox.TabIndex = 18;
             // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 401);
+            this.Controls.Add(this.countryComboBox);
+            this.Controls.Add(this.cityComboBox);
             this.Controls.Add(this.ActiveCustomerCheck);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cancelCustomerButton);
@@ -214,9 +220,7 @@ namespace Appointment_App
             this.Controls.Add(this.label5);
             this.Controls.Add(this.customerZipTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.customerCityTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.customerCountryTextbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UpdateCustomer";
@@ -234,8 +238,6 @@ namespace Appointment_App
         private System.Windows.Forms.TextBox customerAddressTextBox;
         private System.Windows.Forms.TextBox customerPhoneTextBox;
         private System.Windows.Forms.TextBox customerZipTextBox;
-        private System.Windows.Forms.TextBox customerCityTextBox;
-        private System.Windows.Forms.TextBox customerCountryTextbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -246,5 +248,7 @@ namespace Appointment_App
         private System.Windows.Forms.Button cancelCustomerButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ActiveCustomerCheck;
+        private System.Windows.Forms.ComboBox cityComboBox;
+        private System.Windows.Forms.ComboBox countryComboBox;
     }
 }

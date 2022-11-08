@@ -36,9 +36,9 @@ namespace Appointment_App
             customerNameTextBox.Text = custList.First(kvp => kvp.Key == "customerName").Value.ToString();
             customerPhoneTextBox.Text = custList.First(kvp => kvp.Key == "phone").Value.ToString();
             customerAddressTextBox.Text = custList.First(kvp => kvp.Key == "address").Value.ToString();
-            customerCityTextBox.Text = custList.First(kvp => kvp.Key == "city").Value.ToString();
+            cityComboBox.Text = custList.First(kvp => kvp.Key == "city").Value.ToString();
             customerZipTextBox.Text = custList.First(kvp => kvp.Key == "postalCode").Value.ToString();
-            customerCountryTextbox.Text = custList.First(kvp => kvp.Key == "country").Value.ToString();
+            countryComboBox.Text = custList.First(kvp => kvp.Key == "country").Value.ToString();
             if (Convert.ToInt32(custList.First(kvp => kvp.Key == "active").Value) == 1)
             {
                 ActiveCustomerCheck.Checked = true;
@@ -48,6 +48,50 @@ namespace Appointment_App
                 ActiveCustomerCheck.Checked = false;
             }
         }
+
+        public void FillCityData()
+        {
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
+            conn.Open();
+            // Look for customers
+            string query = $"SELECT cityId, city FROM city";
+            MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataReader rd = cmd.ExecuteReader();
+
+            //    while (rd.Read())
+            //    {t
+            //    customerComboBox.Items.Add(rd[1]);
+            //    }
+
+
+            DataSet ds = new DataSet();
+            adapt.Fill(ds, "City");
+            cityComboBox.DisplayMember = "city";
+            cityComboBox.ValueMember = "cityId";
+            cityComboBox.DataSource = ds.Tables["City"];
+
+            // Look for customers
+            string query2 = $"SELECT countryId, country FROM country";
+            MySqlDataAdapter adapt2 = new MySqlDataAdapter(query2, conn);
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataReader rd = cmd.ExecuteReader();
+
+            //    while (rd.Read())
+            //    {t
+            //    customerComboBox.Items.Add(rd[1]);
+            //    }
+
+
+            DataSet ds2 = new DataSet();
+            adapt2.Fill(ds2, "Country");
+            countryComboBox.DisplayMember = "country";
+            countryComboBox.ValueMember = "countryId";
+            countryComboBox.DataSource = ds2.Tables["Country"];
+            conn.Close();
+        }
+
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
@@ -63,9 +107,9 @@ namespace Appointment_App
                     dictionary["customerName"] = customerNameTextBox.Text;
                     dictionary["phone"] = customerPhoneTextBox.Text;
                     dictionary["address"] = customerAddressTextBox.Text;
-                    dictionary["city"] = customerCityTextBox.Text;
+                    dictionary["city"] = cityComboBox.Text;
                     dictionary["postalCode"] = customerZipTextBox.Text;
-                    dictionary["country"] = customerCountryTextbox.Text;
+                    dictionary["country"] = countryComboBox.Text;
                     dictionary["active"] = ActiveCustomerCheck.Checked ? 1 : 0;
 
                     //Pass the updated IDictionary to dbhelper to update the database
