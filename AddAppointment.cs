@@ -48,12 +48,12 @@ namespace Appointment_App
             customerComboBox.ValueMember = "customerId";
             customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
+
         }
 
         public void getTimes()
         {
             //var initialDate = selectedDate;
-            var pickedDate = dateTimePicker1.Value.ToShortDateString();
 
 
         }
@@ -65,8 +65,15 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, descriptionTextBox.Text, LocComboBox.Text, contactTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
+            Logic.createAppointment((int)customerComboBox.SelectedValue, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
             this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime date = dateTimePicker1.Value;
+            dateTimePicker2.Value = date;
+            dateTimePicker3.Value = date;
         }
     }
 }

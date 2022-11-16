@@ -412,7 +412,7 @@ namespace Appointment_App.Database
         }
 
         // Need to fix this where the date is actually in the start combo/calendar box //
-        public static void createAppointment(int custID, string title, string description, string location, string contact, string type, DateTime start, DateTime endTime)
+        public static void createAppointment(int custID, string type, DateTime start, DateTime endTime)
         {
             int appointID = GetID("appointment", "appointmentId") + 1;
             //int userID = 1;
@@ -427,7 +427,7 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction(); ;
             // Start a local transaction.
             var query = "INSERT into appointment (appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-                        $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{title}', '{description}', '{location}', '{contact}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
+                        $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{null}', '{null}', '{null}', '{null}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();
