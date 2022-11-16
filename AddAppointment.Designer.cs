@@ -160,10 +160,10 @@ namespace Appointment_App
             this.typeComboBox.Items.AddRange(new object[] {
             "Initial",
             "General",
-            "Advanced",
-            "Other",
-            "Maintenance",
-            "Exit"});
+            "Sales",
+            "Engineering",
+            "Planning",
+            "Support"});
             this.typeComboBox.Location = new System.Drawing.Point(158, 263);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(123, 26);
