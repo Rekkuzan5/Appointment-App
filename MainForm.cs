@@ -224,5 +224,27 @@ namespace Appointment_App
                 MessageBox.Show("There are no appointments to delete!");
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (appointmentDataGrid.Rows.Count == 0)
+            {
+                //First we need to check if appointments exist
+                MessageBox.Show("There are no appointments to delete.");
+            }
+            else
+            {
+                int appId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
+                UpdateAppointment update = new UpdateAppointment(appId);
+                update.Show();
+            }
+
+        
+
+            //int appId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
+            //UpdateAppointment update = new UpdateAppointment(appId);
+            //update.Show();
+
+        }
     }
 }

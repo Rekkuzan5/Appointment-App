@@ -412,7 +412,7 @@ namespace Appointment_App.Database
         }
 
         // Need to fix this where the date is actually in the start combo/calendar box //
-        public static void createAppointment(int custID, string type, DateTime start, DateTime endTime)
+        public static void createAppointment(int custID, string title, string type, DateTime start, DateTime endTime)
         {
             int appointID = GetID("appointment", "appointmentId") + 1;
             //int userID = 1;
@@ -427,7 +427,31 @@ namespace Appointment_App.Database
             MySqlTransaction transaction = conn.BeginTransaction(); ;
             // Start a local transaction.
             var query = "INSERT into appointment (appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-                        $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{null}', '{null}', '{null}', '{null}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
+                        $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{title}', '{null}', '{null}', '{null}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+            conn.Close();
+
+        }
+
+        public static void UpdateAppointment(int appId, string type, string title, DateTime start, DateTime endTime)
+        {
+            //int appointID = GetID("appointment", "appointmentId") + 1;
+            //int userID = 1;
+
+            int currentUserId = CurrentUserID;
+            string currentUserName = CurrentUserName;
+
+            DateTime utc = getDateTime();
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            MySqlTransaction transaction = conn.BeginTransaction(); ;
+            // Start a local transaction.
+            var query = $"UPDATE appointment SET userId = '{ currentUserId }', title = '{ title }', description = '{null}', location = '{null}', contact = '{null}', type = '{ type }', url = '{null}', start = '{dateSQLFormat(start)}', end = '{dateSQLFormat(endTime)}', createDate = '{dateSQLFormat(utc)}', createdBy = '{currentUserName}', lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = '{currentUserName}' WHERE appointmentId = '{ appId }'";
+            
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Transaction = transaction;
             cmd.ExecuteNonQuery();

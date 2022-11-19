@@ -35,6 +35,11 @@ namespace Appointment_App
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.customerDataGrid = new System.Windows.Forms.DataGridView();
+            this.customerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.CreateAppointmentButton = new System.Windows.Forms.Button();
             this.addCustomerButton = new System.Windows.Forms.Button();
@@ -54,11 +59,6 @@ namespace Appointment_App
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.calendar = new System.Windows.Forms.MonthCalendar();
-            this.customerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).BeginInit();
@@ -101,6 +101,58 @@ namespace Appointment_App
             this.customerDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customerDataGrid.Size = new System.Drawing.Size(798, 230);
             this.customerDataGrid.TabIndex = 0;
+            // 
+            // customerID
+            // 
+            this.customerID.DataPropertyName = "customerId";
+            this.customerID.HeaderText = "ID";
+            this.customerID.Name = "customerID";
+            this.customerID.ReadOnly = true;
+            this.customerID.Visible = false;
+            // 
+            // CustomerName
+            // 
+            this.CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CustomerName.DataPropertyName = "customerName";
+            this.CustomerName.FillWeight = 105.9645F;
+            this.CustomerName.HeaderText = "Name";
+            this.CustomerName.Name = "CustomerName";
+            this.CustomerName.ReadOnly = true;
+            this.CustomerName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // CustomerAddress
+            // 
+            this.CustomerAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CustomerAddress.DataPropertyName = "address";
+            this.CustomerAddress.FillWeight = 105.9645F;
+            this.CustomerAddress.HeaderText = "Address";
+            this.CustomerAddress.Name = "CustomerAddress";
+            this.CustomerAddress.ReadOnly = true;
+            this.CustomerAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // CustomerPhone
+            // 
+            this.CustomerPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CustomerPhone.DataPropertyName = "phone";
+            this.CustomerPhone.FillWeight = 105.9645F;
+            this.CustomerPhone.HeaderText = "Phone";
+            this.CustomerPhone.Name = "CustomerPhone";
+            this.CustomerPhone.ReadOnly = true;
+            this.CustomerPhone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CustomerPhone.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IsActive
+            // 
+            this.IsActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.IsActive.DataPropertyName = "active";
+            this.IsActive.FillWeight = 105.9645F;
+            this.IsActive.HeaderText = "Active";
+            this.IsActive.Name = "IsActive";
+            this.IsActive.ReadOnly = true;
+            this.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IsActive.Width = 53;
             // 
             // label1
             // 
@@ -209,6 +261,7 @@ namespace Appointment_App
             this.button6.TabIndex = 11;
             this.button6.Text = "Modify Appointment";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -333,58 +386,6 @@ namespace Appointment_App
             this.calendar.TabIndex = 14;
             this.calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendar_DateSelected);
             // 
-            // customerID
-            // 
-            this.customerID.DataPropertyName = "customerId";
-            this.customerID.HeaderText = "ID";
-            this.customerID.Name = "customerID";
-            this.customerID.ReadOnly = true;
-            this.customerID.Visible = false;
-            // 
-            // CustomerName
-            // 
-            this.CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CustomerName.DataPropertyName = "customerName";
-            this.CustomerName.FillWeight = 105.9645F;
-            this.CustomerName.HeaderText = "Name";
-            this.CustomerName.Name = "CustomerName";
-            this.CustomerName.ReadOnly = true;
-            this.CustomerName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CustomerName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // CustomerAddress
-            // 
-            this.CustomerAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CustomerAddress.DataPropertyName = "address";
-            this.CustomerAddress.FillWeight = 105.9645F;
-            this.CustomerAddress.HeaderText = "Address";
-            this.CustomerAddress.Name = "CustomerAddress";
-            this.CustomerAddress.ReadOnly = true;
-            this.CustomerAddress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CustomerAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // CustomerPhone
-            // 
-            this.CustomerPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CustomerPhone.DataPropertyName = "phone";
-            this.CustomerPhone.FillWeight = 105.9645F;
-            this.CustomerPhone.HeaderText = "Phone";
-            this.CustomerPhone.Name = "CustomerPhone";
-            this.CustomerPhone.ReadOnly = true;
-            this.CustomerPhone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CustomerPhone.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // IsActive
-            // 
-            this.IsActive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.IsActive.DataPropertyName = "active";
-            this.IsActive.FillWeight = 105.9645F;
-            this.IsActive.HeaderText = "Active";
-            this.IsActive.Name = "IsActive";
-            this.IsActive.ReadOnly = true;
-            this.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.IsActive.Width = 53;
-            // 
             // mainFormBindingSource
             // 
             this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
@@ -394,7 +395,7 @@ namespace Appointment_App
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(877, 976);
+            this.ClientSize = new System.Drawing.Size(896, 881);
             this.Controls.Add(this.calendar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button7);

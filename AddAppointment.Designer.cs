@@ -29,72 +29,86 @@ namespace Appointment_App
         /// </summary>
         private void InitializeComponent()
         {
-            this.customerComboBox = new System.Windows.Forms.ComboBox();
-            this.custLabel = new System.Windows.Forms.Label();
-            this.typeLabel = new System.Windows.Forms.Label();
-            this.endLabel = new System.Windows.Forms.Label();
-            this.startLabel = new System.Windows.Forms.Label();
-            this.AppointmentCancelButton = new System.Windows.Forms.Button();
-            this.CreateAppointmentButton = new System.Windows.Forms.Button();
-            this.typeComboBox = new System.Windows.Forms.ComboBox();
-            this.titleTextBox = new System.Windows.Forms.TextBox();
-            this.titleLabel = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateLabel = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateLabel = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.CreateAppointmentButton = new System.Windows.Forms.Button();
+            this.AppointmentCancelButton = new System.Windows.Forms.Button();
+            this.typeLabel = new System.Windows.Forms.Label();
+            this.startLabel = new System.Windows.Forms.Label();
+            this.endLabel = new System.Windows.Forms.Label();
+            this.custLabel = new System.Windows.Forms.Label();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.formLabel = new System.Windows.Forms.Label();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // customerComboBox
+            // dateTimePicker3
             // 
-            this.customerComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(21, 124);
-            this.customerComboBox.Name = "customerComboBox";
-            this.customerComboBox.Size = new System.Drawing.Size(260, 26);
-            this.customerComboBox.TabIndex = 1;
-            this.customerComboBox.Text = "Select a Customer...";
+            this.dateTimePicker3.CustomFormat = "hh:mm tt";
+            this.dateTimePicker3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(158, 329);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
+            this.dateTimePicker3.Size = new System.Drawing.Size(125, 24);
+            this.dateTimePicker3.TabIndex = 13;
             // 
-            // custLabel
+            // dateTimePicker2
             // 
-            this.custLabel.AutoSize = true;
-            this.custLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.custLabel.Location = new System.Drawing.Point(16, 95);
-            this.custLabel.Name = "custLabel";
-            this.custLabel.Size = new System.Drawing.Size(74, 18);
-            this.custLabel.TabIndex = 4;
-            this.custLabel.Text = "Customer";
+            this.dateTimePicker2.CustomFormat = "hh:mm tt";
+            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(19, 329);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(125, 24);
+            this.dateTimePicker2.TabIndex = 13;
             // 
-            // typeLabel
+            // dateLabel
             // 
-            this.typeLabel.AutoSize = true;
-            this.typeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.typeLabel.Location = new System.Drawing.Point(153, 234);
-            this.typeLabel.Name = "typeLabel";
-            this.typeLabel.Size = new System.Drawing.Size(77, 18);
-            this.typeLabel.TabIndex = 5;
-            this.typeLabel.Text = "Appt. Type";
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateLabel.Location = new System.Drawing.Point(16, 234);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(39, 18);
+            this.dateLabel.TabIndex = 12;
+            this.dateLabel.Text = "Date";
             // 
-            // endLabel
+            // dateTimePicker1
             // 
-            this.endLabel.AutoSize = true;
-            this.endLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endLabel.Location = new System.Drawing.Point(153, 300);
-            this.endLabel.Name = "endLabel";
-            this.endLabel.Size = new System.Drawing.Size(71, 18);
-            this.endLabel.TabIndex = 4;
-            this.endLabel.Text = "Appt. End";
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(19, 263);
+            this.dateTimePicker1.MinimumSize = new System.Drawing.Size(123, 26);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(125, 26);
+            this.dateTimePicker1.TabIndex = 11;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // startLabel
+            // titleLabel
             // 
-            this.startLabel.AutoSize = true;
-            this.startLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startLabel.Location = new System.Drawing.Point(18, 300);
-            this.startLabel.Name = "startLabel";
-            this.startLabel.Size = new System.Drawing.Size(76, 18);
-            this.startLabel.TabIndex = 4;
-            this.startLabel.Text = "Appt. Start";
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Location = new System.Drawing.Point(16, 161);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(72, 18);
+            this.titleLabel.TabIndex = 10;
+            this.titleLabel.Text = "Appt. Title";
+            // 
+            // CreateAppointmentButton
+            // 
+            this.CreateAppointmentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateAppointmentButton.Location = new System.Drawing.Point(77, 391);
+            this.CreateAppointmentButton.Name = "CreateAppointmentButton";
+            this.CreateAppointmentButton.Size = new System.Drawing.Size(100, 30);
+            this.CreateAppointmentButton.TabIndex = 8;
+            this.CreateAppointmentButton.Text = "Create";
+            this.CreateAppointmentButton.UseVisualStyleBackColor = true;
+            this.CreateAppointmentButton.Click += new System.EventHandler(this.CreateAppointmentButton_Click);
             // 
             // AppointmentCancelButton
             // 
@@ -107,16 +121,45 @@ namespace Appointment_App
             this.AppointmentCancelButton.UseVisualStyleBackColor = true;
             this.AppointmentCancelButton.Click += new System.EventHandler(this.AppointmentCancelButton_Click);
             // 
-            // CreateAppointmentButton
+            // typeLabel
             // 
-            this.CreateAppointmentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateAppointmentButton.Location = new System.Drawing.Point(77, 391);
-            this.CreateAppointmentButton.Name = "CreateAppointmentButton";
-            this.CreateAppointmentButton.Size = new System.Drawing.Size(100, 30);
-            this.CreateAppointmentButton.TabIndex = 8;
-            this.CreateAppointmentButton.Text = "Create";
-            this.CreateAppointmentButton.UseVisualStyleBackColor = true;
-            this.CreateAppointmentButton.Click += new System.EventHandler(this.CreateAppointmentButton_Click);
+            this.typeLabel.AutoSize = true;
+            this.typeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeLabel.Location = new System.Drawing.Point(153, 234);
+            this.typeLabel.Name = "typeLabel";
+            this.typeLabel.Size = new System.Drawing.Size(77, 18);
+            this.typeLabel.TabIndex = 5;
+            this.typeLabel.Text = "Appt. Type";
+            // 
+            // startLabel
+            // 
+            this.startLabel.AutoSize = true;
+            this.startLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startLabel.Location = new System.Drawing.Point(18, 300);
+            this.startLabel.Name = "startLabel";
+            this.startLabel.Size = new System.Drawing.Size(76, 18);
+            this.startLabel.TabIndex = 4;
+            this.startLabel.Text = "Appt. Start";
+            // 
+            // endLabel
+            // 
+            this.endLabel.AutoSize = true;
+            this.endLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endLabel.Location = new System.Drawing.Point(153, 300);
+            this.endLabel.Name = "endLabel";
+            this.endLabel.Size = new System.Drawing.Size(71, 18);
+            this.endLabel.TabIndex = 4;
+            this.endLabel.Text = "Appt. End";
+            // 
+            // custLabel
+            // 
+            this.custLabel.AutoSize = true;
+            this.custLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.custLabel.Location = new System.Drawing.Point(16, 95);
+            this.custLabel.Name = "custLabel";
+            this.custLabel.Size = new System.Drawing.Size(74, 18);
+            this.custLabel.TabIndex = 4;
+            this.custLabel.Text = "Customer";
             // 
             // typeComboBox
             // 
@@ -135,67 +178,15 @@ namespace Appointment_App
             this.typeComboBox.Size = new System.Drawing.Size(123, 26);
             this.typeComboBox.TabIndex = 1;
             // 
-            // titleTextBox
+            // customerComboBox
             // 
-            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleTextBox.Location = new System.Drawing.Point(19, 190);
-            this.titleTextBox.MinimumSize = new System.Drawing.Size(123, 26);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(262, 24);
-            this.titleTextBox.TabIndex = 9;
-            // 
-            // titleLabel
-            // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(16, 161);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(72, 18);
-            this.titleLabel.TabIndex = 10;
-            this.titleLabel.Text = "Appt. Title";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(19, 263);
-            this.dateTimePicker1.MinimumSize = new System.Drawing.Size(123, 26);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(125, 26);
-            this.dateTimePicker1.TabIndex = 11;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // dateLabel
-            // 
-            this.dateLabel.AutoSize = true;
-            this.dateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateLabel.Location = new System.Drawing.Point(16, 234);
-            this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(39, 18);
-            this.dateLabel.TabIndex = 12;
-            this.dateLabel.Text = "Date";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "hh:mm tt";
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(19, 329);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(125, 24);
-            this.dateTimePicker2.TabIndex = 13;
-            // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.CustomFormat = "hh:mm tt";
-            this.dateTimePicker3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(158, 329);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.ShowUpDown = true;
-            this.dateTimePicker3.Size = new System.Drawing.Size(125, 24);
-            this.dateTimePicker3.TabIndex = 13;
+            this.customerComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerComboBox.FormattingEnabled = true;
+            this.customerComboBox.Location = new System.Drawing.Point(21, 124);
+            this.customerComboBox.Name = "customerComboBox";
+            this.customerComboBox.Size = new System.Drawing.Size(260, 26);
+            this.customerComboBox.TabIndex = 1;
+            this.customerComboBox.Text = "Select a Customer...";
             // 
             // formLabel
             // 
@@ -206,6 +197,15 @@ namespace Appointment_App
             this.formLabel.Size = new System.Drawing.Size(221, 31);
             this.formLabel.TabIndex = 0;
             this.formLabel.Text = "Add Appointment";
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTextBox.Location = new System.Drawing.Point(19, 190);
+            this.titleTextBox.MinimumSize = new System.Drawing.Size(123, 26);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(262, 26);
+            this.titleTextBox.TabIndex = 9;
             // 
             // AddAppointment
             // 
@@ -236,20 +236,21 @@ namespace Appointment_App
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox customerComboBox;
-        private System.Windows.Forms.Label custLabel;
-        private System.Windows.Forms.Label typeLabel;
-        private System.Windows.Forms.Label endLabel;
-        private System.Windows.Forms.Label startLabel;
-        private System.Windows.Forms.Button AppointmentCancelButton;
-        private System.Windows.Forms.Button CreateAppointmentButton;
-        private System.Windows.Forms.ComboBox typeComboBox;
-        private System.Windows.Forms.TextBox titleTextBox;
-        private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label dateLabel;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Button CreateAppointmentButton;
+        private System.Windows.Forms.Button AppointmentCancelButton;
+        private System.Windows.Forms.Label typeLabel;
+        private System.Windows.Forms.Label startLabel;
+        private System.Windows.Forms.Label endLabel;
+        private System.Windows.Forms.Label custLabel;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.ComboBox customerComboBox;
         private System.Windows.Forms.Label formLabel;
+        private System.Windows.Forms.TextBox titleTextBox;
     }
 }

@@ -65,7 +65,7 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            Logic.createAppointment((int)customerComboBox.SelectedValue, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
+            Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
             this.Close();
         }
 
