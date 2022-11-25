@@ -180,13 +180,13 @@ namespace Appointment_App
             // 
             // customerComboBox
             // 
+            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.customerComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerComboBox.FormattingEnabled = true;
             this.customerComboBox.Location = new System.Drawing.Point(21, 124);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(260, 26);
             this.customerComboBox.TabIndex = 1;
-            this.customerComboBox.Text = "Select a Customer...";
             // 
             // formLabel
             // 
