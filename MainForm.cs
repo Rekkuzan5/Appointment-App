@@ -246,5 +246,11 @@ namespace Appointment_App
             //update.Show();
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Reports reportMenu = new Reports();
+            reportMenu.Show();
+        }
     }
 }
