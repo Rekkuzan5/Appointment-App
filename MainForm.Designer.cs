@@ -397,8 +397,7 @@ namespace Appointment_App
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(895, 978);
+            this.ClientSize = new System.Drawing.Size(882, 978);
             this.Controls.Add(this.calendar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button7);

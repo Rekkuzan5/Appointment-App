@@ -398,10 +398,9 @@ namespace Appointment_App.Database
         }
 
         // Work on these functions. //
-        public static DateTime getDateTime()
+        public static DateTime getDateTime2()
         {
-            return DateTime.Now.ToUniversalTime();
-
+            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), TimeZoneInfo.Local);
         }
 
         public static string dateSQLFormat(DateTime dateValue)
@@ -420,7 +419,7 @@ namespace Appointment_App.Database
             int currentUserId = CurrentUserID;
             string currentUserName = CurrentUserName;
 
-            DateTime utc = getDateTime();
+            DateTime utc = GetDateTime();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -444,7 +443,7 @@ namespace Appointment_App.Database
             int currentUserId = CurrentUserID;
             string currentUserName = CurrentUserName;
 
-            DateTime utc = getDateTime();
+            DateTime utc = GetDateTime();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -473,6 +472,12 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
             conn.Close();
+        }
+
+        // get closest appointment time based on user id and compare within 15 minutes.//
+        public static void getClosestAppointment()
+        {
+            // code goes here //
         }
     }
 }

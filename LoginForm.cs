@@ -32,7 +32,7 @@ namespace Appointment_App
             {
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(Logic.Path), true))
                 {
-                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {Logic.GetDateTime()}\n***");
+                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {Logic.getDateTime2()}\n***");
                 }
 
                 MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
@@ -45,5 +45,7 @@ namespace Appointment_App
                 MessageBox.Show("Login Failed\n\nUsername and Password did not match.");
             }
         }
+
+
     }
 }

@@ -86,7 +86,7 @@ namespace Appointment_App
             CustId = Convert.ToInt32(appointmentList.First(kvp => kvp.Key == "customerId").Value.ToString());
             titleTextBox.Text = appointmentList.First(kvp => kvp.Key == "title").Value.ToString();
             typeComboBox.Text = appointmentList.First(kvp => kvp.Key == "type").Value.ToString();
-            dateTimePicker1.Text = appointmentList.First(kvp => kvp.Key == "Start").Value.ToString();
+            dateTimePicker1.Text = appointmentList.First(kvp => kvp.Key == "Start").Value.ToString(); 
             dateTimePicker2.Text = appointmentList.First(kvp => kvp.Key == "Start").Value.ToString();
             dateTimePicker3.Text = appointmentList.First(kvp => kvp.Key == "End").Value.ToString();
         }

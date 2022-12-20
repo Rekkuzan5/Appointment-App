@@ -61,7 +61,7 @@ namespace Appointment_App
             {
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(Logic.Path), true))
                 {
-                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged out: {Logic.GetDateTime()}\n***");
+                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged out: {Logic.getDateTime2()}\n***");
                 }
                 //this.Close();
                 Application.Exit();
