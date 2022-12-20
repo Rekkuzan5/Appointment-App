@@ -87,7 +87,7 @@ namespace Appointment_App
             this.CustomerPhone,
             this.IsActive});
             this.customerDataGrid.EnableHeadersVisualStyles = false;
-            this.customerDataGrid.Location = new System.Drawing.Point(39, 95);
+            this.customerDataGrid.Location = new System.Drawing.Point(39, 88);
             this.customerDataGrid.MultiSelect = false;
             this.customerDataGrid.Name = "customerDataGrid";
             this.customerDataGrid.ReadOnly = true;
@@ -157,7 +157,7 @@ namespace Appointment_App
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(39, 14);
+            this.label1.Location = new System.Drawing.Point(39, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(798, 63);
             this.label1.TabIndex = 1;
@@ -167,7 +167,7 @@ namespace Appointment_App
             // CreateAppointmentButton
             // 
             this.CreateAppointmentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateAppointmentButton.Location = new System.Drawing.Point(39, 703);
+            this.CreateAppointmentButton.Location = new System.Drawing.Point(39, 696);
             this.CreateAppointmentButton.Name = "CreateAppointmentButton";
             this.CreateAppointmentButton.Size = new System.Drawing.Size(227, 46);
             this.CreateAppointmentButton.TabIndex = 2;
@@ -178,7 +178,7 @@ namespace Appointment_App
             // addCustomerButton
             // 
             this.addCustomerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCustomerButton.Location = new System.Drawing.Point(39, 331);
+            this.addCustomerButton.Location = new System.Drawing.Point(39, 324);
             this.addCustomerButton.Name = "addCustomerButton";
             this.addCustomerButton.Size = new System.Drawing.Size(262, 46);
             this.addCustomerButton.TabIndex = 3;
@@ -189,7 +189,7 @@ namespace Appointment_App
             // UpdateCustomerButton
             // 
             this.UpdateCustomerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateCustomerButton.Location = new System.Drawing.Point(307, 331);
+            this.UpdateCustomerButton.Location = new System.Drawing.Point(307, 324);
             this.UpdateCustomerButton.Name = "UpdateCustomerButton";
             this.UpdateCustomerButton.Size = new System.Drawing.Size(262, 46);
             this.UpdateCustomerButton.TabIndex = 4;
@@ -200,7 +200,7 @@ namespace Appointment_App
             // DeleteCustomerButton
             // 
             this.DeleteCustomerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteCustomerButton.Location = new System.Drawing.Point(575, 331);
+            this.DeleteCustomerButton.Location = new System.Drawing.Point(575, 324);
             this.DeleteCustomerButton.Name = "DeleteCustomerButton";
             this.DeleteCustomerButton.Size = new System.Drawing.Size(262, 46);
             this.DeleteCustomerButton.TabIndex = 5;
@@ -211,7 +211,7 @@ namespace Appointment_App
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 422);
+            this.label2.Location = new System.Drawing.Point(39, 415);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(798, 59);
             this.label2.TabIndex = 6;
@@ -222,7 +222,7 @@ namespace Appointment_App
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(39, 493);
+            this.radioButton1.Location = new System.Drawing.Point(39, 486);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(68, 22);
             this.radioButton1.TabIndex = 7;
@@ -234,7 +234,7 @@ namespace Appointment_App
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(115, 493);
+            this.radioButton2.Location = new System.Drawing.Point(115, 486);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(65, 22);
             this.radioButton2.TabIndex = 8;
@@ -245,7 +245,7 @@ namespace Appointment_App
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(39, 859);
+            this.button5.Location = new System.Drawing.Point(39, 852);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(227, 46);
             this.button5.TabIndex = 10;
@@ -256,7 +256,7 @@ namespace Appointment_App
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(39, 755);
+            this.button6.Location = new System.Drawing.Point(39, 748);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(227, 46);
             this.button6.TabIndex = 11;
@@ -267,7 +267,7 @@ namespace Appointment_App
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(39, 807);
+            this.button7.Location = new System.Drawing.Point(39, 800);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(227, 46);
             this.button7.TabIndex = 12;
@@ -278,7 +278,7 @@ namespace Appointment_App
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(711, 918);
+            this.button2.Location = new System.Drawing.Point(711, 911);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(126, 46);
             this.button2.TabIndex = 13;
@@ -309,7 +309,7 @@ namespace Appointment_App
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
             this.appointmentDataGrid.EnableHeadersVisualStyles = false;
-            this.appointmentDataGrid.Location = new System.Drawing.Point(278, 529);
+            this.appointmentDataGrid.Location = new System.Drawing.Point(278, 522);
             this.appointmentDataGrid.MultiSelect = false;
             this.appointmentDataGrid.Name = "appointmentDataGrid";
             this.appointmentDataGrid.ReadOnly = true;
@@ -381,7 +381,7 @@ namespace Appointment_App
             // 
             // calendar
             // 
-            this.calendar.Location = new System.Drawing.Point(39, 529);
+            this.calendar.Location = new System.Drawing.Point(39, 522);
             this.calendar.MaxSelectionCount = 1;
             this.calendar.Name = "calendar";
             this.calendar.TabIndex = 14;
@@ -396,7 +396,9 @@ namespace Appointment_App
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(896, 881);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(895, 978);
             this.Controls.Add(this.calendar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button7);

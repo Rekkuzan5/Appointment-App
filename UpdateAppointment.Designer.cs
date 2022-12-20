@@ -60,12 +60,9 @@ namespace Appointment_App
             this.typeComboBox.FormattingEnabled = true;
             this.typeComboBox.IntegralHeight = false;
             this.typeComboBox.Items.AddRange(new object[] {
-            "Initial",
-            "General",
-            "Sales",
-            "Engineering",
-            "Planning",
-            "Support"});
+            "Online",
+            "On-site",
+            "Phone"});
             this.typeComboBox.Location = new System.Drawing.Point(81, 216);
             this.typeComboBox.Name = "typeComboBox";
             this.typeComboBox.Size = new System.Drawing.Size(206, 26);
@@ -129,7 +126,7 @@ namespace Appointment_App
             this.titleTextBox.Location = new System.Drawing.Point(81, 265);
             this.titleTextBox.MinimumSize = new System.Drawing.Size(123, 26);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(206, 26);
+            this.titleTextBox.Size = new System.Drawing.Size(206, 24);
             this.titleTextBox.TabIndex = 9;
             // 
             // titleLabel
