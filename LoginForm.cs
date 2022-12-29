@@ -30,13 +30,15 @@ namespace Appointment_App
         {
             if (Logic.VerifyUser(userNameLoginTextBox.Text, passwordLoginTextBox.Text) != 0)
             {
+                var loginTime = Logic.getDateTime2();
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(Logic.Path), true))
                 {
-                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {Logic.getDateTime2()}\n***");
+                    outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {loginTime}\n***");
                 }
 
                 MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
                 MainForm mainForm = new MainForm();
+                Logic.CheckLoginAppointment(loginTime);
                 this.Hide();
                 mainForm.Show();
             }

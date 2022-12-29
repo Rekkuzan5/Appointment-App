@@ -19,27 +19,56 @@ namespace Appointment_App.Database
         public static DateTime UtcNow { get; }
         public static string Path { get => path;}
 
-            public static int VerifyUser(string user, string password)
+        public static int VerifyUser(string user, string password)
         {
-            //string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+        //string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+        MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+        conn.Open();
+
+        string query = $"SELECT userID, userName FROM user WHERE userName = '{user}' AND password = '{password}'";
+        MySqlCommand cmd = new MySqlCommand(query, conn);
+        MySqlDataReader rdr = cmd.ExecuteReader();
+        if (rdr.HasRows)
+        {
+            rdr.Read();
+            CurrentUserID = Convert.ToInt32(rdr[0]);
+            CurrentUserName = Convert.ToString(rdr[1]);
+            //MessageBox.Show($"UserID: {CurrentUserID} User: {user} Password: {password}");
+            rdr.Close();
+            conn.Close();
+            return CurrentUserID;
+        }
+        conn.Close();
+        return 0;
+        }
+
+        // this works but could be made into an object for easier coding....this is too convoluted and harder than it should be this way currently
+        public static void CheckLoginAppointment(DateTime login)
+        {
+            List<KeyValuePair<string, DateTime>> appointmentList = new List<KeyValuePair<string, DateTime>>();
+
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
-            string query = $"SELECT userID, userName FROM user WHERE userName = '{user}' AND password = '{password}'";
+            string query = $"SELECT start FROM appointment WHERE userId = '{CurrentUserID}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            if (rdr.HasRows)
+            while (rdr.Read())
             {
                 rdr.Read();
-                CurrentUserID = Convert.ToInt32(rdr[0]);
-                CurrentUserName = Convert.ToString(rdr[1]);
-                //MessageBox.Show($"UserID: {CurrentUserID} User: {user} Password: {password}");
-                rdr.Close();
-                conn.Close();
-                return CurrentUserID;
+                appointmentList.Add(new KeyValuePair<string, DateTime>("start", (DateTime)rdr[0]));
             }
+            rdr.Close();
             conn.Close();
-            return 0;
+
+            foreach (KeyValuePair<string, DateTime> app in appointmentList)
+            {
+                TimeSpan diff = app.Value.Subtract(login);
+                if (diff.TotalMinutes > 0 && diff.TotalMinutes <= 15)
+                {
+                    MessageBox.Show("You have an appointment within 15 minutes!");
+                }
+            }
         }
 
         public static DateTime GetDateTime()
