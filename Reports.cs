@@ -20,6 +20,7 @@ namespace Appointment_App
         {
             InitializeComponent();
             FillData();
+            GetActiveCustomers();
         }
         public void FillData()
         {
@@ -196,6 +197,42 @@ namespace Appointment_App
         {
             userId = comboBox1.SelectedIndex;
             getTypes();
+        }
+
+        public void GetActiveCustomers()
+        {
+            int active = 0;
+            int inactive = 0;
+            int count = 0;
+
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+
+            string query = $"SELECT active FROM customer";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                int temp = Convert.ToInt32(rdr["active"]);
+                if (temp == 1)
+                {
+                    active ++;
+                    count++;
+                }
+               else
+               {
+                    inactive++;
+                    count++;
+               }
+                    
+            }
+            rdr.Close();
+            conn.Close();
+
+            activeCountLabel.Text = active.ToString();
+            inactiveCountLabel.Text = inactive.ToString();
+            totalCustomersCountLabel.Text = count.ToString();
         }
 
         private void exitButton_Click(object sender, EventArgs e)

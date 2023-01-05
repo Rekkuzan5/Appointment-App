@@ -46,8 +46,17 @@ namespace Appointment_App
             this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exitButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.activeLabel = new System.Windows.Forms.Label();
+            this.inactiveLabel = new System.Windows.Forms.Label();
+            this.activeCountLabel = new System.Windows.Forms.Label();
+            this.inactiveCountLabel = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.totalCustomersLabel = new System.Windows.Forms.Label();
+            this.totalCustomersCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -232,7 +241,7 @@ namespace Appointment_App
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(915, 537);
+            this.exitButton.Location = new System.Drawing.Point(494, 537);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(160, 57);
             this.exitButton.TabIndex = 6;
@@ -240,11 +249,94 @@ namespace Appointment_App
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(396, 302);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(228, 24);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Current Active Customers:";
+            // 
+            // activeLabel
+            // 
+            this.activeLabel.AutoSize = true;
+            this.activeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activeLabel.Location = new System.Drawing.Point(3, 28);
+            this.activeLabel.Name = "activeLabel";
+            this.activeLabel.Size = new System.Drawing.Size(55, 16);
+            this.activeLabel.TabIndex = 8;
+            this.activeLabel.Text = "Active:";
+            // 
+            // inactiveLabel
+            // 
+            this.inactiveLabel.AutoSize = true;
+            this.inactiveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inactiveLabel.Location = new System.Drawing.Point(3, 65);
+            this.inactiveLabel.Name = "inactiveLabel";
+            this.inactiveLabel.Size = new System.Drawing.Size(66, 16);
+            this.inactiveLabel.TabIndex = 9;
+            this.inactiveLabel.Text = "Inactive:";
+            // 
+            // activeCountLabel
+            // 
+            this.activeCountLabel.AutoSize = true;
+            this.activeCountLabel.Location = new System.Drawing.Point(196, 30);
+            this.activeCountLabel.Name = "activeCountLabel";
+            this.activeCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.activeCountLabel.TabIndex = 12;
+            this.activeCountLabel.Text = "0";
+            // 
+            // inactiveCountLabel
+            // 
+            this.inactiveCountLabel.AutoSize = true;
+            this.inactiveCountLabel.Location = new System.Drawing.Point(196, 67);
+            this.inactiveCountLabel.Name = "inactiveCountLabel";
+            this.inactiveCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.inactiveCountLabel.TabIndex = 13;
+            this.inactiveCountLabel.Text = "0";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.totalCustomersCountLabel);
+            this.groupBox2.Controls.Add(this.totalCustomersLabel);
+            this.groupBox2.Controls.Add(this.inactiveCountLabel);
+            this.groupBox2.Controls.Add(this.activeCountLabel);
+            this.groupBox2.Controls.Add(this.inactiveLabel);
+            this.groupBox2.Controls.Add(this.activeLabel);
+            this.groupBox2.Location = new System.Drawing.Point(396, 334);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(257, 142);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            // 
+            // totalCustomersLabel
+            // 
+            this.totalCustomersLabel.AutoSize = true;
+            this.totalCustomersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalCustomersLabel.Location = new System.Drawing.Point(3, 99);
+            this.totalCustomersLabel.Name = "totalCustomersLabel";
+            this.totalCustomersLabel.Size = new System.Drawing.Size(125, 16);
+            this.totalCustomersLabel.TabIndex = 14;
+            this.totalCustomersLabel.Text = "Total Customers:";
+            // 
+            // totalCustomersCountLabel
+            // 
+            this.totalCustomersCountLabel.AutoSize = true;
+            this.totalCustomersCountLabel.Location = new System.Drawing.Point(196, 101);
+            this.totalCustomersCountLabel.Name = "totalCustomersCountLabel";
+            this.totalCustomersCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.totalCustomersCountLabel.TabIndex = 15;
+            this.totalCustomersCountLabel.Text = "0";
+            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 606);
+            this.ClientSize = new System.Drawing.Size(682, 606);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
@@ -256,6 +348,8 @@ namespace Appointment_App
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +374,13 @@ namespace Appointment_App
         private System.Windows.Forms.DataGridViewTextBoxColumn start;
         private System.Windows.Forms.DataGridViewTextBoxColumn end;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label activeLabel;
+        private System.Windows.Forms.Label inactiveLabel;
+        private System.Windows.Forms.Label activeCountLabel;
+        private System.Windows.Forms.Label inactiveCountLabel;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label totalCustomersCountLabel;
+        private System.Windows.Forms.Label totalCustomersLabel;
     }
 }
