@@ -158,10 +158,6 @@ namespace Appointment_App
                 {
                     online = Convert.ToInt32(rdr[0]);
                 }
-                else
-                {
-                    label10.Text = "Not Available";
-                }
                 if (rdr[1] != DBNull.Value)
                 {
                     onSite = Convert.ToInt32(rdr[1]);
@@ -170,7 +166,10 @@ namespace Appointment_App
                 {
                     phone = Convert.ToInt32(rdr[2]);
                 }
-
+                else
+                {
+                    label10.Text = "Not Available";
+                }
                 //monthFilter.Add(new KeyValuePair<string, object>("type", rdr[0]));
                 //monthFilter.Add(new KeyValuePair<string, object>("start", rdr[1]));
 
@@ -201,6 +200,7 @@ namespace Appointment_App
 
         public void GetActiveCustomers()
         {
+            // maybe change from int to boolean to check....might clean up the code.
             int active = 0;
             int inactive = 0;
             int count = 0;

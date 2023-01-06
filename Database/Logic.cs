@@ -452,7 +452,7 @@ namespace Appointment_App.Database
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            MySqlTransaction transaction = conn.BeginTransaction(); ;
+            MySqlTransaction transaction = conn.BeginTransaction();
             // Start a local transaction.
             var query = "INSERT into appointment (appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
                         $"VALUES ('{appointID}', '{custID}', '{currentUserId}', '{title}', '{null}', '{null}', '{null}', '{type}', '{null}', '{dateSQLFormat(start)}','{dateSQLFormat(endTime)}','{dateSQLFormat(utc)}', '{currentUserName}', CURRENT_TIMESTAMP, '{currentUserName}')";
@@ -462,6 +462,47 @@ namespace Appointment_App.Database
             transaction.Commit();
             conn.Close();
 
+        }
+
+        public static bool CompareAppointmentTimes(DateTime appStart, DateTime appEnd)
+        {
+            // make connection and compare appointment times
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+
+            string query = $"SELECT start, end FROM appointment";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            // could probably make this a switch statement
+            while (rdr.Read())
+            {
+                if (appStart > (DateTime)rdr[0] && appEnd < (DateTime)rdr[1])
+                {
+                    MessageBox.Show("Cannot schedule appointment within another appointment!");
+                    return false;
+                }
+                if (appStart > (DateTime)rdr[0] && appStart < (DateTime)rdr[1] && appEnd > (DateTime)rdr[1])
+                {
+                    MessageBox.Show("Cannot schedule appointment that overlaps an existing appointment!");
+                    return false;
+                }
+                if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[1])
+                {
+                    MessageBox.Show("Cannot schedule appointment that engulfs existing appointment!");
+                    return false;
+                }
+                if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[0])
+                {
+                    MessageBox.Show("Cannot schedule appointment that would merge into another!");
+                    return false;
+                }
+            }
+            rdr.Close();
+            conn.Close();
+            
+            return true;
+            
         }
 
         public static void UpdateAppointment(int appId, string type, string title, DateTime start, DateTime endTime)

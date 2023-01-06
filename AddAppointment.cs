@@ -65,8 +65,17 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value );
-            this.Close();
+            if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+            {
+                MessageBox.Show("Appointment added successfully!");
+                Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
+                this.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("Operation Failed");
+            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
