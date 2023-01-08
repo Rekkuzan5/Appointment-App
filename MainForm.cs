@@ -150,7 +150,8 @@ namespace Appointment_App
             //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
             //DataTable at = new DataTable();
             //adapt.Fill(at);
-            handleDay();
+            //handleDay();
+            handleWeek();
             //appointmentDataGrid.DataSource = at;
             //conn.Close();
 
@@ -184,6 +185,50 @@ namespace Appointment_App
             conn.Close();
         }
 
+        private void handleWeek()
+        {
+            calendar.RemoveAllBoldedDates();
+            int dow = (int)currentDate.DayOfWeek;
+            string startDate = currentDate.AddDays(-dow).ToString();
+            DateTime startTime = Convert.ToDateTime(startDate);
+            DateTime tempDate = Convert.ToDateTime(startDate);
+            for (int i = 0; i < 7; i++)
+            {
+                calendar.AddBoldedDate(tempDate.AddDays(i));
+            }
+            calendar.UpdateBoldedDates();
+            string endDate = currentDate.AddDays(7 - dow).ToString();
+            DateTime tempEnd = Convert.ToDateTime(endDate);
+            //conn.Open();
+            //string query = $"SELECT  WHERE BETWEEN date('{startDate}') AND DATE('{endDate}')";
+            //MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            var currentDateNow = Logic.FormatUTCDateTime(currentDate);
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
+            //Logic.FormatUTCDateTime(tempDate);
+            //Logic.FormatUTCDateTime(tempEnd);
+
+            conn.Open();
+            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(tempEnd).ToString("yyyy-MM-dd") + "');";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            //adapt.Fill(at);
+
+            DataTable at = new DataTable();
+            at.Load(cmd.ExecuteReader());
+            foreach (DataRow row in at.Rows)
+            {
+                DateTime utcStart = Convert.ToDateTime(row["Start"]);
+                DateTime utcEnd = Convert.ToDateTime(row["End"]);
+                row["Start"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
+                row["End"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
+            }
+            appointmentDataGrid.DataSource = at;
+            conn.Close();
+
+        }
+
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             AddAppointment appointment = new AddAppointment();
@@ -195,8 +240,17 @@ namespace Appointment_App
             //label3.Text = calendar.SelectionStart.ToString("yyyy-MM-dd");
 
             currentDate = e.Start;
-            handleDay();
+            //handleDay();
+            //handleWeek();
 
+            if (radioButton2.Checked)
+            {
+                handleWeek();
+            }
+            if (radioButton1.Checked)
+            {
+                //handleMonth();
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -251,6 +305,11 @@ namespace Appointment_App
         {
             Reports reportMenu = new Reports();
             reportMenu.Show();
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            handleWeek();
         }
     }
 }

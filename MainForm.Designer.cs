@@ -241,6 +241,7 @@ namespace Appointment_App
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Week";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // button5
             // 
