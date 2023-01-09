@@ -466,42 +466,53 @@ namespace Appointment_App.Database
 
         public static bool CompareAppointmentTimes(DateTime appStart, DateTime appEnd)
         {
-            // make connection and compare appointment times
-            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-            conn.Open();
-
-            string query = $"SELECT start, end FROM appointment";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-
-            // could probably make this a switch statement
-            while (rdr.Read())
+            DateTime openTime = appStart.Date.AddHours(8).AddMinutes(00).AddSeconds(00);
+            DateTime closeTime = appStart.Date.AddHours(17).AddMinutes(00).AddSeconds(00);
+            if (appStart >= openTime && appEnd < closeTime)
             {
-                if (appStart > (DateTime)rdr[0] && appEnd < (DateTime)rdr[1])
+
+
+                // make connection and compare appointment times
+                MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+                conn.Open();
+
+                string query = $"SELECT start, end FROM appointment";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                // could probably make this a switch statement
+                while (rdr.Read())
                 {
-                    MessageBox.Show("Cannot schedule appointment within another appointment!");
-                    return false;
+                    if (appStart > (DateTime)rdr[0] && appEnd < (DateTime)rdr[1])
+                    {
+                        MessageBox.Show("Cannot schedule appointment within another appointment!");
+                        return false;
+                    }
+                    if (appStart > (DateTime)rdr[0] && appStart < (DateTime)rdr[1] && appEnd > (DateTime)rdr[1])
+                    {
+                        MessageBox.Show("Cannot schedule appointment that overlaps an existing appointment!");
+                        return false;
+                    }
+                    if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[1])
+                    {
+                        MessageBox.Show("Cannot schedule appointment that engulfs existing appointment!");
+                        return false;
+                    }
+                    if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[0])
+                    {
+                        MessageBox.Show("Cannot schedule appointment that would merge into another!");
+                        return false;
+                    }
                 }
-                if (appStart > (DateTime)rdr[0] && appStart < (DateTime)rdr[1] && appEnd > (DateTime)rdr[1])
-                {
-                    MessageBox.Show("Cannot schedule appointment that overlaps an existing appointment!");
-                    return false;
-                }
-                if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[1])
-                {
-                    MessageBox.Show("Cannot schedule appointment that engulfs existing appointment!");
-                    return false;
-                }
-                if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[0])
-                {
-                    MessageBox.Show("Cannot schedule appointment that would merge into another!");
-                    return false;
-                }
+                rdr.Close();
+                conn.Close();
+                return true;
             }
-            rdr.Close();
-            conn.Close();
-            
-            return true;
+            else
+            {
+                MessageBox.Show("This appointment is outside of business hours.");
+                return false;
+            }
             
         }
 

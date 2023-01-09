@@ -65,6 +65,8 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
+            //DateTime openTime = dateTimePicker2.Value.Date.AddHours(8).AddMinutes(00).AddSeconds(00);
+
             if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
             {
                 MessageBox.Show("Appointment added successfully!");
