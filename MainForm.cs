@@ -23,6 +23,7 @@ namespace Appointment_App
         {
             InitializeComponent();
             GetCustomers();
+            RemoveAppointments();
             GetAppointments();
         }
 
@@ -140,13 +141,8 @@ namespace Appointment_App
 
         public void GetAppointments()
         {
-            currentDate = DateTime.Now.ToUniversalTime();
-            //MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             //calendar.AddBoldedDate(currentDate);
-            //conn.Open();
             // Look for appointments
-            //string query = $"SELECT customer.customerName, appointment.type, appointment.start, appointment.end FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId";
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
             //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
             //DataTable at = new DataTable();
             //adapt.Fill(at);
@@ -154,6 +150,25 @@ namespace Appointment_App
             handleWeek();
             //appointmentDataGrid.DataSource = at;
             //conn.Close();
+
+        }
+
+        private void RemoveAppointments()
+        {
+            currentDate = DateTime.Now.ToUniversalTime();
+            var test = Logic.FormatUTCDateTime(currentDate);
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+            conn.Open();
+            string query = $"DELETE FROM appointment WHERE appointment.end < '{test}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlTransaction transaction = conn.BeginTransaction();
+
+            cmd.CommandText = query;
+            cmd.Connection = conn;
+            cmd.Transaction = transaction;
+            cmd.ExecuteNonQuery();
+            transaction.Commit();
+
 
         }
 
@@ -229,6 +244,39 @@ namespace Appointment_App
 
         }
 
+        private void HandleMonth()
+        {
+            calendar.RemoveAllBoldedDates();
+            calendar.UpdateBoldedDates();
+            MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
+
+            //Logic.FormatUTCDateTime(tempDate);
+            //Logic.FormatUTCDateTime(tempEnd);
+
+            DateTime monthYear = DateTime.Now;
+            int month = monthYear.Month;
+            int year = monthYear.Year;
+
+            conn.Open();
+            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
+            //adapt.Fill(at);
+
+            DataTable at = new DataTable();
+            at.Load(cmd.ExecuteReader());
+            foreach (DataRow row in at.Rows)
+            {
+                DateTime utcStart = Convert.ToDateTime(row["Start"]);
+                DateTime utcEnd = Convert.ToDateTime(row["End"]);
+                row["Start"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
+                row["End"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
+            }
+            appointmentDataGrid.DataSource = at;
+            conn.Close();
+
+        }
+
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
             AddAppointment appointment = new AddAppointment();
@@ -242,14 +290,14 @@ namespace Appointment_App
             currentDate = e.Start;
             //handleDay();
             //handleWeek();
-
+            
+            if (radioButton1.Checked)
+            {
+                HandleMonth();
+            }
             if (radioButton2.Checked)
             {
                 handleWeek();
-            }
-            if (radioButton1.Checked)
-            {
-                //handleMonth();
             }
         }
 
@@ -310,6 +358,11 @@ namespace Appointment_App
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             handleWeek();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleMonth();
         }
     }
 }

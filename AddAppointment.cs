@@ -65,18 +65,23 @@ namespace Appointment_App
 
         private void CreateAppointmentButton_Click(object sender, EventArgs e)
         {
-            //DateTime openTime = dateTimePicker2.Value.Date.AddHours(8).AddMinutes(00).AddSeconds(00);
-
-            if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+            if (dateTimePicker2.Value < dateTimePicker3.Value && dateTimePicker2.Value != dateTimePicker3.Value)
             {
-                MessageBox.Show("Appointment added successfully!");
-                Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
-                this.Close();
+                if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+                {
+                    MessageBox.Show("Appointment added successfully!");
+                    Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
+                    this.Close();
 
+                }
+                else
+                {
+                    MessageBox.Show("Operation Failed");
+                }
             }
             else
             {
-                MessageBox.Show("Operation Failed");
+                MessageBox.Show("Invalid appointment times entered!");
             }
         }
 
