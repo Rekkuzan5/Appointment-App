@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Appointment_App.Properties {
+namespace Appointment_App.myResources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Appointment_App.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Appointment_App.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Appointment_App.myResources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,24 @@ namespace Appointment_App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        internal static string hello {
+            get {
+                return ResourceManager.GetString("hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login Failed.  Username and Password did not match..
+        /// </summary>
+        internal static string incorrectMatch {
+            get {
+                return ResourceManager.GetString("incorrectMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log In.
         /// </summary>
         internal static string loginLabel {
@@ -75,6 +93,15 @@ namespace Appointment_App.Properties {
         internal static string passwordLabel {
             get {
                 return ResourceManager.GetString("passwordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign-in Successful!.
+        /// </summary>
+        internal static string success {
+            get {
+                return ResourceManager.GetString("success", resourceCulture);
             }
         }
         

@@ -34,8 +34,8 @@ namespace Appointment_App
             this.passwordLoginTextBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
             this.loginLabel = new System.Windows.Forms.Label();
-            this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
+            this.userLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // userNameLoginTextBox
@@ -60,22 +60,22 @@ namespace Appointment_App
             resources.ApplyResources(this.loginLabel, "loginLabel");
             this.loginLabel.Name = "loginLabel";
             // 
-            // usernameLabel
-            // 
-            resources.ApplyResources(this.usernameLabel, "usernameLabel");
-            this.usernameLabel.Name = "usernameLabel";
-            // 
             // passwordLabel
             // 
             resources.ApplyResources(this.passwordLabel, "passwordLabel");
             this.passwordLabel.Name = "passwordLabel";
             // 
+            // userLabel
+            // 
+            resources.ApplyResources(this.userLabel, "userLabel");
+            this.userLabel.Name = "userLabel";
+            // 
             // LoginForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.userLabel);
             this.Controls.Add(this.passwordLabel);
-            this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.loginLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.passwordLoginTextBox);
@@ -92,8 +92,8 @@ namespace Appointment_App
         private System.Windows.Forms.TextBox passwordLoginTextBox;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label loginLabel;
-        private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.Label userLabel;
     }
 }
 

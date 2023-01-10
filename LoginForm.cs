@@ -12,6 +12,10 @@ using System.Configuration;
 using System.Windows.Forms;
 using Appointment_App.Database;
 using System.IO;
+using System.Globalization;
+using System.Resources;
+using System.Reflection;
+using Appointment_App.Properties;
 
 namespace Appointment_App
 {
@@ -20,10 +24,13 @@ namespace Appointment_App
         //private StreamWriter logFile;
         //string path = "logins.txt";
 
+        CultureInfo ci = new CultureInfo("es-ES");
+        ResourceManager locrm = new ResourceManager("Appointment_App.myResources.Resources", typeof(LoginForm).Assembly);
 
-    public LoginForm()
+        public LoginForm()
         {
             InitializeComponent();
+            DetectLanguage();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -36,7 +43,7 @@ namespace Appointment_App
                     outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {loginTime}\n***");
                 }
 
-                MessageBox.Show($"Hello {Logic.CurrentUserName}, Sign-in Successful");
+                MessageBox.Show($"{locrm.GetString("hello", ci)} {Logic.CurrentUserName}\n\n {locrm.GetString("success", ci)}");
                 MainForm mainForm = new MainForm();
                 Logic.CheckLoginAppointment(loginTime);
                 this.Hide();
@@ -44,10 +51,26 @@ namespace Appointment_App
             }
             else
             {
-                MessageBox.Show("Login Failed\n\nUsername and Password did not match.");
+                MessageBox.Show(locrm.GetString("incorrectMatch", ci));
             }
         }
 
+        private void DetectLanguage()
+        {
+            //CultureInfo ci = new CultureInfo("es-ES");
+            //ResourceManager locrm = new ResourceManager("Appointment_App.myResources.Resources", typeof(LoginForm).Assembly);
+            loginLabel.Text = locrm.GetString("loginLabel", ci);
+            userLabel.Text = locrm.GetString("userLabel", ci);
+            passwordLabel.Text = locrm.GetString("passwordLabel", ci);
+            LoginButton.Text = locrm.GetString("LoginButton", ci);
 
+
+            //if (CultureInfo.CurrentCulture.Name == "es-ES")
+            //{
+            //    CultureInfo.CurrentCulture = new CultureInfo("es-ES");
+            //    CultureInfo ci = new CultureInfo("es-ES");
+            //    //loginLabel.Text = locrm.GetString("loginLabel", ci);
+            //}
+        }
     }
 }

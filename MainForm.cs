@@ -109,48 +109,11 @@ namespace Appointment_App
             int customerId = (int)customerDataGrid.SelectedRows[0].Cells[0].Value;
             UpdateCustomer update = new UpdateCustomer(customerId);
             update.Show();
-
         }
-
-        //static public Array getCalendar(bool weekView)
-        //{
-        //    MySqlConnection c = new MySqlConnection(DBConnection.Connection);
-        //    c.Open();
-        //    // Queries the DB for all the appointments related to the logged in user
-        //    string query = $"SELECT customerId, type, start, end, appointmentId, userId FROM appointment WHERE userid = '{Logic.CurrentUserID}'";
-        //    MySqlCommand cmd = new MySqlCommand(query, c);
-        //    MySqlDataReader rdr = cmd.ExecuteReader();
-
-        //    Dictionary<int, Hashtable> appointments = new Dictionary<int, Hashtable>();
-
-        //    // Creates a dictionary of all the appointments
-        //    while (rdr.Read())
-        //    {
-
-        //        Hashtable appointment = new Hashtable();
-        //        appointment.Add("customerId", rdr[0]);
-        //        appointment.Add("type", rdr[1]);
-        //        appointment.Add("start", rdr[2]);
-        //        appointment.Add("end", rdr[3]);
-        //        appointment.Add("userId", rdr[5]);
-
-        //        appointments.Add(Convert.ToInt32(rdr[4]), appointment);
-
-        //    }
-        //    rdr.Close();
 
         public void GetAppointments()
         {
-            //calendar.AddBoldedDate(currentDate);
-            // Look for appointments
-            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            //DataTable at = new DataTable();
-            //adapt.Fill(at);
-            //handleDay();
             handleWeek();
-            //appointmentDataGrid.DataSource = at;
-            //conn.Close();
-
         }
 
         private void RemoveAppointments()
@@ -180,13 +143,10 @@ namespace Appointment_App
             calendar.RemoveAllBoldedDates();
             calendar.AddBoldedDate(currentDate);
             calendar.UpdateBoldedDates();
-            //at.Clear();
+
             conn.Open();
             string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId=customer.customerId WHERE date(start) = date('{ currentDateNow }')";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            //adapt.Fill(at);
-
             DataTable at = new DataTable();
             at.Load(cmd.ExecuteReader());
             foreach (DataRow row in at.Rows)
@@ -214,21 +174,13 @@ namespace Appointment_App
             calendar.UpdateBoldedDates();
             string endDate = currentDate.AddDays(7 - dow).ToString();
             DateTime tempEnd = Convert.ToDateTime(endDate);
-            //conn.Open();
-            //string query = $"SELECT  WHERE BETWEEN date('{startDate}') AND DATE('{endDate}')";
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
 
             var currentDateNow = Logic.FormatUTCDateTime(currentDate);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
-            //Logic.FormatUTCDateTime(tempDate);
-            //Logic.FormatUTCDateTime(tempEnd);
-
             conn.Open();
             string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(tempEnd).ToString("yyyy-MM-dd") + "');";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            //adapt.Fill(at);
 
             DataTable at = new DataTable();
             at.Load(cmd.ExecuteReader());
@@ -250,9 +202,6 @@ namespace Appointment_App
             calendar.UpdateBoldedDates();
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
-            //Logic.FormatUTCDateTime(tempDate);
-            //Logic.FormatUTCDateTime(tempEnd);
-
             DateTime monthYear = DateTime.Now;
             int month = monthYear.Month;
             int year = monthYear.Year;
@@ -260,8 +209,6 @@ namespace Appointment_App
             conn.Open();
             string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataAdapter adapt = new MySqlDataAdapter(selectCommand: cmd);
-            //adapt.Fill(at);
 
             DataTable at = new DataTable();
             at.Load(cmd.ExecuteReader());
@@ -285,11 +232,7 @@ namespace Appointment_App
 
         private void calendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            //label3.Text = calendar.SelectionStart.ToString("yyyy-MM-dd");
-
             currentDate = e.Start;
-            //handleDay();
-            //handleWeek();
             
             if (radioButton1.Checked)
             {
@@ -340,13 +283,6 @@ namespace Appointment_App
                 UpdateAppointment update = new UpdateAppointment(appId);
                 update.Show();
             }
-
-        
-
-            //int appId = (int)appointmentDataGrid.SelectedRows[0].Cells[0].Value;
-            //UpdateAppointment update = new UpdateAppointment(appId);
-            //update.Show();
-
         }
 
         private void button5_Click(object sender, EventArgs e)
