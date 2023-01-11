@@ -14,17 +14,12 @@ using Appointment_App.Database;
 using System.IO;
 using System.Globalization;
 using System.Resources;
-using System.Reflection;
-using Appointment_App.Properties;
 
 namespace Appointment_App
 {
     public partial class LoginForm : Form
     {
-        //private StreamWriter logFile;
-        //string path = "logins.txt";
-
-        CultureInfo ci = new CultureInfo("es-ES");
+        private CultureInfo CI { get; set; }
         ResourceManager locrm = new ResourceManager("Appointment_App.myResources.Resources", typeof(LoginForm).Assembly);
 
         public LoginForm()
@@ -43,7 +38,7 @@ namespace Appointment_App
                     outputFile.WriteLine($"***\nUser: {Logic.CurrentUserName}\nlogged in: {loginTime}\n***");
                 }
 
-                MessageBox.Show($"{locrm.GetString("hello", ci)} {Logic.CurrentUserName}\n\n {locrm.GetString("success", ci)}");
+                MessageBox.Show($"{locrm.GetString("hello", CI)} {Logic.CurrentUserName}\n\n {locrm.GetString("success", CI)}");
                 MainForm mainForm = new MainForm();
                 Logic.CheckLoginAppointment(loginTime);
                 this.Hide();
@@ -51,26 +46,31 @@ namespace Appointment_App
             }
             else
             {
-                MessageBox.Show(locrm.GetString("incorrectMatch", ci));
+                MessageBox.Show(locrm.GetString("incorrectMatch", CI));
             }
         }
 
-        private void DetectLanguage()
+        private CultureInfo DetectLanguage()
         {
-            //CultureInfo ci = new CultureInfo("es-ES");
-            //ResourceManager locrm = new ResourceManager("Appointment_App.myResources.Resources", typeof(LoginForm).Assembly);
-            loginLabel.Text = locrm.GetString("loginLabel", ci);
-            userLabel.Text = locrm.GetString("userLabel", ci);
-            passwordLabel.Text = locrm.GetString("passwordLabel", ci);
-            LoginButton.Text = locrm.GetString("LoginButton", ci);
-
-
-            //if (CultureInfo.CurrentCulture.Name == "es-ES")
-            //{
-            //    CultureInfo.CurrentCulture = new CultureInfo("es-ES");
-            //    CultureInfo ci = new CultureInfo("es-ES");
-            //    //loginLabel.Text = locrm.GetString("loginLabel", ci);
-            //}
+            if (CultureInfo.CurrentCulture.Name == "es-ES")
+            {
+                CI = new CultureInfo("es-ES");
+                loginLabel.Text = locrm.GetString("loginLabel", CI);
+                userLabel.Text = locrm.GetString("userLabel", CI);
+                passwordLabel.Text = locrm.GetString("passwordLabel", CI);
+                LoginButton.Text = locrm.GetString("LoginButton", CI);
+                return CI;
+            }
+            if (CultureInfo.CurrentCulture.Name == "en-EN")
+            {
+                CI = new CultureInfo("en-EN");
+                loginLabel.Text = locrm.GetString("loginLabel", CI);
+                userLabel.Text = locrm.GetString("userLabel", CI);
+                passwordLabel.Text = locrm.GetString("passwordLabel", CI);
+                LoginButton.Text = locrm.GetString("LoginButton", CI);
+                return CI;
+            }
+            return CI;
         }
     }
 }
