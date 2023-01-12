@@ -116,6 +116,7 @@ namespace Appointment_App
             handleWeek();
         }
 
+        // This function is to remove the appointments that have expired automatically once their date has past.  This can be commented out to preserve appointments.
         private void RemoveAppointments()
         {
             currentDate = DateTime.Now.ToUniversalTime();

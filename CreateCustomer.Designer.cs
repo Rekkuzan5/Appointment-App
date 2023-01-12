@@ -216,7 +216,7 @@ namespace Appointment_App
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CreateCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CreateCustomer";
+            this.Text = "Create Customer";
             this.Load += new System.EventHandler(this.CreateCustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

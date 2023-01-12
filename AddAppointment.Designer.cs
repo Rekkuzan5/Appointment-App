@@ -102,7 +102,7 @@ namespace Appointment_App
             // CreateAppointmentButton
             // 
             this.CreateAppointmentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateAppointmentButton.Location = new System.Drawing.Point(77, 391);
+            this.CreateAppointmentButton.Location = new System.Drawing.Point(49, 391);
             this.CreateAppointmentButton.Name = "CreateAppointmentButton";
             this.CreateAppointmentButton.Size = new System.Drawing.Size(100, 30);
             this.CreateAppointmentButton.TabIndex = 8;
@@ -113,7 +113,7 @@ namespace Appointment_App
             // AppointmentCancelButton
             // 
             this.AppointmentCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AppointmentCancelButton.Location = new System.Drawing.Point(183, 391);
+            this.AppointmentCancelButton.Location = new System.Drawing.Point(155, 391);
             this.AppointmentCancelButton.Name = "AppointmentCancelButton";
             this.AppointmentCancelButton.Size = new System.Drawing.Size(100, 30);
             this.AppointmentCancelButton.TabIndex = 8;
@@ -163,6 +163,7 @@ namespace Appointment_App
             // 
             // typeComboBox
             // 
+            this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.typeComboBox.FormattingEnabled = true;
             this.typeComboBox.IntegralHeight = false;
@@ -226,7 +227,7 @@ namespace Appointment_App
             this.Controls.Add(this.formLabel);
             this.Name = "AddAppointment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddAppointment";
+            this.Text = "Add Appointment";
             this.ResumeLayout(false);
             this.PerformLayout();
 

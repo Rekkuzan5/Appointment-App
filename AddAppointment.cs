@@ -67,29 +67,46 @@ namespace Appointment_App
         {
             if (dateTimePicker2.Value < dateTimePicker3.Value && dateTimePicker2.Value != dateTimePicker3.Value)
             {
-                if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+                if (string.IsNullOrEmpty(titleTextBox.Text) && typeComboBox.SelectedValue == null)
                 {
-                    MessageBox.Show("Appointment added successfully!");
-                    Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
-                    this.Close();
-
+                    MessageBox.Show("Appointment title and/or type cannot be blank!", "Error");
                 }
                 else
                 {
-                    MessageBox.Show("Operation Failed");
+                    if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+                    {
+                        MessageBox.Show("Appointment added successfully!", "Success");
+                        Logic.createAppointment((int)customerComboBox.SelectedValue, titleTextBox.Text, typeComboBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
+                        this.Close();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Operation Failed", "Error");
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Invalid appointment times entered!");
+                MessageBox.Show("Invalid appointment times entered!", "Error");
             }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            DateTime date = dateTimePicker1.Value;
-            dateTimePicker2.Value = date;
-            dateTimePicker3.Value = date;
+            if (dateTimePicker1.Value >= DateTime.Today)
+            {
+                DateTime date = dateTimePicker1.Value;
+                dateTimePicker2.Value = date;
+                dateTimePicker3.Value = date;
+            }
+            else
+            {
+                MessageBox.Show("Cannot select a date in the past for appointment.", "Error");
+                dateTimePicker1.Value = DateTime.Today;
+            }
+
+                
         }
     }
 }

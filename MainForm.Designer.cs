@@ -417,7 +417,7 @@ namespace Appointment_App
             this.Controls.Add(this.customerDataGrid);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "Dashboard";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).EndInit();
