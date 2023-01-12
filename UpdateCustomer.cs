@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -58,14 +59,6 @@ namespace Appointment_App
             // Look for customers
             string query = $"SELECT cityId, city FROM city";
             MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rd = cmd.ExecuteReader();
-
-            //    while (rd.Read())
-            //    {t
-            //    customerComboBox.Items.Add(rd[1]);
-            //    }
-
 
             DataSet ds = new DataSet();
             adapt.Fill(ds, "City");
@@ -76,14 +69,6 @@ namespace Appointment_App
             // Look for customers
             string query2 = $"SELECT countryId, country FROM country";
             MySqlDataAdapter adapt2 = new MySqlDataAdapter(query2, conn);
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rd = cmd.ExecuteReader();
-
-            //    while (rd.Read())
-            //    {t
-            //    customerComboBox.Items.Add(rd[1]);
-            //    }
-
 
             DataSet ds2 = new DataSet();
             adapt2.Fill(ds2, "Country");
@@ -93,39 +78,126 @@ namespace Appointment_App
             conn.Close();
         }
 
+        // validation for fields
+        private bool ValidateInformation()
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(customerNameTextBox.Text) ||
+                string.IsNullOrEmpty(customerAddressTextBox.Text) ||
+                string.IsNullOrEmpty(customerPhoneTextBox.Text) ||
+                string.IsNullOrEmpty(customerZipTextBox.Text) ||
+                string.IsNullOrEmpty(cityComboBox.Text) ||
+                string.IsNullOrEmpty(countryComboBox.Text))
+            {
+                MessageBox.Show("Please enter information in all fields.", "Error");
+                return false;
+            }
+            bool phoneResult = isValidPhoneNumber(customerPhoneTextBox.Text);
+            bool zipResult = isValidZipCode(customerZipTextBox.Text);
+
+            if (phoneResult && zipResult)
+            {
+                result = true;
+            }
+            return result;
+        }
+
 
         private void UpdateCustomerButton_Click(object sender, EventArgs e)
         {
-            DialogResult youSure = MessageBox.Show("Are you sure you want to update this customer?", "", MessageBoxButtons.YesNo);
+            DialogResult youSure = MessageBox.Show("Are you sure you want to update this customer?", "Proceed?", MessageBoxButtons.YesNo);
             if (youSure == DialogResult.Yes)
             {
-                try
+                if (ValidateInformation())
                 {
-                    //Grab List & convert
-                    var list = CustList;
-                    IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
-                    //replace values for the keys in the form         
-                    dictionary["customerName"] = customerNameTextBox.Text;
-                    dictionary["phone"] = customerPhoneTextBox.Text;
-                    dictionary["address"] = customerAddressTextBox.Text;
-                    dictionary["city"] = cityComboBox.Text;
-                    dictionary["postalCode"] = customerZipTextBox.Text;
-                    dictionary["country"] = countryComboBox.Text;
-                    dictionary["active"] = ActiveCustomerCheck.Checked ? 1 : 0;
 
-                    //Pass the updated IDictionary to dbhelper to update the database
-                    Logic.UpdateCustomer(dictionary);
+                    try
+                    {
+                        //Grab List & convert
+                        var list = CustList;
+                        IDictionary<string, object> dictionary = list.ToDictionary(pair => pair.Key, pair => pair.Value);
+                        //replace values for the keys in the form         
+                        dictionary["customerName"] = customerNameTextBox.Text;
+                        dictionary["phone"] = customerPhoneTextBox.Text;
+                        dictionary["address"] = customerAddressTextBox.Text;
+                        dictionary["city"] = cityComboBox.Text;
+                        dictionary["postalCode"] = customerZipTextBox.Text;
+                        dictionary["country"] = countryComboBox.Text;
+                        dictionary["active"] = ActiveCustomerCheck.Checked ? 1 : 0;
 
+                        //Pass the updated IDictionary to dbhelper to update the database
+                        Logic.UpdateCustomer(dictionary);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    finally
+                    {
+                        MessageBox.Show("Customer Record Updated", "Success");
+                        this.Close();
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex);
+                    MessageBox.Show("validation failed", "Error");
                 }
-                finally
-                {
-                    MessageBox.Show("Customer Record Updated");
-                    this.Close();
-                }
+            }
+        }
+
+        // validation for customer name by limiting user input to only alpha characters
+        private void customerNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar) != true && Char.IsNumber(e.KeyChar) == true)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public bool isValidPhoneNumber(string phonenumber)
+        {
+            // Regex string to check against
+            string regex = @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$";
+
+            Regex p = new Regex(regex);
+
+            if (phonenumber == null)
+            {
+                return false;
+            }
+
+            Match m = p.Match(phonenumber);
+
+            return m.Success;
+        }
+
+        private bool isValidZipCode(string zip)
+        {
+            Regex z = new Regex(@"([0-9]{5})");
+            if (z.IsMatch(zip))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Prevent user from entering alphacharacters that are not numbers into textbox
+        private void customerPhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void customerZipTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
 

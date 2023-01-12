@@ -53,6 +53,7 @@ namespace Appointment_App
             this.customerNameTextBox.Name = "customerNameTextBox";
             this.customerNameTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerNameTextBox.TabIndex = 0;
+            this.customerNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerNameTextBox_KeyPress);
             // 
             // customerAddressTextBox
             // 
@@ -69,6 +70,7 @@ namespace Appointment_App
             this.customerPhoneTextBox.Name = "customerPhoneTextBox";
             this.customerPhoneTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerPhoneTextBox.TabIndex = 2;
+            this.customerPhoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerPhoneTextBox_KeyPress);
             // 
             // customerZipTextBox
             // 
@@ -77,6 +79,7 @@ namespace Appointment_App
             this.customerZipTextBox.Name = "customerZipTextBox";
             this.customerZipTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerZipTextBox.TabIndex = 3;
+            this.customerZipTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerZipTextBox_KeyPress);
             // 
             // label1
             // 

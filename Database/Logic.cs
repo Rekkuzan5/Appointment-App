@@ -66,7 +66,7 @@ namespace Appointment_App.Database
                 TimeSpan diff = app.Value.Subtract(login);
                 if (diff.TotalMinutes > 0 && diff.TotalMinutes <= 15)
                 {
-                    MessageBox.Show("You have an appointment within 15 minutes!");
+                    MessageBox.Show("You have an appointment within 15 minutes!", "Alert");
                 }
             }
         }
@@ -295,6 +295,7 @@ namespace Appointment_App.Database
             transaction.Commit();
         }
 
+        // Create a new country for the database
         public static int CreateCountry(string country)
         {
             string username = CurrentUserName;
@@ -328,25 +329,25 @@ namespace Appointment_App.Database
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 conn.Close();
-                MessageBox.Show("Country has been added to Database");
+                MessageBox.Show("New country has been added", "Success");
                 return newCountryId;
             }
 
             var containedCountry = countryList.First(kvp => kvp.Key == "countryId").Value;
             if (containedCountry != 0)
             {
-                MessageBox.Show("This country is present");
+                //MessageBox.Show("This country is present"); -- Test message
                 int oldCountryId = (int)countryList.First(kvp => kvp.Key == "countryId").Value;
                 return oldCountryId;
             }
             else
             {
-                MessageBox.Show("Error: Country cannot be added.");
+                MessageBox.Show("Country cannot be added.", "Error");
                 return 0;
             }
         }
 
-        // *** Needs to be a button for creating a new city because a city doesn't need to be input into the system unless new ***
+        // *** Create a new city for the database
         public static int CreateCity(int countryId, string city)
         {
             int cityId = GetID("city", "cityID") + 1;
@@ -383,20 +384,20 @@ namespace Appointment_App.Database
                 cmd2.ExecuteNonQuery();
                 transaction.Commit();
                 conn.Close();
-                MessageBox.Show("City has been added to Database");
+                MessageBox.Show("New city has been added.", "Success");
                 return newCityId;
             }
 
             var containedCity = cityList.First(kvp => kvp.Key == "cityId").Value;
             if (containedCity != 0)
             {
-                MessageBox.Show("This city is present");
+                //MessageBox.Show("This city is present"); -- test message
                 int existingCityId = (int)cityList.First(kvp => kvp.Key == "cityId").Value;
                 return existingCityId;
             }
             else
             {
-                MessageBox.Show("Error: City cannot be added.");
+                MessageBox.Show("City cannot be added.", "Error");
                 return 0;
             }
         }
@@ -426,7 +427,6 @@ namespace Appointment_App.Database
 
         }
 
-        // Work on these functions. //
         public static DateTime getDateTime2()
         {
             return TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), TimeZoneInfo.Local);
@@ -434,7 +434,7 @@ namespace Appointment_App.Database
 
         public static string dateSQLFormat(DateTime dateValue)
         {
-            string formatForMySql = dateValue.ToString("yyyy-MM-dd HH:mm");
+            string formatForMySql = dateValue.ToString("yyyy-MM-dd HH:mm:ss");
 
             return formatForMySql;
         }
@@ -448,6 +448,8 @@ namespace Appointment_App.Database
             int currentUserId = CurrentUserID;
             string currentUserName = CurrentUserName;
 
+            start = TimeZoneInfo.ConvertTimeToUtc(start);
+            endTime = TimeZoneInfo.ConvertTimeToUtc(endTime);
             DateTime utc = GetDateTime();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
@@ -485,22 +487,22 @@ namespace Appointment_App.Database
                 {
                     if (appStart > (DateTime)rdr[0] && appEnd < (DateTime)rdr[1])
                     {
-                        MessageBox.Show("Cannot schedule appointment within another appointment!");
+                        MessageBox.Show("Cannot schedule appointment within another appointment!", "Error");
                         return false;
                     }
                     if (appStart > (DateTime)rdr[0] && appStart < (DateTime)rdr[1] && appEnd > (DateTime)rdr[1])
                     {
-                        MessageBox.Show("Cannot schedule appointment that overlaps an existing appointment!");
+                        MessageBox.Show("Cannot schedule appointment that overlaps an existing appointment!", "Error");
                         return false;
                     }
                     if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[1])
                     {
-                        MessageBox.Show("Cannot schedule appointment that engulfs existing appointment!");
+                        MessageBox.Show("Cannot schedule appointment that engulfs existing appointment!", "Error");
                         return false;
                     }
                     if (appStart < (DateTime)rdr[0] && appEnd > (DateTime)rdr[0])
                     {
-                        MessageBox.Show("Cannot schedule appointment that would merge into another!");
+                        MessageBox.Show("Cannot schedule appointment that would merge into another!", "Error");
                         return false;
                     }
                 }
@@ -510,7 +512,7 @@ namespace Appointment_App.Database
             }
             else
             {
-                MessageBox.Show("This appointment is outside of business hours.");
+                MessageBox.Show("This appointment is outside of business hours.", "Error");
                 return false;
             }
             
@@ -523,6 +525,9 @@ namespace Appointment_App.Database
 
             int currentUserId = CurrentUserID;
             string currentUserName = CurrentUserName;
+
+            start = TimeZoneInfo.ConvertTimeToUtc(start);
+            endTime = TimeZoneInfo.ConvertTimeToUtc(endTime);
 
             DateTime utc = GetDateTime();
 
@@ -553,12 +558,6 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
             conn.Close();
-        }
-
-        // get closest appointment time based on user id and compare within 15 minutes.//
-        public static void getClosestAppointment()
-        {
-            // code goes here //
         }
     }
 }

@@ -54,6 +54,7 @@ namespace Appointment_App
             this.customerNameTextBox.Name = "customerNameTextBox";
             this.customerNameTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerNameTextBox.TabIndex = 0;
+            this.customerNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerNameTextBox_KeyPress);
             // 
             // customerAddressTextBox
             // 
@@ -70,6 +71,7 @@ namespace Appointment_App
             this.customerPhoneTextBox.Name = "customerPhoneTextBox";
             this.customerPhoneTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerPhoneTextBox.TabIndex = 2;
+            this.customerPhoneTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerPhoneTextBox_KeyPress);
             // 
             // customerZipTextBox
             // 
@@ -78,70 +80,71 @@ namespace Appointment_App
             this.customerZipTextBox.Name = "customerZipTextBox";
             this.customerZipTextBox.Size = new System.Drawing.Size(150, 24);
             this.customerZipTextBox.TabIndex = 3;
+            this.customerZipTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.customerZipTextBox_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(27, 116);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 26);
+            this.label1.Size = new System.Drawing.Size(48, 18);
             this.label1.TabIndex = 7;
             this.label1.Text = "Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(27, 182);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 26);
+            this.label2.Size = new System.Drawing.Size(62, 18);
             this.label2.TabIndex = 8;
             this.label2.Text = "Address";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(27, 248);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 26);
+            this.label3.Size = new System.Drawing.Size(51, 18);
             this.label3.TabIndex = 9;
             this.label3.Text = "Phone";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(202, 116);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 26);
+            this.label4.Size = new System.Drawing.Size(68, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = "Zip Code";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(202, 248);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 26);
+            this.label5.Size = new System.Drawing.Size(60, 18);
             this.label5.TabIndex = 11;
             this.label5.Text = "Country";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(202, 182);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 26);
+            this.label7.Size = new System.Drawing.Size(33, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = "City";
             // 
             // UpdateCustomerButton
             // 
-            this.UpdateCustomerButton.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateCustomerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateCustomerButton.Location = new System.Drawing.Point(32, 326);
             this.UpdateCustomerButton.Name = "UpdateCustomerButton";
             this.UpdateCustomerButton.Size = new System.Drawing.Size(150, 46);
@@ -152,7 +155,7 @@ namespace Appointment_App
             // 
             // cancelCustomerButton
             // 
-            this.cancelCustomerButton.Font = new System.Drawing.Font("Poppins", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelCustomerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelCustomerButton.Location = new System.Drawing.Point(207, 326);
             this.cancelCustomerButton.Name = "cancelCustomerButton";
             this.cancelCustomerButton.Size = new System.Drawing.Size(150, 46);
@@ -163,7 +166,7 @@ namespace Appointment_App
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Poppins", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(32, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(325, 45);

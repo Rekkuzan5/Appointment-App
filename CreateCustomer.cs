@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Appointment_App
 {
@@ -31,7 +32,6 @@ namespace Appointment_App
             this.Close();
         }
 
-        // *** need to polish this section but it is working partially *** //
         public void FillCityData()
         {
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
@@ -40,14 +40,6 @@ namespace Appointment_App
             // Look for customers
             string query = $"SELECT cityId, city FROM city";
             MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rd = cmd.ExecuteReader();
-
-            //    while (rd.Read())
-            //    {t
-            //    customerComboBox.Items.Add(rd[1]);
-            //    }
-
 
             DataSet ds = new DataSet();
             adapt.Fill(ds, "City");
@@ -58,14 +50,6 @@ namespace Appointment_App
             // Look for customers
             string query2 = $"SELECT countryId, country FROM country";
             MySqlDataAdapter adapt2 = new MySqlDataAdapter(query2, conn);
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rd = cmd.ExecuteReader();
-
-            //    while (rd.Read())
-            //    {t
-            //    customerComboBox.Items.Add(rd[1]);
-            //    }
-
 
             DataSet ds2 = new DataSet();
             adapt2.Fill(ds2, "Country");
@@ -75,25 +59,37 @@ namespace Appointment_App
             conn.Close();
         }
 
-        private void CreateCustomerButton_Click(object sender, EventArgs e)
+        // Need to create a validation function that checks for the correct format of the information to pass into the create customer function
+        private bool ValidateInformation()
         {
-            //DateTime timestamp = Logic.GetDateTime();
-            //string username = Logic.CurrentUserName;
-
+            bool result = false;
             if (string.IsNullOrEmpty(customerNameTextBox.Text) ||
                 string.IsNullOrEmpty(customerAddressTextBox.Text) ||
                 string.IsNullOrEmpty(customerPhoneTextBox.Text) ||
                 string.IsNullOrEmpty(customerZipTextBox.Text) ||
                 string.IsNullOrEmpty(cityComboTextBox.Text) ||
-                string.IsNullOrEmpty(customerCountryCombobox.Text)
-                )
+                string.IsNullOrEmpty(customerCountryCombobox.Text))
             {
-                MessageBox.Show("Please enter information in all fields.");
+                MessageBox.Show("Please enter information in all fields.", "Error");
+                return false;
             }
-            else
+            bool phoneResult = isValidPhoneNumber(customerPhoneTextBox.Text);
+            bool zipResult = isValidZipCode(customerZipTextBox.Text);
+            
+            if (phoneResult && zipResult)
             {
+                result = true;
+            }
+            return result;
+        }
+
+        private void CreateCustomerButton_Click(object sender, EventArgs e)
+        {
+            if (ValidateInformation())
+            {
+                MessageBox.Show("Customer successfully created.", "Success");
+
                 int active = 1;
-                //int customerID = Logic.GetID("customer", "customerId") + 1;
                 string username = Logic.CurrentUserName;
                 int countryID = Logic.CreateCountry(customerCountryCombobox.Text);
                 int cityID = Logic.CreateCity(countryID, cityComboTextBox.Text);
@@ -102,15 +98,67 @@ namespace Appointment_App
                 Logic.CreateCustomer(customerNameTextBox.Text, addressID, active, Logic.Now, username);
 
                 this.Close();
-
             }
-            //Create country table record
+            else
+            {
+                MessageBox.Show("validation failed", "Error");
+            }
+        }
 
-            //Create city table record
+        // validation for customer name by limiting user input to only alpha characters
+        private void customerNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar) != true && Char.IsNumber(e.KeyChar) == true)
+            {
+                e.Handled = true;
+            }
+        }
 
-            //Create address table record
+        public bool isValidPhoneNumber(string phonenumber)
+        {
+            // Regex string to check against
+            string regex = @"^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$";
 
-            //Create customer record
+            Regex p = new Regex(regex);
+
+            if (phonenumber == null)
+            {
+                return false;
+            }
+
+            Match m = p.Match(phonenumber);
+
+            return m.Success;
+        }
+
+        private bool isValidZipCode(string zip)
+        {
+            Regex z = new Regex(@"([0-9]{5})");
+            if (z.IsMatch(zip))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Prevent user from entering alphacharacters that are not numbers into textbox
+        private void customerPhoneTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void customerZipTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
