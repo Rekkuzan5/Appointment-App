@@ -17,48 +17,17 @@ namespace Appointment_App
         public int CustId { get; set; }
         public int AppointmentID { get; set; }
 
-
-        //public static List<KeyValuePair<string, object>> appointmentList;
+        List<KeyValuePair<string, object>> appointmentList = new List<KeyValuePair<string, object>>();
 
         public UpdateAppointment(int appId)
         {
             InitializeComponent();
             AppointmentID = appId;
-            //FillData();
             FillFields();
         }
 
-        //public void FillData()
-        //{
-        //    MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-
-        //    conn.Open();
-        //    // Look for customers
-        //    string query = $"SELECT customerId, customerName FROM customer";
-        //    MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
-        //    //MySqlCommand cmd = new MySqlCommand(query, conn);
-        //    //MySqlDataReader rd = cmd.ExecuteReader();
-
-        //    //    while (rd.Read())
-        //    //    {t
-        //    //    customerComboBox.Items.Add(rd[1]);
-        //    //    }
-
-
-        //    DataSet ds = new DataSet();
-        //    adapt.Fill(ds, "Customers");
-        //    customerComboBox.DisplayMember = "customerName";
-        //    customerComboBox.ValueMember = "customerId";
-        //    customerComboBox.DataSource = ds.Tables["Customers"];
-
-        //    conn.Close();
-
-        //}
-
         public void FillFields()
         {
-            var appointmentList = new List<KeyValuePair<string, object>>();
-
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
@@ -87,8 +56,8 @@ namespace Appointment_App
             titleTextBox.Text = appointmentList.First(kvp => kvp.Key == "title").Value.ToString();
             typeComboBox.Text = appointmentList.First(kvp => kvp.Key == "type").Value.ToString();
             dateTimePicker1.Text = appointmentList.First(kvp => kvp.Key == "Start").Value.ToString(); 
-            dateTimePicker2.Text = appointmentList.First(kvp => kvp.Key == "Start").Value.ToString();
-            dateTimePicker3.Text = appointmentList.First(kvp => kvp.Key == "End").Value.ToString();
+            dateTimePicker2.Text = TimeZoneInfo.ConvertTimeFromUtc((DateTime)appointmentList.First(kvp => kvp.Key == "Start").Value, TimeZoneInfo.Local).ToString();
+            dateTimePicker3.Text = TimeZoneInfo.ConvertTimeFromUtc((DateTime)appointmentList.First(kvp => kvp.Key == "End").Value, TimeZoneInfo.Local).ToString();
         }
 
         private void AppointmentCancelButton_Click(object sender, EventArgs e)
@@ -98,15 +67,43 @@ namespace Appointment_App
 
         private void UpdateAppointmentButton_Click(object sender, EventArgs e)
         {
+            if (ValidateFields())
+            {
             Logic.UpdateAppointment(AppointmentID, typeComboBox.Text, titleTextBox.Text, dateTimePicker2.Value, dateTimePicker3.Value);
             this.Close();
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            bool result = false;
+            if (dateTimePicker2.Value < dateTimePicker3.Value && dateTimePicker2.Value != dateTimePicker3.Value)
+            {
+                if (string.IsNullOrEmpty(titleTextBox.Text) && typeComboBox.SelectedValue == null)
+                {
+                    MessageBox.Show("Appointment title and/or type cannot be blank!", "Error");
+                    return result;
+                }
+                if (Logic.CompareAppointmentTimes(dateTimePicker2.Value, dateTimePicker3.Value))
+                {
+                    MessageBox.Show("Appointment added successfully!", "Success");
+                    result = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid appointment times entered!", "Error");
+            }
+            return result;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            DateTime date = dateTimePicker1.Value;
-            dateTimePicker2.Value = date;
-            dateTimePicker3.Value = date;
+            if (dateTimePicker1.Value < DateTime.Today)
+            {
+                MessageBox.Show("Cannot select a date in the past for appointment.", "Error");
+                dateTimePicker1.Value = Convert.ToDateTime(appointmentList.First(kvp => kvp.Key == "Start").Value);
+            }
         }
     }
 }

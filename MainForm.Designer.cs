@@ -48,18 +48,17 @@ namespace Appointment_App
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.reportsButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.appointmentDataGrid = new System.Windows.Forms.DataGridView();
-            this.apptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.calendar = new System.Windows.Forms.MonthCalendar();
+            this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calendar = new System.Windows.Forms.MonthCalendar();
-            this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFormBindingSource)).BeginInit();
@@ -244,49 +243,49 @@ namespace Appointment_App
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // button5
+            // reportsButton
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(39, 852);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(227, 46);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Reports";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.reportsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportsButton.Location = new System.Drawing.Point(39, 852);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(227, 46);
+            this.reportsButton.TabIndex = 10;
+            this.reportsButton.Text = "Reports";
+            this.reportsButton.UseVisualStyleBackColor = true;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
             // 
-            // button6
+            // updateButton
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(39, 748);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(227, 46);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Modify Appointment";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateButton.Location = new System.Drawing.Point(39, 748);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(227, 46);
+            this.updateButton.TabIndex = 11;
+            this.updateButton.Text = "Modify Appointment";
+            this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
-            // button7
+            // deleteButton
             // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(39, 800);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(227, 46);
-            this.button7.TabIndex = 12;
-            this.button7.Text = "Delete Appointment";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButton.Location = new System.Drawing.Point(39, 800);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(227, 46);
+            this.deleteButton.TabIndex = 12;
+            this.deleteButton.Text = "Delete Appointment";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // button2
+            // exitButton
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(711, 911);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 46);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Exit";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Location = new System.Drawing.Point(711, 911);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(126, 46);
+            this.exitButton.TabIndex = 13;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // appointmentDataGrid
             // 
@@ -305,7 +304,6 @@ namespace Appointment_App
             this.appointmentDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.appointmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.appointmentDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.apptID,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -326,12 +324,17 @@ namespace Appointment_App
             this.appointmentDataGrid.Size = new System.Drawing.Size(559, 376);
             this.appointmentDataGrid.TabIndex = 0;
             // 
-            // apptID
+            // calendar
             // 
-            this.apptID.DataPropertyName = "appointmentId";
-            this.apptID.HeaderText = "ID";
-            this.apptID.Name = "apptID";
-            this.apptID.ReadOnly = true;
+            this.calendar.Location = new System.Drawing.Point(39, 522);
+            this.calendar.MaxSelectionCount = 1;
+            this.calendar.Name = "calendar";
+            this.calendar.TabIndex = 14;
+            this.calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendar_DateSelected);
+            // 
+            // mainFormBindingSource
+            // 
+            this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -346,7 +349,7 @@ namespace Appointment_App
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Type";
             this.dataGridViewTextBoxColumn2.FillWeight = 105.9645F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Type";
@@ -357,7 +360,7 @@ namespace Appointment_App
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "start";
             this.dataGridViewTextBoxColumn3.FillWeight = 105.9645F;
             this.dataGridViewTextBoxColumn3.HeaderText = "Start Time";
@@ -366,11 +369,10 @@ namespace Appointment_App
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn3.Width = 150;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn4.DataPropertyName = "end";
             this.dataGridViewTextBoxColumn4.FillWeight = 105.9645F;
             this.dataGridViewTextBoxColumn4.HeaderText = "End Time";
@@ -379,19 +381,6 @@ namespace Appointment_App
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn4.Width = 150;
-            // 
-            // calendar
-            // 
-            this.calendar.Location = new System.Drawing.Point(39, 522);
-            this.calendar.MaxSelectionCount = 1;
-            this.calendar.Name = "calendar";
-            this.calendar.TabIndex = 14;
-            this.calendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendar_DateSelected);
-            // 
-            // mainFormBindingSource
-            // 
-            this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
             // 
             // MainForm
             // 
@@ -401,10 +390,10 @@ namespace Appointment_App
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(882, 978);
             this.Controls.Add(this.calendar);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.updateButton);
+            this.Controls.Add(this.reportsButton);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label2);
@@ -438,22 +427,21 @@ namespace Appointment_App
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button reportsButton;
+        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.BindingSource mainFormBindingSource;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.DataGridView appointmentDataGrid;
         private System.Windows.Forms.MonthCalendar calendar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apptID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerPhone;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IsActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
     }
 }

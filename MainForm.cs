@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Appointment_App
         {
             InitializeComponent();
             GetCustomers();
-            RemoveAppointments();
+            //RemoveAppointments();
             GetAppointments();
         }
 
@@ -55,7 +56,7 @@ namespace Appointment_App
             create.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void exitButton_Click(object sender, EventArgs e)
         {
             DialogResult logout = MessageBox.Show("Logout and exit application?", "Exit Application", MessageBoxButtons.YesNo);
             if (logout == DialogResult.Yes)
@@ -164,23 +165,20 @@ namespace Appointment_App
         private void handleWeek()
         {
             calendar.RemoveAllBoldedDates();
+            currentDate = calendar.SelectionStart;
             int dow = (int)currentDate.DayOfWeek;
-            string startDate = currentDate.AddDays(-dow).ToString();
-            DateTime startTime = Convert.ToDateTime(startDate);
-            DateTime tempDate = Convert.ToDateTime(startDate);
+            DateTime startTime = currentDate.AddDays(-dow);
+            DateTime tempDate = Convert.ToDateTime(startTime);
             for (int i = 0; i < 7; i++)
             {
                 calendar.AddBoldedDate(tempDate.AddDays(i));
             }
             calendar.UpdateBoldedDates();
-            string endDate = currentDate.AddDays(7 - dow).ToString();
-            DateTime tempEnd = Convert.ToDateTime(endDate);
+            DateTime endDate = currentDate.AddDays(7 - dow);
 
-            var currentDateNow = Logic.FormatUTCDateTime(currentDate);
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
-
             conn.Open();
-            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(tempEnd).ToString("yyyy-MM-dd") + "');";
+            string query = $"SELECT customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(endDate).ToString("yyyy-MM-dd") + "');";
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
             DataTable at = new DataTable();
@@ -199,19 +197,20 @@ namespace Appointment_App
 
         private void HandleMonth()
         {
+            at.Clear();
             calendar.RemoveAllBoldedDates();
             calendar.UpdateBoldedDates();
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
 
-            DateTime monthYear = DateTime.Now;
+            DateTime monthYear = calendar.SelectionStart;
             int month = monthYear.Month;
             int year = monthYear.Year;
 
             conn.Open();
-            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
+            string query = $"SELECT customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
-            DataTable at = new DataTable();
+            //DataTable at = new DataTable();
             at.Load(cmd.ExecuteReader());
             foreach (DataRow row in at.Rows)
             {
@@ -245,7 +244,7 @@ namespace Appointment_App
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void deleteButton_Click(object sender, EventArgs e)
         {
             if (appointmentDataGrid.Rows.Count > 0)
             {
@@ -271,12 +270,12 @@ namespace Appointment_App
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void updateButton_Click(object sender, EventArgs e)
         {
             if (appointmentDataGrid.Rows.Count == 0)
             {
                 //First we need to check if appointments exist
-                MessageBox.Show("There are no appointments to delete.");
+                MessageBox.Show("There are no appointments to update.");
             }
             else
             {
@@ -286,7 +285,7 @@ namespace Appointment_App
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void reportsButton_Click(object sender, EventArgs e)
         {
             Reports reportMenu = new Reports();
             reportMenu.Show();

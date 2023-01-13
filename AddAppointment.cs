@@ -14,7 +14,6 @@ namespace Appointment_App
 {
     public partial class AddAppointment : Form
     {
-        //private string _selectedDate;
         public int CustId { get; set; }
 
         public AddAppointment()
@@ -33,14 +32,6 @@ namespace Appointment_App
             // Look for customers
             string query = $"SELECT customerId, customerName FROM customer";
             MySqlDataAdapter adapt = new MySqlDataAdapter(query, conn);
-            //MySqlCommand cmd = new MySqlCommand(query, conn);
-            //MySqlDataReader rd = cmd.ExecuteReader();
-
-            //    while (rd.Read())
-            //    {t
-            //    customerComboBox.Items.Add(rd[1]);
-            //    }
-
 
             DataSet ds = new DataSet();
             adapt.Fill(ds, "Customers");
@@ -48,13 +39,6 @@ namespace Appointment_App
             customerComboBox.ValueMember = "customerId";
             customerComboBox.DataSource = ds.Tables["Customers"];
             conn.Close();
-
-        }
-
-        public void getTimes()
-        {
-            //var initialDate = selectedDate;
-
 
         }
 
@@ -80,10 +64,6 @@ namespace Appointment_App
                         this.Close();
 
                     }
-                    else
-                    {
-                        MessageBox.Show("Operation Failed", "Error");
-                    }
                 }
             }
             else
@@ -104,9 +84,7 @@ namespace Appointment_App
             {
                 MessageBox.Show("Cannot select a date in the past for appointment.", "Error");
                 dateTimePicker1.Value = DateTime.Today;
-            }
-
-                
+            }     
         }
     }
 }
