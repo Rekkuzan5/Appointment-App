@@ -201,6 +201,7 @@ namespace Appointment_App
             this.Controls.Add(this.AppointmentCancelButton);
             this.Controls.Add(this.typeLabel);
             this.Name = "UpdateAppointment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update Appointment";
             this.ResumeLayout(false);
             this.PerformLayout();

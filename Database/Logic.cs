@@ -21,7 +21,6 @@ namespace Appointment_App.Database
 
         public static int VerifyUser(string user, string password)
         {
-        //string connection = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
         MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
         conn.Open();
 
@@ -33,7 +32,6 @@ namespace Appointment_App.Database
             rdr.Read();
             CurrentUserID = Convert.ToInt32(rdr[0]);
             CurrentUserName = Convert.ToString(rdr[1]);
-            //MessageBox.Show($"UserID: {CurrentUserID} User: {user} Password: {password}");
             rdr.Close();
             conn.Close();
             return CurrentUserID;
@@ -81,7 +79,7 @@ namespace Appointment_App.Database
             return formatSQLTime;
         }
 
-        // Gets the id from any table.  New customers will not need this since the table auto increments userID for us.
+        // Gets the id from any table.
         // *** this may need to be changed or a new method for just getting the id that isn't the max type ***
         public static int GetID(string table, string id)
         {
@@ -132,7 +130,8 @@ namespace Appointment_App.Database
                     return null;
                 }
 
-                //Get Address info now that we have addressID
+                //Get Address info
+                // *** Lambda for consolidating expression *** //
                 var addressID = customerList.First(kvp => kvp.Key == "addressId").Value;
 
                 var query2 = $"SELECT * FROM address WHERE addressId = {addressID}";
@@ -149,7 +148,8 @@ namespace Appointment_App.Database
                     rdr2.Close();
                 }
 
-                //Get city info now that we have cityID
+                //Get city info
+                // *** Lambda for consolidating expression *** //
                 var cityID = customerList.First(kvp => kvp.Key == "cityId").Value;
 
                 var query3 = $"SELECT * FROM city WHERE cityId = {cityID}";
@@ -164,7 +164,8 @@ namespace Appointment_App.Database
                     rdr3.Close();
                 }
 
-                //Get country info now that we have countryId
+                //Get country info
+                // *** Lambda for consolidating expression *** //
                 var countryID = customerList.First(kvp => kvp.Key == "countryId").Value;
 
                 var query4 = $"SELECT * FROM country WHERE countryId = {countryID}";
@@ -190,8 +191,6 @@ namespace Appointment_App.Database
         // Create Customer function will go here.
         public static void CreateCustomer(string name, int addressId, int active, DateTime time, string username)
         {
-            string utcTime = FormatUTCDateTime(time);
-
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
 
@@ -210,7 +209,6 @@ namespace Appointment_App.Database
         public static void UpdateCustomer(IDictionary<string, object> dictionary)
         {
             string user = CurrentUserName;
-            //DateTime utc = getDateTime();
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
@@ -260,7 +258,6 @@ namespace Appointment_App.Database
 
         public static void DeleteCustomer(IDictionary<string, object> dictionary)
         {
-            //Fix this for proper deleting of customers.
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             var query5 = $"DELETE FROM appointment" +
@@ -333,6 +330,7 @@ namespace Appointment_App.Database
                 return newCountryId;
             }
 
+            // *** Lambda for consolidating expression *** //
             var containedCountry = countryList.First(kvp => kvp.Key == "countryId").Value;
             if (containedCountry != 0)
             {
@@ -352,7 +350,6 @@ namespace Appointment_App.Database
         {
             int cityId = GetID("city", "cityID") + 1;
             string username = CurrentUserName;
-            //DateTime UTCTime = GetDateTime();
             string utcTime = FormatUTCDateTime(Now);
 
             var cityList = new List<KeyValuePair<string, int>>();
@@ -388,6 +385,7 @@ namespace Appointment_App.Database
                 return newCityId;
             }
 
+            // *** Lambda for consolidating expression *** //
             var containedCity = cityList.First(kvp => kvp.Key == "cityId").Value;
             if (containedCity != 0)
             {
@@ -406,7 +404,6 @@ namespace Appointment_App.Database
         {
             int addressId = GetID("address", "addressId") + 1;
             string username = CurrentUserName;
-            //DateTime UTCTime = GetDateTime();
             string utcTime = FormatUTCDateTime(Now);
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
@@ -424,7 +421,6 @@ namespace Appointment_App.Database
             conn.Close();
 
             return addressId;
-
         }
 
         public static DateTime getDateTime2()
@@ -432,14 +428,10 @@ namespace Appointment_App.Database
             return TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), TimeZoneInfo.Local);
         }
 
-        public static string dateSQLFormat(DateTime dateValue)
-        {
-            string formatForMySql = dateValue.ToString("yyyy-MM-dd HH:mm:ss");
+        // *** Lambda to streamline the date format function *** //
+        public static string dateSQLFormat(DateTime dateValue) => dateValue.ToString("yyyy-MM-dd HH:mm:ss");
 
-            return formatForMySql;
-        }
 
-        // Need to fix this where the date is actually in the start combo/calendar box //
         public static void createAppointment(int custID, string title, string type, DateTime start, DateTime endTime)
         {
             int appointID = GetID("appointment", "appointmentId") + 1;
@@ -472,8 +464,6 @@ namespace Appointment_App.Database
             DateTime closeTime = appStart.Date.AddHours(17).AddMinutes(00).AddSeconds(00);
             if (appStart >= openTime && appEnd < closeTime)
             {
-
-
                 // make connection and compare appointment times
                 MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
                 conn.Open();
@@ -520,9 +510,6 @@ namespace Appointment_App.Database
 
         public static void UpdateAppointment(int appId, string type, string title, DateTime start, DateTime endTime)
         {
-            //int appointID = GetID("appointment", "appointmentId") + 1;
-            //int userID = 1;
-
             int currentUserId = CurrentUserID;
             string currentUserName = CurrentUserName;
 
@@ -534,7 +521,7 @@ namespace Appointment_App.Database
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
             MySqlTransaction transaction = conn.BeginTransaction(); ;
-            // Start a local transaction.
+
             var query = $"UPDATE appointment SET userId = '{ currentUserId }', title = '{ title }', description = '{null}', location = '{null}', contact = '{null}', type = '{ type }', url = '{null}', start = '{dateSQLFormat(start)}', end = '{dateSQLFormat(endTime)}', createDate = '{dateSQLFormat(utc)}', createdBy = '{currentUserName}', lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = '{currentUserName}' WHERE appointmentId = '{ appId }'";
             
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -542,7 +529,6 @@ namespace Appointment_App.Database
             cmd.ExecuteNonQuery();
             transaction.Commit();
             conn.Close();
-
         }
 
         public static void DeleteAppointment(int appointmentID)

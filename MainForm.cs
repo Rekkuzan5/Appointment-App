@@ -137,6 +137,7 @@ namespace Appointment_App
 
         }
 
+        // not used but could be implemented if needed.
         private void handleDay()
         {
             var currentDateNow = Logic.FormatUTCDateTime(currentDate);
@@ -178,7 +179,7 @@ namespace Appointment_App
 
             MySqlConnection conn = new MySqlConnection(DBConnection.Connection);
             conn.Open();
-            string query = $"SELECT customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(endDate).ToString("yyyy-MM-dd") + "');";
+            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE start BETWEEN DATE('" + TimeZoneInfo.ConvertTimeToUtc(startTime).ToString("yyyy-MM-dd") + "') AND DATE('" + TimeZoneInfo.ConvertTimeToUtc(endDate).ToString("yyyy-MM-dd") + "');";
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
             DataTable at = new DataTable();
@@ -207,7 +208,7 @@ namespace Appointment_App
             int year = monthYear.Year;
 
             conn.Open();
-            string query = $"SELECT customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
+            string query = $"SELECT appointment.appointmentId, customer.customerName, appointment.type, appointment.start AS Start, appointment.end AS End FROM appointment INNER JOIN customer ON appointment.customerId = customer.customerId WHERE month(start) = '{month}' and year(start) = '{year}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
             //DataTable at = new DataTable();

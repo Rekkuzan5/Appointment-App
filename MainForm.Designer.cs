@@ -55,6 +55,7 @@ namespace Appointment_App
             this.appointmentDataGrid = new System.Windows.Forms.DataGridView();
             this.calendar = new System.Windows.Forms.MonthCalendar();
             this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -304,6 +305,7 @@ namespace Appointment_App
             this.appointmentDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.appointmentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.appointmentDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.appID,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -335,6 +337,14 @@ namespace Appointment_App
             // mainFormBindingSource
             // 
             this.mainFormBindingSource.DataSource = typeof(Appointment_App.MainForm);
+            // 
+            // appID
+            // 
+            this.appID.DataPropertyName = "appointmentId";
+            this.appID.HeaderText = "ID";
+            this.appID.Name = "appID";
+            this.appID.ReadOnly = true;
+            this.appID.Visible = false;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -439,6 +449,7 @@ namespace Appointment_App
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerPhone;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IsActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn appID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

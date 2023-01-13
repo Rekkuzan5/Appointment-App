@@ -31,6 +31,9 @@ namespace Appointment_App
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -42,9 +45,6 @@ namespace Appointment_App
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exitButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.activeLabel = new System.Windows.Forms.Label();
@@ -52,8 +52,8 @@ namespace Appointment_App
             this.activeCountLabel = new System.Windows.Forms.Label();
             this.inactiveCountLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.totalCustomersLabel = new System.Windows.Forms.Label();
             this.totalCustomersCountLabel = new System.Windows.Forms.Label();
+            this.totalCustomersLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -62,7 +62,7 @@ namespace Appointment_App
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(246, 82);
+            this.comboBox1.Location = new System.Drawing.Point(246, 35);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
@@ -81,7 +81,7 @@ namespace Appointment_App
             this.type,
             this.start,
             this.end});
-            this.dataGridView1.Location = new System.Drawing.Point(13, 111);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 64);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -89,11 +89,35 @@ namespace Appointment_App
             this.dataGridView1.Size = new System.Drawing.Size(354, 483);
             this.dataGridView1.TabIndex = 1;
             // 
+            // type
+            // 
+            this.type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.type.DataPropertyName = "type";
+            this.type.HeaderText = "Appt. Type";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            // 
+            // start
+            // 
+            this.start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.start.DataPropertyName = "start";
+            this.start.HeaderText = "Start";
+            this.start.Name = "start";
+            this.start.ReadOnly = true;
+            // 
+            // end
+            // 
+            this.end.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.end.DataPropertyName = "end";
+            this.end.HeaderText = "End";
+            this.end.Name = "end";
+            this.end.ReadOnly = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(392, 79);
+            this.label1.Location = new System.Drawing.Point(392, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 24);
             this.label1.TabIndex = 2;
@@ -103,7 +127,7 @@ namespace Appointment_App
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 79);
+            this.label2.Location = new System.Drawing.Point(9, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(151, 24);
             this.label2.TabIndex = 4;
@@ -141,7 +165,7 @@ namespace Appointment_App
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Location = new System.Drawing.Point(396, 111);
+            this.groupBox1.Location = new System.Drawing.Point(396, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(258, 163);
             this.groupBox1.TabIndex = 5;
@@ -214,34 +238,10 @@ namespace Appointment_App
             this.label3.TabIndex = 4;
             this.label3.Text = "Month:";
             // 
-            // type
-            // 
-            this.type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.type.DataPropertyName = "type";
-            this.type.HeaderText = "Appt. Type";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            // 
-            // start
-            // 
-            this.start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.start.DataPropertyName = "start";
-            this.start.HeaderText = "Start";
-            this.start.Name = "start";
-            this.start.ReadOnly = true;
-            // 
-            // end
-            // 
-            this.end.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.end.DataPropertyName = "end";
-            this.end.HeaderText = "End";
-            this.end.Name = "end";
-            this.end.ReadOnly = true;
-            // 
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(494, 537);
+            this.exitButton.Location = new System.Drawing.Point(494, 490);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(160, 57);
             this.exitButton.TabIndex = 6;
@@ -253,7 +253,7 @@ namespace Appointment_App
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(396, 302);
+            this.label7.Location = new System.Drawing.Point(396, 255);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(228, 24);
             this.label7.TabIndex = 7;
@@ -305,11 +305,20 @@ namespace Appointment_App
             this.groupBox2.Controls.Add(this.activeCountLabel);
             this.groupBox2.Controls.Add(this.inactiveLabel);
             this.groupBox2.Controls.Add(this.activeLabel);
-            this.groupBox2.Location = new System.Drawing.Point(396, 334);
+            this.groupBox2.Location = new System.Drawing.Point(396, 287);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(257, 142);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
+            // 
+            // totalCustomersCountLabel
+            // 
+            this.totalCustomersCountLabel.AutoSize = true;
+            this.totalCustomersCountLabel.Location = new System.Drawing.Point(196, 101);
+            this.totalCustomersCountLabel.Name = "totalCustomersCountLabel";
+            this.totalCustomersCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.totalCustomersCountLabel.TabIndex = 15;
+            this.totalCustomersCountLabel.Text = "0";
             // 
             // totalCustomersLabel
             // 
@@ -321,20 +330,11 @@ namespace Appointment_App
             this.totalCustomersLabel.TabIndex = 14;
             this.totalCustomersLabel.Text = "Total Customers:";
             // 
-            // totalCustomersCountLabel
-            // 
-            this.totalCustomersCountLabel.AutoSize = true;
-            this.totalCustomersCountLabel.Location = new System.Drawing.Point(196, 101);
-            this.totalCustomersCountLabel.Name = "totalCustomersCountLabel";
-            this.totalCustomersCountLabel.Size = new System.Drawing.Size(13, 13);
-            this.totalCustomersCountLabel.TabIndex = 15;
-            this.totalCustomersCountLabel.Text = "0";
-            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 606);
+            this.ClientSize = new System.Drawing.Size(672, 575);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.exitButton);
@@ -344,6 +344,7 @@ namespace Appointment_App
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
             this.Name = "Reports";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
