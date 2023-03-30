@@ -170,7 +170,7 @@ namespace Appointment_App
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(325, 45);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Create New Customer";
+            this.label6.Text = "Create New Member";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customerCountryCombobox

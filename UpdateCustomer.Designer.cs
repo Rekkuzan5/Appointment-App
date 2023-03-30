@@ -171,7 +171,7 @@ namespace Appointment_App
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(325, 45);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Update Customer";
+            this.label6.Text = "Update Member";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ActiveCustomerCheck
