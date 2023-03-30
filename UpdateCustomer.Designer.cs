@@ -228,7 +228,7 @@ namespace Appointment_App
             this.Controls.Add(this.label1);
             this.Name = "UpdateCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Customer";
+            this.Text = "Update Member";
             this.Load += new System.EventHandler(this.UpdateCustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
