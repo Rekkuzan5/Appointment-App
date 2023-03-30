@@ -255,9 +255,9 @@ namespace Appointment_App
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(396, 255);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(228, 24);
+            this.label7.Size = new System.Drawing.Size(218, 24);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Current Active Customers:";
+            this.label7.Text = "Current Active Members:";
             // 
             // activeLabel
             // 
@@ -326,9 +326,9 @@ namespace Appointment_App
             this.totalCustomersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalCustomersLabel.Location = new System.Drawing.Point(3, 99);
             this.totalCustomersLabel.Name = "totalCustomersLabel";
-            this.totalCustomersLabel.Size = new System.Drawing.Size(125, 16);
+            this.totalCustomersLabel.Size = new System.Drawing.Size(116, 16);
             this.totalCustomersLabel.TabIndex = 14;
-            this.totalCustomersLabel.Text = "Total Customers:";
+            this.totalCustomersLabel.Text = "Total Members:";
             // 
             // Reports
             // 
