@@ -173,6 +173,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Appointment_App.Database.DBConnection.datasource" />
     <None Include="Properties\DataSources\Appointment_App.Database.Logic.datasource" />

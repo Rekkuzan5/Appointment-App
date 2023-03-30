@@ -50,6 +50,22 @@ namespace Appointment_App
 
         }
 
+        // Search function for searching customers on main menu
+        private void SearchMember()
+        {
+            if (!string.IsNullOrEmpty(searchMemberBox.Text))
+            {
+                foreach (DataGridViewRow row in customerDataGrid.Rows)
+                {
+                    if (row.Cells["customerName"].Value.ToString().ToUpper().Contains(searchMemberBox.Text.ToUpper()))
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         private void addCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer create = new CreateCustomer();
@@ -301,5 +317,10 @@ namespace Appointment_App
         {
             HandleMonth();
         }
-    }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+            SearchMember();
+		}
+	}
 }

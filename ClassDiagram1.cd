@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Appointment_App.AddAppointment">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAABYAAACAAAACCgQCBCAACAoKAAAAAABgCAAAAAgA=</HashCode>
+      <FileName>AddAppointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Appointment">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAACAAQAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Appointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.CreateCustomer">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAABDAQADAgAACCACACAAAAgAAAAIAQGBQIAAA=</HashCode>
+      <FileName>CreateCustomer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Customer">
+    <Position X="2" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAEAAAQEAAACAAAcAAQAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.LoginForm">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAAAAQGAAAABAIACAAAACACAAACAAAACAAAAAAEA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.MainForm">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABABCCAADQsUFiAPAPBCAACQCUYAEAEgEABBAABsAc=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Program">
+    <Position X="5.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Reports">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAgAAQACECAgABAwbACAACACEAgBAAAABCCAAAAAAAQ=</HashCode>
+      <FileName>Reports.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.UpdateAppointment">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIACAGAAAAACgQCBCAACAIKAAAAEQFgiAAAAAgA=</HashCode>
+      <FileName>UpdateAppointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.UpdateCustomer">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAACBCBAADAAACKCACACACAAABAAAIIQGAQIBAE=</HashCode>
+      <FileName>UpdateCustomer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Database.DBConnection">
+    <Position X="7.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Database\DBConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Database.Logic">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYAAAQIQQAAQIAJAACwAIABCAEAEIABIAQAAAAAEA=</HashCode>
+      <FileName>Database\Logic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.myResources.Resources">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAABEAAAAQAAACIAAAAAAAgAEII=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Appointment_App.Properties.Settings">
+    <Position X="9" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
